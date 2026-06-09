@@ -1,0 +1,42 @@
+# Generated data (regenerated deterministically from seed)
+data/cic_proxy_friday_ddos.csv
+data/cic_real_friday_ddos.csv
+data/*.parquet
+data/*.pcap
+data/*ISCX*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+*.lock
+
+# LaTeX build artefacts
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.synctex.gz
+paper/main_v4.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Keep results/ in the repo (last good run) — strip with `make clean` before regen
+# Keep tables/ and figures/ — they ARE the deliverable
+
+results/**/*.csv
+
+.toggle-profile
+.pre-commit-cache/

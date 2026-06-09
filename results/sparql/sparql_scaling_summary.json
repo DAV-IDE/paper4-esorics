@@ -1,0 +1,35 @@
+[
+  {
+    "target_triples": 1000,
+    "actual_triples": 964,
+    "build_ms": 4.23729199974332,
+    "Q1_latency_ms": 4.1697499982547015,
+    "Q1_bindings": 34,
+    "Q2_latency_ms": 4.815666998183588,
+    "Q2_bindings": 100,
+    "Q3_latency_ms": 1.7000000007101335,
+    "Q3_bindings": 13
+  },
+  {
+    "target_triples": 10000,
+    "actual_triples": 9452,
+    "build_ms": 42.50250000040978,
+    "Q1_latency_ms": 22.906500002136454,
+    "Q1_bindings": 321,
+    "Q2_latency_ms": 33.97029199913959,
+    "Q2_bindings": 1000,
+    "Q3_latency_ms": 5.5977080010052305,
+    "Q3_bindings": 110
+  },
+  {
+    "target_triples": 50000,
+    "actual_triples": 47032,
+    "build_ms": 216.75508299813373,
+    "Q1_latency_ms": 109.36454200054868,
+    "Q1_bindings": 1543,
+    "Q2_latency_ms": 199.33645800119848,
+    "Q2_bindings": 5000,
+    "Q3_latency_ms": 21.9287500003702,
+    "Q3_bindings": 505
+  }
+]

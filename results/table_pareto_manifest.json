@@ -1,0 +1,21 @@
+{
+  "n_baseline": 3,
+  "n_eal": 9,
+  "n_total_points": 12,
+  "n_detected": 5,
+  "n_missed": 7,
+  "pareto_front": [
+    {
+      "label": "z/dport-entr.",
+      "fpr": 0.00010097950116126426,
+      "delay": 1034.0,
+      "kind": "baseline"
+    },
+    {
+      "label": "z/pkt-rate",
+      "fpr": 0.005351913561547006,
+      "delay": 0.0,
+      "kind": "baseline"
+    }
+  ]
+}

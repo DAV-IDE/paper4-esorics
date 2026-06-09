@@ -1,0 +1,9 @@
+# Paper 4 reproducibility — pinned dependencies
+# Python >= 3.10
+
+numpy>=1.26,<2.2
+pandas>=2.1,<2.3
+scipy>=1.11,<1.15
+matplotlib>=3.8,<3.10
+rdflib>=7.0,<8.0
+pyarrow>=14.0,<18.0

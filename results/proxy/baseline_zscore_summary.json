@@ -1,0 +1,47 @@
+{
+  "pktrate": {
+    "feature": "pkt_rate",
+    "AUC_ROC": NaN,
+    "AUC_PR": NaN,
+    "FPR_at_k3": 0.005351913561547006,
+    "detected": true,
+    "detection_delay_s": 0.0,
+    "n_fires_post_warmup": 96,
+    "n_total_seconds": 14400,
+    "n_post_warmup_seconds": 13800,
+    "n_attack_seconds": 3897,
+    "n_warmup_seconds": 600,
+    "k": 3.0,
+    "window_seconds": 300
+  },
+  "byterate": {
+    "feature": "byte_rate",
+    "AUC_ROC": NaN,
+    "AUC_PR": NaN,
+    "FPR_at_k3": 0.006260729071998384,
+    "detected": true,
+    "detection_delay_s": 0.0,
+    "n_fires_post_warmup": 105,
+    "n_total_seconds": 14400,
+    "n_post_warmup_seconds": 13800,
+    "n_attack_seconds": 3897,
+    "n_warmup_seconds": 600,
+    "k": 3.0,
+    "window_seconds": 300
+  },
+  "dportentropy": {
+    "feature": "dport_entropy",
+    "AUC_ROC": NaN,
+    "AUC_PR": NaN,
+    "FPR_at_k3": 0.00010097950116126426,
+    "detected": true,
+    "detection_delay_s": 1034.0,
+    "n_fires_post_warmup": 21,
+    "n_total_seconds": 14400,
+    "n_post_warmup_seconds": 13800,
+    "n_attack_seconds": 3897,
+    "n_warmup_seconds": 600,
+    "k": 3.0,
+    "window_seconds": 300
+  }
+}

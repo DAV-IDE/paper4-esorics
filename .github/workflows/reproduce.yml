@@ -1,0 +1,24 @@
+name: Reproduce Paper 4
+on: [push, pull_request]
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: make all
+      - run: |
+          # Check that the regenerated tables match the committed ones
+          git diff --exit-code tables/ figures/ || \
+            (echo "ERROR: regenerated artefacts differ from committed"; exit 1)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-artefacts
+          path: |
+            tables/
+            figures/
+            results/

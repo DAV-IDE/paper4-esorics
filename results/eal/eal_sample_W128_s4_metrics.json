@@ -1,0 +1,17 @@
+{
+  "estimator": "Sample",
+  "W": 128,
+  "s": 4,
+  "k": 3.0,
+  "mu_stable": 2.2753060671705483,
+  "sigma_stable": 0.20767165062350326,
+  "tau": 2.898321019041058,
+  "AUC_ROC": NaN,
+  "AUC_PR": NaN,
+  "FPR_post_warmup": 0.03473694839947491,
+  "detected": true,
+  "detection_delay_s": 355.0,
+  "n_fires_post_warmup": 400,
+  "n_attack_seconds": 3897,
+  "n_warmup_seconds": 600
+}
