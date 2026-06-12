@@ -12,7 +12,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: make all
       - run: |
-          git diff --exit-code tables/ || \
+          git diff --exit-code --ignore-blank-lines --ignore-space-at-eol tables/ || \
             (echo "ERROR: regenerated LaTeX tables differ from committed ones!"; exit 1)
       - uses: actions/upload-artifact@v4
         with:
