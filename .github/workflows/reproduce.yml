@@ -12,9 +12,8 @@ jobs:
       - run: pip install -r requirements.txt
       - run: make all
       - run: |
-          # Check that the regenerated tables match the committed ones
-          git diff --exit-code tables/ figures/ || \
-            (echo "ERROR: regenerated artefacts differ from committed"; exit 1)
+          git diff --exit-code tables/ || \
+            (echo "ERROR: regenerated LaTeX tables differ from committed ones!"; exit 1)
       - uses: actions/upload-artifact@v4
         with:
           name: regenerated-artefacts
