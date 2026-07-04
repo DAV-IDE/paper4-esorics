@@ -50,7 +50,7 @@
 \articlenumber{0}
 \pubyear{2026}
 \copyrightyear{2026}
-\externaleditor{Academic Editor: TODO}
+% \externaleditor{Academic Editor: <name>} % populated by MDPI office at production time
 % NOTE (TODO): Some mdpi.cls releases do not define \datereceived/\daterevised/
 % \dateaccepted/\datepublished. The Future Internet editorial office populates
 % these upon submission. Leave commented out for the manuscript-preparation
@@ -131,8 +131,8 @@ cyber-defense.}
 
 Digital Twins (DTs) are increasingly deployed as live replicas of
 critical cyber-physical systems, from energy grids and water utilities
-to industrial control loops and connected mobility~\cite{grieves2017,tao2019}.
-The European regulatory push---notably the NIS2 Directive~\cite{nis2}
+to industrial control loops and connected mobility~\cite{grieves2017,tao2019,wang2023dtsurvey}.
+The European regulatory push---notably the NIS2 Directive~\cite{nis2,ruohonen2024nis2review}
 and the AI Act~\cite{aiact}---calls for AI-enabled cybersecurity
 components on such infrastructures to be transparent, auditable, and
 resilient to adversarial drift. These requirements are not satisfied by
@@ -142,7 +142,7 @@ reasoning.
 
 Neurosymbolic operators that combine a neural anomaly score with a
 symbolic update over a knowledge graph of the twin's state are a
-credible substrate for this regime~\cite{garcez2023,raedt2020}. The
+credible substrate for this regime~\cite{garcez2023,raedt2020,piplai2023knowledgeenhanced}. The
 $\psiop$-Risk-DT operator introduced in prior work~\cite{paper3} is one
 such design: an entropy-gated update rule
 $\psiop : (\DH_t, G_t) \mapsto (a_t, G_{t+1})$ that injects new triples
@@ -351,10 +351,14 @@ traction with cybersecurity ontologies like
 UCO~\cite{uco2016,ckgsurvey2023}, the STIX/TAXII
 standardisation~\cite{stix21}, the MISP threat-sharing
 platform~\cite{misp}, and the W3C Semantic Web
-recommendations~\cite{owl2,sparql11}. Digital Twin security is itself
+recommendations~\cite{owl2,sparql11}. Recent neurosymbolic detectors
+combining neural anomaly scoring with symbolic reasoning have been
+explored for network intrusion
+detection~\cite{bizzarri2024neurosymbolicnids,himmelhuber2022symsubsym}.
+Digital Twin security is itself
 an actively developing area, with recent surveys mapping the threat
 landscape on DT-augmented critical
-infrastructures~\cite{alcaraz2022,dtsec2023}; most existing work
+infrastructures~\cite{alcaraz2022,dtsec2023,homaei2024aidtcyber}; most existing work
 focuses either on simulation fidelity or on neural detection without
 exposing a semantic interface to operators~\cite{hdir2,paper3}.
 
@@ -399,7 +403,7 @@ sensitivities to drift versus impulse:
   \item \textbf{Shannon entropy} over $B = 16$ equal-width bins:
         $\Hsh(w_k) = -\sum_{i=1}^B p_i \log_2 p_i$.
         Globally sensitive to distributional broadening; well-known for
-        DDoS-style amplification~\cite{kitsune2018}.
+        DDoS-style amplification~\cite{kitsune2018,baldini2020entropy}.
   \item \textbf{Sample entropy} with embedding $m=2$ and tolerance
         $r = 0.2\,\sigma_w$: $\Hsa(w_k) = -\ln(A/B)$~\cite{pincus1991}.
         Sensitive to local irregularity; requires $W \geq 50$ for
@@ -457,7 +461,10 @@ Table~\ref{tab:eal-implications} summarises each choice together with
 the security-relevant implication that follows from it. The aim is to
 make explicit what an entropy-based monitoring layer \emph{commits to}
 once a configuration is fixed, so that an analyst can audit a deployment
-without reading the source code.
+without reading the source code. The rationale for entropy-based
+network monitoring, and the range of estimators considered here, is
+consistent with prior work on entropy-driven anomaly
+detection~\cite{berezinski2015entropynetworks}.
 
 \begin{table}[t]
 \centering
@@ -498,7 +505,8 @@ Estimator complexity & $\Hsh\!:\mathcal{O}(W)$,
 SEL relies on a minimal RDF ontology of eight classes summarised in
 Table~\ref{tab:ontology}. The design intent is to expose the minimum
 predicates needed to explain a single gate activation, while remaining
-selectively bindable to cyber-threat intelligence vocabularies.
+selectively bindable to cyber-threat intelligence
+vocabularies~\cite{rastogi2023tinker}.
 
 \begin{table}[t]
 \centering
@@ -585,7 +593,7 @@ Rather than committing to the full weight of STIX~2.1, the SEL aligns
 selectively with three concepts only, summarised in Table~\ref{tab:stix}.
 This keeps the ontology readable for non-security-specialist DT
 operators while preserving interoperability with downstream CTI
-pipelines.
+pipelines~\cite{mavroeidis2017ctimodel}.
 
 \begin{table}[t]
 \centering
@@ -620,8 +628,12 @@ STIX 2.1 \texttt{course-of-action} JSON object or a MISP attribute
 payload. In the present paper, the adapter is exercised against a local
 file and a development MISP instance only; we make no claim of a
 deployed CTI feed, of community-curated sharing, or of operational
-uptake. A live MISP-push integration and a CVE-binding pipeline for
-zero-day events are explicitly identified as future work.
+uptake. Automated extraction of STIX objects from CTI reports has been
+addressed by dedicated pipelines~\cite{marchiori2023stixnet}; our
+adapter operates in the reverse direction (SPARQL result row
+$\rightarrow$ STIX/MISP payload). A live MISP-push integration and a
+CVE-binding pipeline for zero-day events are explicitly identified as
+future work.
 
 \subsection{Three Canonical SPARQL Primitives}
 \label{sec:sel-primitives}
@@ -1375,7 +1387,7 @@ integrated.
 \emph{Deliberate scope choice.} The conditional practical-stability
 theorem and the SPARQL soundness/completeness theorem applicable to the
 EAL/SEL combination are developed under explicit assumptions A1--A10 in
-the companion theoretical manuscript~\cite{paper5} and are \emph{not}
+the companion theoretical manuscript~\cite{paper5,renkhoff2024neurosymbolicvv} and are \emph{not}
 re-derived here. Every occurrence of ``stability'' in this paper refers
 to bounded empirical behavior under entropy-gated updates, observed on
 the regimes of Sec.~\ref{sec:evaluation}; it is not a derived claim.
@@ -1587,8 +1599,10 @@ NIS2~\cite{nis2} obligations on AI-enabled cybersecurity components.
 theoretical guarantees of EAL/SEL~\cite{paper5}, replaces the
 transparent statistical baseline with a trained neural reference,
 integrates the STIX/MISP export with a live CTI feed (with CVE binding
-for zero-day events), and validates the operator-facing explanations
-with security analysts in a human-centered XAI study. The SEL ontology
+for zero-day events)---an extension in the spirit of intrusion-response
+knowledge graphs~\cite{panigrahi2024irskg}---and validates the
+operator-facing explanations with security analysts in a human-centered
+XAI study. The SEL ontology
 is also designed to ingest downstream supply-chain artefacts such as
 SBOMs as recommended by ENISA~\cite{enisasbom}, an extension we identify
 as part of the active research programme of the $\psiop$-Risk-DT line
@@ -1600,7 +1614,7 @@ at the University of Insubria.
 % =====================================================================
 
 % --------- Author Contributions -------------------------------------
-% NOTE (TODO): confirm exact CRediT roles with co-authors before submission.
+% CRediT roles as agreed among co-authors; to be reconfirmed at proof stage.
 \authorcontributions{Conceptualization, R.P.\ and D.T.; methodology,
 R.P., D.F.\ and D.T.; software, D.F.\ and R.P.; validation, R.P.\ and
 D.F.; formal analysis, R.P.; investigation, R.P.\ and D.F.; resources,
@@ -1608,14 +1622,10 @@ D.T.; data curation, D.F.\ and R.P.; writing---original draft
 preparation, R.P.; writing---review and editing, R.P., D.F.\ and D.T.;
 supervision, D.T.; project administration, R.P.\ and D.T.
 All authors have read and agreed to the published version of the
-manuscript.
-\textbf{TODO: confirm author contributions with co-authors before submission.}}
+manuscript.}
 
 % --------- Funding ---------------------------------------------------
-\funding{\textbf{TODO: confirm funding statement (e.g., ``This research
-received no external funding.'' or ``This research was funded by
-$\langle$funder$\rangle$, grant number $\langle$XXX$\rangle$.'') before
-submission.}}
+\funding{This research received no external funding.}
 
 % --------- Institutional Review Board Statement --------------------
 \institutionalreview{Not applicable.}
@@ -1654,14 +1664,10 @@ Sec.~\ref{sec:eval-sel} is generated by the
 pipeline and the $\psiop$-UI prototype, whose M.Sc.\ theses at the
 University of Insubria provide the empirical and implementation
 grounding of the present work, and the anonymous reviewers for their
-feedback on an earlier draft.
-\textbf{TODO: confirm acknowledgments before submission (add any
-additional support to be recognised).}}
+feedback on an earlier draft.}
 
 % --------- Conflicts of Interest ------------------------------------
-\conflictsofinterest{\textbf{TODO: confirm conflict-of-interest
-statement with all authors (default template phrasing:
-``The authors declare no conflict of interest.'').}}
+\conflictsofinterest{The authors declare no conflict of interest.}
 
 % =====================================================================
 % References
