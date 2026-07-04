@@ -166,15 +166,15 @@ python scripts/sparql_scaling.py \
 * **Q2** — phase-based comparison (group by attack phase)
 * **Q3** — gate-fired explainability lookup (joins Window → Explanation → Mitigation)
 
-**Expected latencies** (also in Table 9):
+**Expected latencies** (also in Table 9, generated from `results/sparql/sparql_scaling_summary.json`):
 
 | Graph size | Q1 (ms) | Q2 (ms) | Q3 (ms) | Q1 bindings | Q3 bindings |
 |------------|---------|---------|---------|-------------|-------------|
-| 1k triples | 11.55 | 11.85 | 4.56 | 34 | 13 |
-| 10k triples | 74.26 | 85.00 | 15.44 | 321 | 110 |
-| 50k triples | 344.90 | 465.62 | 66.65 | 1543 | 505 |
+| 1k triples | 4.17 | 4.99 | 1.77 | 34 | 13 |
+| 10k triples | 24.72 | 34.82 | 5.65 | 321 | 110 |
+| 50k triples | 109.90 | 189.01 | 23.70 | 1,543 | 505 |
 
-Tolerance: ±20% on latency (hardware-dependent); bindings must match exactly.
+Tolerance: ±20% on latency (hardware-dependent — the values above are the ones committed in `tables/sparql_scaling.tex` and reported in the paper §5.4); bindings must match exactly.
 
 **Honesty caveat (paper, §5.4):** "We make no claim of scaling to production graphs of 10⁶ triples or above."
 

@@ -1173,18 +1173,18 @@ measurements of Table~\ref{tab:sparql-scaling}, we restrict our
 statements to four observations. First, latency for all three queries
 grows \emph{between linearly and quadratically} in the triple count
 over the $10^{3}$--$5\times 10^{4}$ range tested: from $1{,}000$ to
-$50{,}000$ triples ($50\times$), Q1 grows from $11.6$~ms to $345$~ms
-($\sim$$30\times$), Q2 from $11.9$~ms to $466$~ms ($\sim$$39\times$),
-Q3 from $4.6$~ms to $66.7$~ms ($\sim$$15\times$). Second, Q3 is
+$50{,}000$ triples ($50\times$), Q1 grows from $4.2$~ms to $110$~ms
+($\sim$$26\times$), Q2 from $5.0$~ms to $189$~ms ($\sim$$38\times$),
+Q3 from $1.8$~ms to $23.7$~ms ($\sim$$13\times$). Second, Q3 is
 uniformly the cheapest because its triple pattern conditions on
 \texttt{psi:gateFired}, which has the smallest extension under the
 $10\%$ gate-firing rate. Third, Q2 grows fastest because of its
 ordering clause and full enumeration of \texttt{psi:AttackPhase}
 memberships. Fourth, the operational implication is that for graphs in
 the $10^{4}$-triple range a typical incident-response query (Q3) returns
-in under $100$~ms even on a non-indexed in-memory store, which is
+in under $10$~ms even on a non-indexed in-memory store, which is
 compatible with interactive analyst workflows; Q1 and Q2 at the same
-scale remain under $100$~ms and $90$~ms respectively. We make no claim
+scale remain under $25$~ms and $35$~ms respectively. We make no claim
 of scaling to production graphs of $10^{6}$ triples or above, nor of
 suitability for live CTI ingestion at scale; both are out of scope and
 flagged as future work.
