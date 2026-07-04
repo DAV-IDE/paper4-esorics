@@ -18,7 +18,7 @@
 | Bundle branch       | `mdpi-futureinternet-submission-bundle`                                   |
 | Target venue        | MDPI *Future Internet*                                                    |
 | Target class        | `Definitions/mdpi` with option `futureinternet`                           |
-| Compile target      | Overleaf (local `pdflatex`/`latexmk` unavailable in the build sandbox)    |
+| Compile target      | Overleaf (local `pdflatex`/`latexmk` unavailable in the local build environment) |
 | Primary reproducibility artefact | `DAV-IDE/paper4-esorics` (this repository)                   |
 
 ## 2. Bundle layout
@@ -193,7 +193,7 @@ do not silently patch.
 ## 7. Local compilation status
 
 Local `pdflatex` / `latexmk` / `tectonic` are **not available** in the
-build sandbox that produced this bundle. Compilation is delegated to
+local build environment that produced this bundle. Compilation is delegated to
 Overleaf, where the MDPI `Definitions/mdpi` class and its dependencies
 (cite, hyperref, ORCID artwork, etc.) are pre-installed by the venue's
 template.

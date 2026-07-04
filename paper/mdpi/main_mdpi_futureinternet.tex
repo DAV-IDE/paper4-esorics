@@ -1143,7 +1143,7 @@ $\to$\texttt{RiskScore}$\to$\texttt{Explanation}$\to$\texttt{MitigationHint}
 windows marked as gate-fired so Q3 has non-empty bindings.
 
 \paragraph{Measurement protocol and proxy declaration.} Latency is
-measured on an in-memory \texttt{rdflib} 7.x store on a single sandbox
+measured on an in-memory \texttt{rdflib} 7.x store on a single test host
 CPU. We run $11$ repetitions per query per graph size, discard the
 first (warm-up) and report the median of the remaining $10$. We treat
 this as a \emph{portable proxy} for indexed-store scaling on Apache
