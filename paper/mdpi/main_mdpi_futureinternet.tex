@@ -1,0 +1,1676 @@
+% =====================================================================
+% MDPI Future Internet submission -- Paper 4
+% Derivation: paper/main_v4.tex (LNCS, v4.1.2 post-PR#5 alignment @ f0ec2a5 / d4e3068)
+%   -> MDPI Future Internet template.
+%
+% CRITICAL: This file is a FORMAL adaptation of paper/main_v4.tex to the
+% MDPI Future Internet template. NO scientific content, numerical value,
+% table row, figure, claim, caveat, boundary, threat to validity, or
+% reproducibility statement has been altered from paper/main_v4.tex.
+% Only:
+%   - documentclass switched from llncs to Definitions/mdpi (futureinternet)
+%   - authors, affiliation and metadata rewritten in MDPI frontmatter
+%   - \bibitem list converted to references.bib (BibTeX)
+%   - table/figure include paths rewritten (../ prefix removed)
+%   - Reproducibility Statement moved into \dataavailability{}
+%   - Acknowledgements moved into \acknowledgments{}
+%
+% See README_MDPI_OVERLEAF.md for provenance, TODO items, and Overleaf
+% instructions.
+%
+% Compile in Overleaf with main document = paper/mdpi/main_mdpi_futureinternet.tex.
+% Local pdflatex not available in the sandbox; compilation is delegated to Overleaf.
+% =====================================================================
+
+% --------- Journal (Future Internet) and article type ---------------
+\documentclass[futureinternet,article,submit,pdftex,moreauthors]{Definitions/mdpi}
+
+% --------- Custom macros preserved from paper/main_v4.tex ------------
+\newcommand{\psiop}{\ensuremath{\Psi}}
+\newcommand{\Hsh}{\ensuremath{H^{\mathrm{Sh}}}}
+\newcommand{\Hsa}{\ensuremath{H^{\mathrm{Sa}}}}
+\newcommand{\Hpe}{\ensuremath{H^{\mathrm{Pe}}}}
+\newcommand{\DH}{\ensuremath{\Delta H}}
+\newcommand{\taus}{\ensuremath{\tau_{s}}}
+
+% --------- ORCID marker macros (used inside \Author{...}) -----------
+% If the current mdpi.cls already defines these (older releases do),
+% the following \providecommand invocations become no-ops.
+\providecommand{\orcidA}{}
+\providecommand{\orcidB}{}
+\providecommand{\orcidC}{}
+
+% --------- Firstpage / metadata -------------------------------------
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2026}
+\copyrightyear{2026}
+\externaleditor{Academic Editor: TODO}
+% NOTE (TODO): Some mdpi.cls releases do not define \datereceived/\daterevised/
+% \dateaccepted/\datepublished. The Future Internet editorial office populates
+% these upon submission. Leave commented out for the manuscript-preparation
+% Overleaf compile; the office will re-inject them at production time.
+% \datereceived{TODO}
+% \daterevised{TODO}
+% \dateaccepted{TODO}
+% \datepublished{TODO}
+\hreflink{https://doi.org/}
+
+% --------- Title -----------------------------------------------------
+\Title{A Parameterised Entropy Control Plane and SPARQL-Queryable
+Explanations for Auditable Neurosymbolic Digital Twin Security}
+
+% --------- Authors ---------------------------------------------------
+\AuthorNames{Roberto Pazzi, Davide Facheris and Davide Tosi}
+
+\Author{Roberto Pazzi $^{1,}$*\orcidA{},
+        Davide Facheris $^{1}$\orcidB{}, and
+        Davide Tosi $^{1}$\orcidC{}}
+
+% --------- ORCIDs (footnote) ----------------------------------------
+\firstnote{ORCID: R.P.\ 0009-0009-3454-5678;
+           D.F.\ 0009-0007-7990-8335;
+           D.T.\ 0000-0003-3815-2512.}
+
+% --------- Affiliations ---------------------------------------------
+\address{%
+$^{1}$\quad Department of Human Sciences and Territorial Innovation
+        (DiSUIT), University of Insubria, Varese/Como, Italy;
+        \href{mailto:dfacheris@studenti.uninsubria.it}{dfacheris@studenti.uninsubria.it}
+        (D.F.);
+        \href{mailto:davide.tosi@uninsubria.it}{davide.tosi@uninsubria.it}
+        (D.T.)}
+
+% --------- Corresponding author -------------------------------------
+\corres{Correspondence:
+        \href{mailto:roberto.pazzi@uninsubria.it}{roberto.pazzi@uninsubria.it}}
+
+% =====================================================================
+\begin{document}
+
+% --------- Abstract -------------------------------------------------
+\abstract{Neurosymbolic operators that combine neural anomaly scoring
+with symbolic graph updates are emerging as a credible substrate for
+Digital Twin cybersecurity, but two operational properties remain
+under-specified: how their gating behavior depends on the entropy
+estimator and windowing parameters chosen at deployment time, and how
+their reasoning can be made available to security operators through
+standard cyber-threat-intelligence interfaces. We address both questions
+atop a previously validated entropy-gated operator. First, we define an
+\emph{Entropy Analysis Layer} (EAL) that promotes the entropy estimator
+$E \in \{\mathrm{Shannon}, \mathrm{Sample}, \mathrm{Permutation}\}$,
+window size $W$, and stride $s$ to first-class deployment variables,
+together with a parameter-aware stable-phase threshold
+$\taus(W, s, E)$ recomputed per configuration. Second, we define a
+\emph{Semantic Explainability Layer} (SEL) over an eight-class RDF
+ontology selectively aligned with STIX~2.1, MISP, and CVE concepts,
+exposed through three canonical SPARQL primitives on an Apache Jena
+Fuseki endpoint. We characterise the resulting design space with a
+$5\times 3\times 3$ factorial sensitivity study on synthetic Stable,
+Drift, and Shock regimes and with a targeted single-scenario evaluation
+on a real-traffic subset (CIC-IDS2017 DDoS), against a transparent
+statistical baseline. The two layers complement---not replace---the
+end-to-end detection validation reported for the underlying operator in
+prior work, contributing configuration evidence, queryable explanations,
+and an auditable trade-off structure for deployable Digital Twin
+cyber-defense.}
+
+% --------- Keywords -------------------------------------------------
+\keyword{Digital Twin security; neurosymbolic AI; entropy control plane;
+         configurability; auditability; SPARQL; RDF;
+         cyber-threat intelligence; threats to validity}
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Digital Twins (DTs) are increasingly deployed as live replicas of
+critical cyber-physical systems, from energy grids and water utilities
+to industrial control loops and connected mobility~\cite{grieves2017,tao2019}.
+The European regulatory push---notably the NIS2 Directive~\cite{nis2}
+and the AI Act~\cite{aiact}---calls for AI-enabled cybersecurity
+components on such infrastructures to be transparent, auditable, and
+resilient to adversarial drift. These requirements are not satisfied by
+detection accuracy alone: they presuppose deployment-time
+configurability of the detector and operator-facing access to its
+reasoning.
+
+Neurosymbolic operators that combine a neural anomaly score with a
+symbolic update over a knowledge graph of the twin's state are a
+credible substrate for this regime~\cite{garcez2023,raedt2020}. The
+$\psiop$-Risk-DT operator introduced in prior work~\cite{paper3} is one
+such design: an entropy-gated update rule
+$\psiop : (\DH_t, G_t) \mapsto (a_t, G_{t+1})$ that injects new triples
+into the DT's RDF graph only when an information-theoretic deviation
+and a neural activation are jointly above threshold. That operator was
+previously validated end-to-end on a single containerised
+NTP-amplification scenario, where it reached AUC$\approx 0.993$,
+FPR$\approx 0.021$, end-to-end latency $\approx 25.8$~ms, and a
+modular-update load reduction up to $88\%$ relative to global graph
+rewrites~\cite{paper3}.
+
+Two operational properties of that operator remain under-specified, and
+they are precisely the properties that a NIS2- or AI-Act-aware
+deployment has to argue about. \emph{First}, the operator fixes one
+entropy estimator and one $(W, s)$ configuration; how the choice of
+estimator, window size, and stride affects detection delay and
+stable-phase false-positive behavior---and what trade-off structure
+emerges across these choices---is left implicit. \emph{Second}, the
+operator emits explanations as structured triples but does not expose a
+queryable interface to security operators, nor an alignment to standard
+cyber-threat-intelligence vocabularies such as STIX~2.1, MISP, and CVE.
+
+We argue that closing these two gaps is not an incremental engineering
+task but a structural one. \textbf{The next operational gap in
+neurosymbolic DT cybersecurity is not detector accuracy but detector
+configurability and auditability.} Configurability and operator-queryable
+semantics are not features of a particular detector; they are missing
+structural primitives of any deployable neurosymbolic cyber-defense
+pipeline that aspires to be auditable in the sense required by emerging
+regulation.
+
+We instantiate this position with two composable layers atop the
+previously validated operator. The first, an \emph{Entropy Analysis
+Layer} (EAL), promotes the entropy estimator $E \in \{\mathrm{Shannon},
+\mathrm{Sample}, \mathrm{Permutation}\}$, the window size
+$W \in \{64, 128, 256\}$, and the stride $s \in \{1, 4, 8\}$ to
+first-class deployment variables, and supplies a parameter-aware
+stable-phase threshold
+$\taus(W, s, E) = \mu_{\mathrm{stable}} + 3\,\sigma_{\mathrm{stable}}$
+recomputed per configuration. We characterise the EAL design space with
+a $5 \times 3 \times 3 = 45$-run factorial study on synthetic Stable,
+Drift, and Shock regimes, and with a \emph{targeted single-scenario
+evaluation} on a community real-traffic subset (CIC-IDS2017 DDoS
+Friday-Afternoon~\cite{cicids2017}), against a transparent, non-trained
+statistical baseline (z-score over a sliding mean).
+
+The second layer, a \emph{Semantic Explainability Layer} (SEL), defines
+an eight-class RDF ontology selectively aligned with STIX~2.1, MISP,
+and CVE, and exposes three canonical SPARQL primitives---entropy-spike
+triage (Q1), phase-based comparison (Q2), and gate-fired explainability
+lookup (Q3)---on an Apache Jena Fuseki endpoint. We characterise the
+operator workflow that the SEL enables (alert $\to$ SPARQL
+interrogation $\to$ explanation retrieval $\to$ mitigation hint, with
+an optional STIX/MISP export through a stand-alone adapter), and we
+report a small scaling note relating query latency to graph size in the
+$10^{3}$--$10^{4}$ triple range.
+
+The two layers complement---not replace---the end-to-end detection
+validation of~\cite{paper3}. What they contribute is
+\emph{configuration evidence}, \emph{queryable explanations}, and an
+\emph{auditable trade-off structure} that exposes the navigable design
+space of an entropy-gated neurosymbolic DT cybersecurity operator. The
+remainder of the paper makes this design space, and its empirical
+characterisation, precise.
+
+\paragraph{Contributions.} We frame our contribution as a
+\emph{parameterised and auditable design space}, not as a new detector.
+Four artefacts instantiate this position:
+
+\begin{enumerate}[label=\textbf{C\arabic*.},leftmargin=*]
+  \item \textbf{Parameterised entropy control plane.} We define an
+        \emph{Entropy Analysis Layer} (EAL) that promotes the entropy
+        estimator, window size, and stride of a neurosymbolic DT
+        operator to first-class deployment variables, together with a
+        parameter-aware stable-phase threshold $\taus(W, s, E)$. EAL is
+        composable atop the previously validated $\psiop$-Risk-DT
+        operator~\cite{paper3} and does not modify its gating semantics.
+  \item \textbf{Empirical characterisation of estimator behavior across
+        synthetic and real regimes.} We characterise the EAL design
+        space with a $5 \times 3 \times 3 = 45$-run factorial study on
+        synthetic Stable, Drift, and Shock regimes and with a targeted
+        single-scenario real-data evaluation on the CIC-IDS2017 DDoS
+        Friday-Afternoon subset~\cite{cicids2017} against a transparent,
+        non-trained statistical baseline. The evaluation is deliberately
+        scoped to \emph{transferability of estimator behavior}, not to
+        state-of-the-art detection accuracy.
+  \item \textbf{CTI-aligned, SPARQL-queryable explanation interface.}
+        We define a \emph{Semantic Explainability Layer} (SEL) over an
+        eight-class RDF ontology selectively aligned with STIX~2.1,
+        MISP, and CVE~\cite{stix21,misp}, exposed through three
+        canonical SPARQL primitives. We instantiate an end-to-end
+        operator workflow (alert $\to$ SPARQL interrogation $\to$
+        explanation retrieval $\to$ mitigation hint, with optional
+        STIX/MISP export) and report a small scaling note relating query
+        latency to graph size in the $10^{3}$--$10^{4}$ triple range.
+  \item \textbf{Configuration evidence for multi-estimator gating under
+        mixed risk profiles.} From the EAL design space we extract a
+        Pareto front in the (stable-phase false-positive rate, detection
+        delay) plane that motivates \emph{multi-estimator} configurations
+        for mixed-risk deployments and identifies the $(E, W, s)$
+        regions where single-estimator configurations dominate.
+\end{enumerate}
+
+\noindent All four contributions are deliberately scoped to operational
+design and configurability; they complement the end-to-end detection
+validation reported in~\cite{paper3}, and they expose an \emph{auditable
+design structure suitable as technical evidence} under emerging AI Act
+and NIS2 obligations on AI-enabled cybersecurity components.
+
+\paragraph{Scope boundary.}
+The detection-quality figures (AUC$\approx 0.993$, FPR$\approx 0.021$,
+latency $\approx 25.8$~ms, MSU reduction $\leq 88\%$) cited above are
+\emph{inherited} from~\cite{paper3} on a single NTP-amplification
+scenario and are \emph{never} presented as new results of this paper.
+The empirical contributions of this paper are confined to the 45-run
+synthetic factorial of Sec.~\ref{sec:eval-eal}, the single-scenario
+real-data evaluation of Sec.~\ref{sec:eval-real}, the Pareto figure of
+Sec.~\ref{sec:eval-pareto}, and the SPARQL scaling note of
+Sec.~\ref{sec:eval-scaling}. The formal theoretical guarantees applicable
+to the EAL/SEL combination---conditional practical stability under
+assumptions A1--A10 and SPARQL soundness/completeness---are developed
+in a companion theoretical manuscript~\cite{paper5} currently in
+preparation and are \emph{not} re-derived nor experimentally verified
+here. Every occurrence of ``stability'' in this paper refers to
+\emph{bounded empirical behavior under entropy-gated updates}, observed
+on the regimes of Sec.~\ref{sec:evaluation}.
+
+\paragraph{Organisation.} Section~\ref{sec:background} reviews the
+$\psiop$-Risk-DT operator and positions our two layers.
+Section~\ref{sec:eal} specifies EAL. Section~\ref{sec:sel} specifies SEL
+and introduces the operator workflow it enables
+(Sec.~\ref{sec:sel-workflow}).
+Section~\ref{sec:evaluation} characterises the EAL/SEL design space
+through four complementary parts: synthetic factorial study
+(Sec.~\ref{sec:eval-eal}), targeted real-data evaluation
+(Sec.~\ref{sec:eval-real}), Pareto front of the design space
+(Sec.~\ref{sec:eval-pareto}), SPARQL scaling note
+(Sec.~\ref{sec:eval-scaling}), plus the illustrative SEL SPARQL
+evaluation (Sec.~\ref{sec:eval-sel}) and the claim boundaries
+(Sec.~\ref{sec:claim-boundaries}). Section~\ref{sec:tov} states the
+threats to validity and the deliberate scope choices along five axes.
+Section~\ref{sec:lineage} fixes the paper lineage and the Safe-Claim
+Matrix. Section~\ref{sec:theory} relates the present work to the
+companion theoretical manuscript. Section~\ref{sec:conclusion}
+concludes.
+
+% =====================================================================
+\section{Background and Related Work}
+\label{sec:background}
+
+\subsection{The \texorpdfstring{$\psiop$}{Psi}-Risk-DT Operator}
+
+We summarise only what is needed for the two layers introduced in this
+paper; full derivation and validation appear in~\cite{paper3}.
+
+Given an observation stream $\{O_t\}$ over a Digital Twin replica and a
+baseline entropy $H_{\mathrm{base}}$, the operator computes an entropy
+deviation
+\begin{equation}
+\DH_t \;=\; \frac{H(X_t) - H_{\mathrm{base}}}{\max(\varepsilon,
+H_{\mathrm{base}})},
+\label{eq:dh}
+\end{equation}
+and a neural activation
+$a_{t+1} = f(W a_t + b + x_t)$ with $f$ sigmoid. The symbolic graph
+$G_t$ is updated only when an entropy-deviation threshold and a neural
+threshold are \emph{jointly} crossed:
+\begin{equation}
+G_{t+1} \;=\;
+\begin{cases}
+G_t \cup \psiop_{\mathrm{inject}}(a_t) & \text{if } \DH_t > \taus
+                                          \;\wedge\; a_t > \theta,\\
+G_t                                    & \text{otherwise.}
+\end{cases}
+\label{eq:gate}
+\end{equation}
+Hyperparameters validated in~\cite{paper3} on the NTP scenario are
+$\taus = 0.15$, $\theta = 0.7$, and a three-term hybrid loss
+$L_{\mathrm{total}} = \alpha L_{\mathrm{cls}} + \beta L_{\mathrm{graph}}
++ \gamma L_{\mathrm{sem}}$ with $(\alpha,\beta,\gamma)=(0.4,0.3,0.3)$.
+
+The Modular Semantic Update (MSU) restricts each rewrite to the affected
+DT sub-component, reducing symbolic update load by up to 88\% on the
+validated scenario~\cite{paper3}. A Lyapunov-style argument
+(Eq.~4 of~\cite{paper3}) is sketched informally; a formal conditional
+practical-stability theorem is developed under explicit assumptions in
+the companion manuscript~\cite{paper5} and is not re-derived here.
+
+\subsection{Position in the Literature}
+
+Information-theoretic anomaly detection on CPS traffic streams has a
+long lineage, from Shannon-entropy DDoS detectors to permutation-entropy
+detectors for time-series anomalies~\cite{bandt2002,pincus1991,kitsune2018}.
+Recent surveys of CPS anomaly detection and zero-day attack
+classification highlight three persistent gaps that motivate the
+present work: limited robustness under \emph{concept
+drift}~\cite{gama2014}, opacity of the resulting
+classifiers~\cite{adadi2018,capuano2022}, and the absence of a
+shared semantic layer linking detector outputs to operational threat
+intelligence~\cite{mlcps2024,zeroday2022,cicids2017}. Approaches based
+on model-agnostic post-hoc explanations such as
+SHAP~\cite{lundberg2017} address the second gap but not the third.
+
+Knowledge-graph approaches to security explainability have gained
+traction with cybersecurity ontologies like
+UCO~\cite{uco2016,ckgsurvey2023}, the STIX/TAXII
+standardisation~\cite{stix21}, the MISP threat-sharing
+platform~\cite{misp}, and the W3C Semantic Web
+recommendations~\cite{owl2,sparql11}. Digital Twin security is itself
+an actively developing area, with recent surveys mapping the threat
+landscape on DT-augmented critical
+infrastructures~\cite{alcaraz2022,dtsec2023}; most existing work
+focuses either on simulation fidelity or on neural detection without
+exposing a semantic interface to operators~\cite{hdir2,paper3}.
+
+Our two layers sit at this intersection. The EAL contributes a
+parameter-aware, reproducibility-oriented view of the signal-preparation
+stage that is largely implicit in earlier entropy-based detectors. The
+SEL contributes a minimal, operator-facing RDF/SPARQL interface that
+selectively binds to STIX/MISP/CVE concepts without committing the DT to
+the full weight of these vocabularies. We position both layers as a
+\emph{parameterised and auditable design space} on top of the previously
+validated $\psiop$-Risk-DT operator, rather than as new detection
+engines.
+
+% =====================================================================
+\section{Entropy Analysis Layer (EAL)}
+\label{sec:eal}
+
+\subsection{Design Goals}
+
+The EAL is responsible for transforming a one-dimensional mismatch
+signal $\Delta_t = O_t - E_t$ into the entropy deviation $\DH_t$
+consumed by Eq.~\eqref{eq:gate}. We require it to satisfy three
+properties.
+
+\begin{description}[leftmargin=*,style=nextline]
+\item[P1 (Reproducibility).] Every entropy series produced by EAL must
+be reproducible from $(\Delta_t, E, W, s)$ alone, with no hidden state.
+\item[P2 (Parameter Awareness).] The choice of estimator $E$, window
+size $W$, and stride $s$ must be \emph{declarative} parameters of EAL,
+not implicit constants of the implementation.
+\item[P3 (Calibrated Threshold).] A separation threshold $\taus$ must
+be derivable from a labelled stable phase and must adapt to the choice
+of $(E, W, s)$, but need not be online.
+\end{description}
+
+\subsection{Estimators}
+
+EAL admits three families of estimators, chosen for their distinct
+sensitivities to drift versus impulse:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Shannon entropy} over $B = 16$ equal-width bins:
+        $\Hsh(w_k) = -\sum_{i=1}^B p_i \log_2 p_i$.
+        Globally sensitive to distributional broadening; well-known for
+        DDoS-style amplification~\cite{kitsune2018}.
+  \item \textbf{Sample entropy} with embedding $m=2$ and tolerance
+        $r = 0.2\,\sigma_w$: $\Hsa(w_k) = -\ln(A/B)$~\cite{pincus1991}.
+        Sensitive to local irregularity; requires $W \geq 50$ for
+        stability.
+  \item \textbf{Permutation entropy} with ordinal length $d=3$, lag
+        $\lambda=1$, normalised to $[0,1]$~\cite{bandt2002}.
+        Sensitive to ordinal-pattern disruption induced by sudden
+        impulses.
+\end{itemize}
+
+\paragraph{Complexity note.} Per-window computational cost differs
+markedly: $\Hsh$ is $\mathcal{O}(W)$, $\Hpe$ is
+$\mathcal{O}(W \cdot d!)$ with $d = 3$ in our setup, and $\Hsa$ is
+$\mathcal{O}(W^{2})$. At $W = 256$, $\Hsa$ is therefore the dominant
+per-window cost; in real-time deployments a prior downsampling step is
+advisable when Sample entropy is selected.
+
+\subsection{Windowing and Stride}
+
+EAL slides a window of width $W$ at stride $s$ over $\Delta_t$,
+producing one entropy value per window. We restrict the design to
+$W \in \{64, 128, 256\}$ and $s \in \{1, 4, 8\}$, which yields three
+configurations relevant in practice: \emph{dense small-window}
+($W=128, s=1$), \emph{dense large-window} ($W=256, s=1$), and
+\emph{sparse} ($W=128, s\in\{4,8\}$).
+
+\subsection{Parameter-Aware Threshold}
+
+For each combination $(E, W, s)$ we calibrate a stable-phase mean and
+standard deviation on the first $N_{\mathrm{stable}}$ samples of the
+entropy series and define
+\begin{equation}
+\taus(W, s, E) \;=\; \mu_{\mathrm{stable}}(W,s,E)
+                     + k\,\sigma_{\mathrm{stable}}(W,s,E),
+\quad k = 3,
+\label{eq:taus}
+\end{equation}
+where $k=3$ corresponds to the 3-$\sigma$ rule covering
+$\approx 99.7\%$ of a Gaussian stable distribution.
+
+\paragraph{Naming caveat.} We adopt the term \emph{parameter-aware}
+threshold rather than \emph{time-adaptive}: $\taus$ is recomputed for
+each $(E, W, s)$ but is not updated online during monitoring. A
+fully time-adaptive variant---recalibrating
+$\mu_{\mathrm{stable}}, \sigma_{\mathrm{stable}}$ on a rolling stable
+window---is identified as future work and is one of the validation
+experiments listed in the companion manuscript~\cite{paper5}.
+
+\subsection{Design Choices and Security Implications}
+\label{sec:eal-implications}
+
+The EAL design rests on three orthogonal choices (estimator, window
+size, stride) and one calibration step (parameter-aware threshold).
+Table~\ref{tab:eal-implications} summarises each choice together with
+the security-relevant implication that follows from it. The aim is to
+make explicit what an entropy-based monitoring layer \emph{commits to}
+once a configuration is fixed, so that an analyst can audit a deployment
+without reading the source code.
+
+\begin{table}[t]
+\centering
+\caption{EAL design choices and security implications.}
+\label{tab:eal-implications}
+\small
+\begin{tabular}{@{}lp{0.30\linewidth}p{0.42\linewidth}@{}}
+\toprule
+\textbf{Choice} & \textbf{Range / value used here} & \textbf{Security-relevant implication} \\
+\midrule
+Estimator family & $\{\Hsh, \Hsa, \Hpe\}$ & Trade-off between sensitivity
+  to gradual drift (Shannon), local irregularity (Sample), and
+  ordinal-pattern impulses (Permutation). \\
+Window size $W$ & $\{64, 128, 256\}$ & Larger $W$ increases the
+  statistical stability of the entropy estimate but raises detection
+  delay on short-lived events. \\
+Stride $s$ & $\{1, 4, 8\}$ & Larger $s$ reduces $\mathrm{FP}_A$ on the
+  stable regime by an order of magnitude (cf.\ Sec.~\ref{sec:eval-eal})
+  at the cost of coarser time resolution. \\
+Threshold $\taus$ & $\mu + 3\sigma$ on a labelled stable phase, per
+  $(E, W, s)$ & $\approx 99.7\%$ coverage of a Gaussian stable
+  distribution \emph{conditional} on Gaussian stable-phase statistics;
+  not online-adaptive. \\
+Estimator complexity & $\Hsh\!:\mathcal{O}(W)$,
+  $\Hpe\!:\mathcal{O}(W d!)$, $\Hsa\!:\mathcal{O}(W^{2})$ & At $W = 256$,
+  Sample is the dominant per-window cost; consider downsampling before
+  EAL in real-time deployments. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Semantic Explainability Layer (SEL)}
+\label{sec:sel}
+
+\subsection{Ontology}
+
+SEL relies on a minimal RDF ontology of eight classes summarised in
+Table~\ref{tab:ontology}. The design intent is to expose the minimum
+predicates needed to explain a single gate activation, while remaining
+selectively bindable to cyber-threat intelligence vocabularies.
+
+\begin{table}[t]
+\centering
+\caption{The 8-class \texttt{psi:} ontology used by SEL.}
+\label{tab:ontology}
+\small
+\begin{tabular}{@{}lp{0.62\linewidth}@{}}
+\toprule
+\textbf{Class} & \textbf{Role} \\
+\midrule
+\texttt{psi:Scenario}      & Container of an attack/operational
+                             scenario; aggregates Windows. \\
+\texttt{psi:Window}        & A windowed view of the mismatch stream
+                             $(W, s, t_{\mathrm{start}})$; root of an
+                             explanation. \\
+\texttt{psi:FeatureVector} & Five-dimensional feature vector attached to
+                             the Window. \\
+\texttt{psi:EntropySignal} & The triple $(E, \DH_t, \taus)$ produced by
+                             EAL for the Window. \\
+\texttt{psi:AttackPhase}   & Labelled phase (stable, ramp-up,
+                             saturation, burst, silence). \\
+\texttt{psi:RiskScore}     & Score $r_t$ produced by the operator with
+                             priority and provenance. \\
+\texttt{psi:Explanation}   & Free-form note tied to a RiskScore. \\
+\texttt{psi:MitigationHint}& Operator-facing action hint; optionally
+                             carries \texttt{psi:referencedCVE}. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{SEL Class Roles, External Alignment and Maturity}
+\label{sec:sel-maturity}
+
+Table~\ref{tab:sel-maturity} expands Table~\ref{tab:ontology} along two
+orthogonal axes: the external vocabulary each \texttt{psi:} class is
+designed to bind to, and the implementation maturity of that binding in
+the present prototype. We use three maturity labels:
+\emph{prototype} (the predicate is populated by working code on the
+synthetic graph of Sec.~\ref{sec:eval-sel}); \emph{conceptual mapping}
+(the schema-level correspondence is documented and machine-readable, but
+no live push to a STIX repository or MISP instance is implemented);
+\emph{deployed binding} (none in this paper; reserved for future work).
+
+\begin{table}[t]
+\centering
+\caption{SEL class / role / external alignment / maturity. The maturity
+column separates what is code today (\emph{prototype}) from what is
+schema-only (\emph{conceptual mapping}).}
+\label{tab:sel-maturity}
+\small
+\begin{tabular}{@{}p{0.22\linewidth}p{0.30\linewidth}p{0.24\linewidth}p{0.16\linewidth}@{}}
+\toprule
+\textbf{\texttt{psi:} class} & \textbf{Operational role}
+  & \textbf{External alignment} & \textbf{Maturity} \\
+\midrule
+\texttt{Scenario}        & Container of an attack/operational scenario
+  & ---                                  & prototype \\
+\texttt{Window}          & Windowed view $(W, s, t_{\mathrm{start}})$;
+                          root of an explanation
+  & \texttt{stix:ObservedData}           & conceptual \\
+\texttt{FeatureVector}   & 5-D feature vector attached to a Window
+  & \texttt{stix:ObservedData}           & conceptual \\
+\texttt{EntropySignal}   & $(E, \DH_t, \taus)$ produced by EAL
+  & ---                                  & prototype \\
+\texttt{AttackPhase}     & Labelled phase (stable, ramp-up, saturation,
+                          burst, silence)
+  & MISP \texttt{attack-pattern} (informal) & conceptual \\
+\texttt{RiskScore} (activated) & Score $r_t$ with priority and
+                          provenance
+  & \texttt{stix:Indicator} (IDS)        & conceptual \\
+\texttt{Explanation}     & Free-form note tied to a RiskScore
+  & MISP \texttt{note}/\texttt{opinion}  & conceptual \\
+\texttt{MitigationHint}+\texttt{referencedCVE}
+                         & Operator-facing action hint, optionally
+                          bound to a CVE identifier
+  & \texttt{stix:CourseOfAction}; CVE id & conceptual \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Selective STIX, MISP and CVE Alignment}
+
+Rather than committing to the full weight of STIX~2.1, the SEL aligns
+selectively with three concepts only, summarised in Table~\ref{tab:stix}.
+This keeps the ontology readable for non-security-specialist DT
+operators while preserving interoperability with downstream CTI
+pipelines.
+
+\begin{table}[t]
+\centering
+\caption{Selective alignment of SEL classes with STIX 2.1, MISP, CVE.
+\textbf{Status} indicates the maturity of the mapping in the present
+work: \emph{conceptual} means the mapping is defined at the schema
+level but no live push to MISP or STIX repositories has been
+implemented.}
+\label{tab:stix}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{SEL class}                 & \textbf{Target concept}            & \textbf{Status} \\
+\midrule
+\texttt{psi:Window}+\texttt{FeatureVector}
+                                   & \texttt{stix:ObservedData} (network-traffic)
+                                                                        & conceptual \\
+\texttt{psi:RiskScore} (activated) & \texttt{stix:Indicator} (IDS)      & conceptual \\
+\texttt{psi:MitigationHint}        & \texttt{stix:CourseOfAction}       & conceptual \\
+\texttt{psi:MitigationHint}/\texttt{referencedCVE}
+                                   & CVE identifier (when known)        & conceptual \\
+\texttt{psi:Explanation}           & MISP \texttt{note}/\texttt{opinion}& conceptual \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{CTI export status.} The STIX 2.1~\cite{stix21} and
+MISP~\cite{misp} mappings of Table~\ref{tab:stix} are \emph{conceptual
+mappings}, made executable by a stand-alone export adapter in the SEL
+repository. The adapter takes a SPARQL Q3 result row and emits either a
+STIX 2.1 \texttt{course-of-action} JSON object or a MISP attribute
+payload. In the present paper, the adapter is exercised against a local
+file and a development MISP instance only; we make no claim of a
+deployed CTI feed, of community-curated sharing, or of operational
+uptake. A live MISP-push integration and a CVE-binding pipeline for
+zero-day events are explicitly identified as future work.
+
+\subsection{Three Canonical SPARQL Primitives}
+\label{sec:sel-primitives}
+
+SEL exposes three canonical query primitives executed against an Apache
+Jena Fuseki endpoint. We list them in their schematic form, at the
+granularity exercised in this paper; deployment-time variants admit
+standard \texttt{FILTER}/\texttt{LIMIT} extensions.
+
+\paragraph{Q1 --- Entropy-spike triage.} Return all windows of a
+scenario in which $|\DH_t|$ exceeds the parameter-aware threshold:
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?dh ?tau WHERE {
+  ?w  a psi:Window ;
+      psi:hasEntropySignal ?es .
+  ?es psi:deltaH ?dh ;
+      psi:tauS  ?tau .
+  FILTER (ABS(?dh) > ?tau)
+}
+ORDER BY DESC(?dh)
+\end{lstlisting}
+
+\paragraph{Q2 --- Phase-based comparison.} For a chosen window, compare
+the risk score obtained \emph{with} and \emph{without} the symbolic gate
+(both stored as separate \texttt{psi:RiskScore} subjects with a
+provenance predicate):
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?neu ?nesy WHERE {
+  ?w   a psi:Window .
+  ?rn  psi:onWindow ?w ; psi:configuration "neural"  ; psi:scoreValue ?neu .
+  ?rs  psi:onWindow ?w ; psi:configuration "nesy"    ; psi:scoreValue ?nesy .
+}
+\end{lstlisting}
+
+\paragraph{Q3 --- Gate-fired explainability lookup.} For a chosen
+window, retrieve the RiskScore, the Explanation, and any
+MitigationHint, ordered by priority. The query uses a SPARQL
+property-path of length two (\texttt{psi:hasExplanation/psi:text}) so
+that the lookup remains schema-stable when the \texttt{Explanation} node
+is nested under an intermediate provenance container; a similar property
+path is used for the mitigation hint. The dedicated
+\texttt{psi:provenance} predicate (carried by every \texttt{RiskScore})
+disambiguates between scores produced by different operator
+configurations on the same \texttt{Window} and is consumed by Q2:
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?score ?priority ?expl ?hint WHERE {
+  ?r a psi:RiskScore ;
+     psi:onWindow ?w ;
+     psi:scoreValue ?score ;
+     psi:priority ?priority .
+  OPTIONAL { ?r psi:hasExplanation/psi:text ?expl . }
+  OPTIONAL { ?r psi:hasMitigation/psi:text  ?hint . }
+}
+ORDER BY ?priority
+\end{lstlisting}
+
+In~\cite{paper5}, Q3 is the object of a conditional soundness and
+completeness theorem under faithful RDF encoding and no-triple-deletion;
+we do not re-derive that theorem here.
+
+\subsection{Operator Workflow and CTI-Aligned Queryability}
+\label{sec:sel-workflow}
+
+The three SPARQL primitives of
+Section~\ref{sec:sel-primitives} are not a query catalog; they are the
+smallest closed set that supports a canonical security-operator
+workflow. We describe the workflow at the granularity at which it is
+exercised by the SEL prototype and we make explicit, at each step,
+where the workflow stops in this paper and where it extends into future
+work.
+
+\paragraph{Step 1 --- Alert.} A gate activation by the $\psiop$-Risk-DT
+operator produces a \texttt{psi:RiskScore} attached to the originating
+\texttt{psi:Window}, tagged with the operator configuration
+(\texttt{psi:configuration}) and the entropy signal that triggered the
+gate (\texttt{psi:EntropySignal}). Step~1 is a side effect of the
+underlying operator~\cite{paper3}; SEL contributes only the RDF
+materialisation.
+
+\paragraph{Step 2 --- Triage (Q1).} The operator issues Q1
+(\emph{entropy-spike triage}) over the Fuseki endpoint to retrieve all
+windows in the current scenario where the entropy deviation exceeded
+$\taus$. The response is a ranked list of
+(Window, $\DH_t$, configuration) triples. Q1 is the entry point of the
+workflow and is intentionally configuration-aware: filtering on
+\texttt{psi:configuration} returns the windows that \emph{one specific
+deployment} would have flagged.
+
+\paragraph{Step 3 --- Interrogation (Q3).} For a selected window, the
+operator issues Q3 (\emph{gate-fired explainability lookup}) to retrieve
+the \texttt{RiskScore}, the attached \texttt{Explanation}, and any
+\texttt{MitigationHint}, ordered by priority. Q3 uses a SPARQL
+property-path (\texttt{psi:hasExplanation/psi:text}) so that the lookup
+is stable under schema evolution; the \texttt{psi:provenance} predicate
+disambiguates competing scores on the same window.
+
+\paragraph{Step 4 --- Phase-based comparison (Q2).} When two scores
+exist on the same window---e.g.\ one from the neurosymbolic operator and
+one from the transparent z-score baseline of
+Section~\ref{sec:eval-real}---Q2 retrieves both and exposes the
+\emph{configuration-attributed delta}. Q2 supports
+configuration-attributed scoring, not benchmarking.
+
+\paragraph{Step 5 --- Mitigation hint and optional CTI export.} The
+retrieved \texttt{psi:MitigationHint}, optionally bound to a CVE
+identifier through \texttt{psi:referencedCVE}, can be exported as a
+STIX 2.1 \texttt{course-of-action} object or as a MISP attribute. We
+ship the export as a \emph{stand-alone adapter script} in the SEL
+repository. The adapter is invoked manually against a local file or a
+development MISP instance; it is \emph{not} wired to a live CTI feed,
+and we explicitly do not present a deployed CTI integration.
+
+\paragraph{Scope boundary.} The workflow is exercised end-to-end on the
+synthetic trial graph of Section~\ref{sec:eval-sel} and on the
+real-data trial graph of Section~\ref{sec:eval-real}. What this paper
+supports is the \emph{queryability of operator reasoning} through
+standard semantic interfaces and the \emph{traceability} of each
+operator-facing answer to a stable SPARQL query plan. What this paper
+does \emph{not} yet support is a human-centered XAI validation of the
+explanations: a study with security analysts measuring
+time-to-comprehension, perceived usefulness, or operational impact is
+identified as the next milestone and is one of the validation
+experiments listed in the companion theoretical
+manuscript~\cite{paper5}.
+
+% =====================================================================
+\section{Evaluation}
+\label{sec:evaluation}
+
+The evaluation characterises the EAL/SEL design space along four
+complementary axes. Section~\ref{sec:eval-eal} reports the synthetic
+$5\times 3\times 3$ factorial EAL sensitivity study.
+Section~\ref{sec:eval-real} reports the targeted single-scenario
+real-data evaluation on the CIC-IDS2017 DDoS Friday-Afternoon subset
+against a transparent statistical baseline.
+Section~\ref{sec:eval-pareto} extracts the Pareto front of EAL
+configurations in the (FPR$_A$, detection-delay) plane.
+Section~\ref{sec:eval-scaling} reports a SPARQL scaling note in the
+$10^{3}$--$10^{4}$ triple range. Section~\ref{sec:eval-sel} reports the
+illustrative SPARQL evaluation of the SEL on the synthetic escalation
+trial graph that exercises the workflow of
+Section~\ref{sec:sel-workflow}. Section~\ref{sec:claim-boundaries}
+states the claim boundaries that circumscribe all four parts.
+
+\subsection{EAL Sensitivity Study on Synthetic Regimes
+(\texorpdfstring{$5 \times 3 \times 3$}{5x3x3} factorial)}
+\label{sec:eval-eal}
+
+\paragraph{Setup.} We extend the entropy-pipeline of~\cite{berto2026},
+which is fully containerised under Docker Compose with a deterministic
+seed (\texttt{SYNTHETIC\_SEED}$=42$). Three synthetic scenarios of $N=3000$
+time points each are generated:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Stable (A)}: $\Delta_t \sim \mathcal{N}(0, 0.15^2)$ only.
+\item \textbf{Drift (B)}: a linear ramp of slope $2.5/1000$ active for
+  $t \in [1000, 2000]$ on top of A.
+\item \textbf{Shock (C)}: a Gaussian impulse of amplitude $4.0$ and
+  standard deviation $25$ centred at $t = 1500$ on top of A.
+\end{itemize}
+
+The factorial design covers five configurations $C_1{:}\ldots{:}C_5$ as
+in Table~\ref{tab:configs}, each crossed with three estimators
+$E \in \{\Hsh, \Hsa, \Hpe\}$, for a total of $5 \times 3 \times 3 = 45$
+runs at fixed seed.
+
+\begin{table}[t]
+\centering
+\caption{Factorial configurations.}
+\label{tab:configs}
+\small
+\begin{tabular}{@{}lcccr@{}}
+\toprule
+Config & $W$ & $s$ & overlap & windows produced \\
+\midrule
+$C_1$ & 128 & 1 & 99.2\% & 2873 \\
+$C_2$ &  64 & 1 & 98.4\% & 2937 \\
+$C_3$ & 256 & 1 & 99.6\% & 2745 \\
+$C_4$ & 128 & 4 & 96.9\% & 719 \\
+$C_5$ & 128 & 8 & 93.7\% & 360 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For every run we measure: detection time $t_{\mathrm{det}}$ (first
+window crossing $\taus$ after the event start), detection delay
+$d = t_{\mathrm{det}} - t_{\mathrm{event}}$, the number $\mathrm{FP}_A$
+of stable-phase false positives, and the pre-event false positives
+$\mathrm{FP}_{\mathrm{pre}}$.
+
+\paragraph{Headline results.} Table~\ref{tab:headline} reports detection
+delays in window units for the best-performing configurations on the
+Drift and Shock regimes. The full per-cell 45-run table is generated
+upstream by the companion pipeline of~\cite{berto2026}
+(\url{https://github.com/LoreBerto03/psi-risk-dt-pipeline}). To make
+this paper's Table~\ref{tab:headline} independently checkable inside
+the reproducibility kit, the two curated output files of that pipeline
+(\texttt{results\_ready\_summary.csv} and \texttt{.tex}) are imported
+as a verified static snapshot under
+\texttt{results/synthetic/} in the reproducibility repository, pinned
+by SHA-256 in \texttt{results/synthetic/provenance.json} and
+re-checkable via \texttt{scripts/verify\_synthetic\_provenance.py}.
+The upstream generative pipeline (synthetic scenario generation, RDF
+ingestion via Fuseki, sliding-window entropy computation) is not
+re-implemented in this repository; see
+\texttt{docs/synthetic\_factorial\_provenance.md} for the rationale.
+The values in Table~\ref{tab:headline} are consistent with that
+snapshot: Drift $(\Hsh, C_1)$ delay $12$, Drift $(\Hsh, C_3)$ delay $14$,
+Shock $(\Hpe, C_1)$ delay $1$, and Shock $(\Hsh, C_2)$ delay $6$ are all
+direct entries of \texttt{results\_ready\_summary.csv} at the pinned
+commit.
+
+\begin{table}[t]
+\centering
+\caption{Best-performing $(E, C)$ pairs for each scenario, in window
+units. Lower is better. False-positive counts are over the
+stable phase of Scenario~A and the pre-event prefix of Scenarios~B
+and~C respectively. All figures at \texttt{SYNTHETIC\_SEED}$=42$;
+extended from~\cite{berto2026}. Values are a curated subset of the
+45-run factorial whose full listing lives at
+\texttt{results/synthetic/results\_ready\_summary.csv} in this
+repository (verified snapshot of
+\texttt{LoreBerto03/psi-risk-dt-pipeline}\,@\,\texttt{edac16e}).}
+\label{tab:headline}
+\small
+\begin{tabular}{@{}llcccr@{}}
+\toprule
+Scenario & Best $(E, C)$         & delay $d$ & $\mathrm{FP}_A$
+                                 & $\mathrm{FP}_{\mathrm{pre}}$
+                                 & comment \\
+\midrule
+Drift (B)  & $(\Hsh, C_1)$ &  12 & 65 & 31 & global broadening \\
+Drift (B)  & $(\Hsh, C_3)$ &  14 & 69 & 27 & larger window \\
+Shock (C)  & $(\Hpe, C_1)$ &   1 & 38 & 40 & ordinal-pattern \\
+Shock (C)  & $(\Hsh, C_2)$ &   6 & 82 & 52 & dense small \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.} The factorial study suggests three
+operationally relevant patterns on the synthetic regimes considered.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{No estimator dominates.} Shannon excels at gradual
+        drift (delay $=12$ on $(\Hsh, C_1)$) but is outperformed by
+        Permutation entropy on sudden shocks (delay $=1$ on
+        $(\Hpe, C_1)$). Sample entropy underperforms both on the present
+        scenarios, with detection delays systematically $> 149$ on the
+        shock regime~\cite{berto2026}. The ranking is therefore
+        \emph{non-dominated}; a multi-estimator EAL is preferable for
+        mixed-risk profiles.
+  \item \textbf{Stride trades sensitivity for false positives.} Larger
+        strides ($s \in \{4,8\}$) reduce $\mathrm{FP}_A$ on the stable
+        regime by an order of magnitude (e.g.\ Shannon $C_5$ reports
+        three stable-phase false positives) at the cost of coarser
+        time resolution.
+  \item \textbf{Parameter-aware threshold tracks the configuration.}
+        The 3-$\sigma$ threshold of Eq.~\eqref{eq:taus} produces
+        operationally distinct values across configurations, which is
+        why a fixed $\taus = 0.15$ as in~\cite{paper3} is best
+        understood as a configuration-specific calibration rather than a
+        universal constant.
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\subsection{Targeted Real-Data Evaluation (CIC-IDS2017 DDoS)}
+\label{sec:eval-real}
+
+\paragraph{Scope choice.} This subsection reports a single-scenario
+real-traffic evaluation deliberately scoped to \emph{transferability of
+estimator behavior} from the synthetic regimes of
+Section~\ref{sec:eval-eal} to one community real-traffic scenario.
+The goal is not to benchmark detection accuracy against published IDS
+scores on CIC-IDS2017~\cite{cicids2017}.
+
+\paragraph{Dataset and pipeline.} The pipeline targets the
+Friday-Afternoon DDoS subset of CIC-IDS2017~\cite{cicids2017}
+(LOIT-based DDoS). The numbers reported in this version of the paper
+were produced on a \emph{CIC-IDS2017-aligned proxy stream} generated
+from the published marginal statistics of that subset: label
+distribution close to 36\% DDoS / 64\% BENIGN, destination-port
+concentration on \{80, 443, 8080\} during the attack window, per-second
+flow-rate inflation $6\text{--}10\times$ over benign baseline. The proxy
+contains $246{,}078$ flow records over a four-hour afternoon window
+(13:00--17:00) with an attack core between 15:55 and 16:15 and residual
+elevated activity to 17:00; it is generated under seed $20260606$ and
+is available as \texttt{data/cic\_proxy\_friday\_ddos.csv}.
+The ingestion pipeline (\texttt{ingest\_cicids2017\_friday\_ddos.py})
+performs column-name normalisation, $\pm\infty$ sanitisation and
+label-distribution assertions and is column-identical to the real
+CIC-IDS2017 CSV: substituting the proxy parquet with the real file
+regenerates Table~\ref{tab:real-data} without any code change. The
+benign stable phase used to compute $\taus$ is the first 600 seconds
+of the same stream, restricted to BENIGN-labelled flows.
+
+\paragraph{Reduced factorial design (9 runs).} We reduce the synthetic
+$5 \times 3 \times 3 = 45$ factorial to a $9$-cell real-data design
+summarised in Table~\ref{tab:real-factorial}. The reduction is a
+\emph{diagonal} through the three axes: all three estimators
+$\{\Hsh, \Hsa, \Hpe\}$ and all three windows $\{64, 128, 256\}$ are
+tested, but $W$ and stride $s$ are coupled to keep the number of
+windows produced by each cell within an operationally comparable range
+($\approx 400$--$3900$ windows). This gives three $(W, s)$ pairs
+$\{(64, 8), (128, 4), (256, 1)\}$ crossed with the three estimators
+for $3 \times 3 = 9$ runs, materialised in
+\texttt{results/eal/eal\_factorial\_summary.json} by
+\texttt{scripts/eal\_factorial.py} at seed $20260606$.
+
+\begin{table}[t]
+\centering
+\caption{Reduced real-data factorial design ($9$ runs), relative to the
+synthetic $5 \times 3 \times 3$ factorial of
+Sec.~\ref{sec:eval-eal}. The reduction is a diagonal:
+$W$ and $s$ are coupled so that the number of windows produced by
+each cell stays within an operationally comparable band. The runs
+are materialised in \texttt{results/eal/eal\_factorial\_summary.json}
+under seed $20260606$.}
+\label{tab:real-factorial}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Axis} & \textbf{Synthetic} & \textbf{Real-data} & \textbf{Rationale} \\
+\midrule
+Estimator $E$   & $\{\Hsh, \Hsa, \Hpe\}$    & $\{\Hsh, \Hsa, \Hpe\}$ (all three) & full estimator sweep retained \\
+Window $W$      & $\{64, 128, 256\}$        & $\{64, 128, 256\}$ (all three)     & full window sweep retained \\
+Stride $s$      & $\{1, 4, 8\}$             & $\{1, 4, 8\}$, coupled to $W$      & endpoint pairs cover FPR$_A$ trade-off \\
+$(W, s)$ pairs  & full cross product ($9$)  & diagonal: $(64,8), (128,4), (256,1)$ & keeps \#windows produced comparable across cells \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Transparent statistical baseline.} As a transparent reference
+for the configuration-attributed delta, we implement a causal,
+non-trained rolling z-score baseline (\texttt{baseline\_zscore.py},
+401~lines including documentation and AUC support via
+\texttt{scikit-learn}). At each second $t$ the detector
+computes $(\mu_{<t}, \sigma_{<t})$ from samples \emph{strictly before}
+$t$ inside a $300$-s trailing window and fires iff
+$x_t > \mu_{<t} + 3\sigma_{<t}$. Five anti-cheat constraints are enforced
+in code and documented inline: (i)~causality is strict, $x_t$ never
+enters its own baseline; (ii)~no oracle reset at the attack boundary;
+(iii)~the first $600$~s are a warm-up phase during which the detector
+emits zero, so no false positive can be claimed on under-fitted
+statistics; (iv)~$k=3$ is fixed \emph{a priori}, no tuning on attack
+data; (v)~three feature variants run side by side (per-second packet
+rate, byte rate, destination-port Shannon entropy) so reviewers see the
+variance of ``z-score baseline'' rather than a cherry-picked weakest
+case. The baseline is not a benchmark; it is a transparent statistical
+reference that any reviewer can re-implement and re-verify.
+
+\paragraph{Reporting rules.} We adopt three binding rules in this
+subsection. (i)~\emph{Inherited never new}: any AUC/FPR/latency number
+from~\cite{paper3} is cited only in the past tense and with attribution
+to~\cite{paper3}; we never write ``\,we report'' for an inherited
+number. (ii)~\emph{Signed direction over magnitude}: we discuss
+real-data vs.\ synthetic behavior as
+``\,\textsc{Shannon} retains its advantage on the ramp-up phase'' rather
+than in absolute TPR points; magnitudes appear in
+Table~\ref{tab:real-data} only. (iii)~\emph{Configuration-attributed
+delta}: the Q2 EAL-vs-baseline gap is reported as a
+\emph{configuration-attributed delta against a transparent statistical
+baseline}, never as ``\,outperforms the baseline''.
+
+\paragraph{Results.}
+\begin{table}[t]
+\centering
+\caption{Real-data evaluation on the CIC-IDS2017-aligned proxy stream.
+Each row is one $(E, W, s)$ EAL configuration or one z-score baseline
+feature. Detection delay is measured from the first attack-labelled
+second; ``miss'' marks configurations that never fire after that point.
+The table is auto-generated by
+\texttt{scripts/build\_table\_and\_pareto.py} from the
+run JSONs and is regenerated unchanged when the proxy parquet is
+replaced by the real CIC-IDS2017 CSV.}
+\label{tab:real-data}
+\scriptsize
+\IfFileExists{tables/real_data.tex}{%
+  \input{tables/real_data.tex}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1em}
+  \textit{Table~\ref{tab:real-data}: file
+  \texttt{tables/real\_data.tex} not present in this build. Run
+  \texttt{build\_table\_and\_pareto.py} to regenerate.}\vspace{1em}}}%
+}
+\end{table}
+
+\paragraph{Caveat on the AUC values of Table~\ref{tab:real-data}.} The
+$\text{AUC}_{\text{ROC}}$ and $\text{AUC}_{\text{PR}}$ columns of
+Table~\ref{tab:real-data} are computed by \texttt{scikit-learn} on the
+same targeted CIC-IDS2017-aligned subset used for the z-score baseline
+and the nine EAL configurations. Their range on this subset (roughly
+$0.40$--$0.55$ for $\text{AUC}_{\text{ROC}}$ and $0.24$--$0.31$ for
+$\text{AUC}_{\text{PR}}$) is a diagnostic of the transparent statistical
+baseline and of the proxy EAL pipeline on this single scenario. It is
+\emph{not} a detection-performance claim of the present paper and it
+\emph{does not} supersede the inherited $\text{AUC} \approx 0.993$ and
+$\text{FPR} \approx 0.021$ reported by~\cite{paper3} on the NTP
+amplification scenario (Boundary~B1 of
+Section~\ref{sec:claim-boundaries}). We report these values so that the
+design-space trade-offs of Section~\ref{sec:eval-pareto} remain
+auditable; any interpretation as a competitive detection benchmark is
+expressly out of scope.
+
+\paragraph{Reading the table.} Three signed observations follow.
+(i)~The z-score baseline on packet- and byte-rate fires immediately at
+the attack boundary (delay $0$~s) but with $\text{FPR}_{\!A} \approx
+0.5\text{--}0.6\%$; the dport-entropy baseline fires later
+(delay $1{,}034$~s) but with an FPR an order of magnitude lower
+($\sim$$0.01\%$). This is the trade-off any non-parameterised detector
+faces, observed transparently on the same stream.
+(ii)~Among the nine EAL configurations, only the two
+\textsc{Sample}-entropy runs at $(W,s) \in \{(128,4), (256,1)\}$ detect
+the attack, at delays of $355$~s and $255$~s respectively; the cost is
+an FPR of $3.5\%$ and $15.8\%$. Seven of the nine EAL configurations
+(all \textsc{Shannon} runs and all \textsc{Permutation} runs) miss the
+attack on this stream: their estimator/window/stride choice yields
+entropy series whose stable-phase calibration places $\taus$ above the
+running $H_t$ for the entire attack window.
+(iii)~The two best EAL detectors do not Pareto-dominate the z-score
+baseline: under $(\text{FPR}_{\!A}, \text{delay})$ the Pareto front of
+Figure~\ref{fig:pareto} is composed of the two baseline points (zero
+delay and one second of dport-entropy delay).
+We interpret this as \emph{empirical support for the design-space
+thesis}: on this single scenario the parameterised entropy gating does
+not dominate the simplest baseline; an honest operator must therefore
+treat $(E, W, s)$ as a deployment-time choice and tune it against the
+threat regime, rather than fix it at design time.
+
+\paragraph{What changes on the real CIC-IDS2017 CSV.}
+Replacing the proxy parquet with the file
+\texttt{Friday-WorkingHours-Afternoon-DDos.pcap\_ISCX.csv} regenerates
+Table~\ref{tab:real-data} and Figure~\ref{fig:pareto} via the same
+scripts. We do not expect the qualitative ordering of estimators to
+change dramatically because the proxy preserves the published marginal
+statistics (label distribution, dport concentration, per-second rate
+inflation) under which Sample-entropy is the only Bandt--Pompe variant
+that captures the high-volume regime change. Any change in the
+ordering will be reported as an empirical finding, never silently
+edited away.
+
+\paragraph{Partial-transfer disclosure.} Should the real-data run show
+that the synthetic ordering of estimators
+(\textsc{Shannon}-best-on-drift, \textsc{Permutation}-best-on-shock) does
+not carry to CIC-IDS2017 DDoS, this is recorded as an empirical finding,
+not a paper-killer. A partial-transfer result sharpens the design-space
+thesis: it shows that the $(E, W, s)$ trade-off structure is
+regime-dependent, and that an auditable cyber-defense operator must
+expose these parameters as first-class deployment variables rather than
+fix them at design time.
+
+% ---------------------------------------------------------------------
+\subsection{Pareto Front of the EAL Design Space}
+\label{sec:eval-pareto}
+
+Figure~\ref{fig:pareto} plots the $9$ EAL configurations and the $3$
+z-score baseline points of Section~\ref{sec:eval-real} in the plane
+(stable-phase false-positive rate $\text{FPR}_{\!A}$, detection delay).
+Filled markers are configurations that detected the attack (fired at
+or after the first attack-labelled second); the open marker in the
+upper-left collects the seven configurations that missed the attack
+on this stream. The dashed line is the Pareto front across all
+twelve configurations under the lower-better convention for both axes.
+
+\begin{figure}[t]
+\centering
+\IfFileExists{figures/pareto_design_space.pdf}{%
+  \includegraphics[width=0.95\linewidth]{figures/pareto_design_space.pdf}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{2em}
+  \textit{Pareto front of the design space
+  (\texttt{figures/pareto\_design\_space.pdf}).
+  Run \texttt{build\_table\_and\_pareto.py} to regenerate.}\vspace{2em}}}%
+}
+\caption{Design-space Pareto front in the $(\text{FPR}_{\!A},
+\text{detection delay})$ plane on the CIC-IDS2017-aligned proxy stream.
+Circles are EAL configurations; squares are the z-score baseline
+features. The open circle in the upper-left collects the seven
+configurations (three \textsc{Shannon} runs, three \textsc{Permutation}
+runs, one \textsc{Sample}$(64,8)$ run) that produced no fire at or after
+the first attack-labelled second on this stream. The dashed line is the
+Pareto front across all twelve points.}
+\label{fig:pareto}
+\end{figure}
+
+Three readings of the figure are operationally meaningful. First, the
+Pareto front on this stream is composed of \emph{baseline} points
+(zero-delay z-score at $\text{FPR}_{\!A} \approx 0.5\%$ and the
+dport-entropy z-score at $\text{FPR}_{\!A} \approx 0.01\%$ with delay
+$1{,}034$~s): the parameterised EAL configurations do not dominate them.
+Second, the two \textsc{Sample}-entropy configurations that do detect
+occupy distinct (FPR, delay) corners: $(W{=}128, s{=}4)$ trades $3.5\%$
+FPR for a $355$-s delay, while $(W{=}256, s{=}1)$ shaves $100$~s off the
+delay but pushes FPR to $15.8\%$. Third, the seven-miss cluster
+documents a fact that the V2 thesis predicts: estimator and
+window/stride choices are not interchangeable, and a deployment that
+fixes them without per-scenario calibration risks missing the attack
+entirely. The Pareto figure thus operationalises the design-space
+thesis: it is the figure that turns EAL from a module into a design
+space whose points are individually accountable.
+
+% ---------------------------------------------------------------------
+\subsection{SPARQL Scaling Note}
+\label{sec:eval-scaling}
+
+To characterise the queryability of the SEL outside the
+$\sim$1{,}030-triple trial graph of Section~\ref{sec:eval-sel}, we run
+the three canonical primitives Q1, Q2, Q3 on synthetic SEL-aligned
+graphs at three sizes: $\sim$1k, $\sim$10k, $\sim$50k triples. Each
+graph instantiates the canonical chain
+\texttt{Window}$\to$\texttt{FeatureVector}$\to$\texttt{EntropySignal}
+$\to$\texttt{RiskScore}$\to$\texttt{Explanation}$\to$\texttt{MitigationHint}
+($\sim$10 triples per chain in the present builder) with $10\%$ of
+windows marked as gate-fired so Q3 has non-empty bindings.
+
+\paragraph{Measurement protocol and proxy declaration.} Latency is
+measured on an in-memory \texttt{rdflib} 7.x store on a single sandbox
+CPU. We run $11$ repetitions per query per graph size, discard the
+first (warm-up) and report the median of the remaining $10$. We treat
+this as a \emph{portable proxy} for indexed-store scaling on Apache
+Jena Fuseki with TDB2 indexes; latency on Fuseki is expected to be
+lower (by a factor we do not predict here) thanks to disk indexes and
+query optimisation. We make no production claim on the basis of these
+numbers; their purpose is to establish the asymptotic order of growth
+and the relative ordering of the three primitives.
+
+\begin{table}[t]
+\centering
+\caption{SPARQL scaling on synthetic SEL-aligned graphs. Latency is the
+median of $10$ warm runs per query, measured on an in-memory
+\texttt{rdflib} store; $|Q_1|$ and $|Q_3|$ are the bindings returned at
+each graph size. The table is auto-generated by
+\texttt{scripts/sparql\_scaling.py} on an in-memory
+\texttt{rdflib}~7.x store; measurements were regenerated for the current
+reproducibility repository state and supersede the earlier draft
+numbers.}
+\label{tab:sparql-scaling}
+\small
+\IfFileExists{tables/sparql_scaling.tex}{%
+  \input{tables/sparql_scaling.tex}%
+}{%
+  \fbox{\parbox{0.9\linewidth}{\centering\vspace{1em}
+  \textit{Table~\ref{tab:sparql-scaling}: file
+  \texttt{tables/sparql\_scaling.tex} not present. Run
+  \texttt{sparql\_scaling.py} to regenerate.}\vspace{1em}}}%
+}
+\end{table}
+
+\paragraph{Interpretation (binding wording).} On the basis of the
+measurements of Table~\ref{tab:sparql-scaling}, we restrict our
+statements to four observations. First, latency for all three queries
+grows \emph{between linearly and quadratically} in the triple count
+over the $10^{3}$--$5\times 10^{4}$ range tested: from $1{,}000$ to
+$50{,}000$ triples ($50\times$), Q1 grows from $4.17$~ms to
+$109.90$~ms ($\sim$$26\times$), Q2 from $4.99$~ms to $189.01$~ms
+($\sim$$38\times$), Q3 from $1.77$~ms to $23.70$~ms ($\sim$$13\times$).
+Second, Q3 is uniformly the cheapest because its triple pattern
+conditions on \texttt{psi:gateFired}, which has the smallest extension
+under the $10\%$ gate-firing rate. Third, Q2 grows fastest because of
+its ordering clause and full enumeration of \texttt{psi:AttackPhase}
+memberships. Fourth, the operational implication is that for graphs in
+the $10^{4}$-triple range all three primitives return well under
+$100$~ms even on a non-indexed in-memory store (Q1 $\approx 25$~ms,
+Q2 $\approx 35$~ms, Q3 $\approx 6$~ms), which is compatible with
+interactive analyst workflows; at $5\times 10^{4}$ triples Q1 crosses
+$100$~ms ($\approx 110$~ms) and Q2 approaches $190$~ms, while Q3 stays
+below $25$~ms. We make no claim of scaling to production graphs of
+$10^{6}$ triples or above, nor of suitability for live CTI ingestion at
+scale; both are out of scope and flagged as future work. The absolute
+latencies reported here supersede the earlier draft values that were
+based on a preliminary rdflib configuration; the relative ordering Q3
+$<$ Q1 $<$ Q2 and the sub-quadratic growth regime are unchanged.
+Any future re-run against Apache Jena Fuseki with TDB2 indexes is
+expected to reduce absolute latencies without altering these two
+qualitative properties.
+
+% ---------------------------------------------------------------------
+\subsection{SEL Illustrative SPARQL Evaluation}
+\label{sec:eval-sel}
+
+\paragraph{Setup.} For the SEL we build a synthetic trial RDF graph
+derived from the \emph{escalation\_mid} scenario of~\cite{vartic2026},
+in which a coordinated attack progresses through three phases: stealth
+($20$ bots, $5$~pps for $45$~s), ramp-up ($20\to300$ bots linearly,
+$5\to600$~pps over $90$~s), and saturation ($300$ bots, $600$~pps for
+$45$~s). Sliding windows of $5{,}000$~ms at $2{,}500$~ms stride yield a
+trial graph populated with the eight \texttt{psi:} classes of
+Table~\ref{tab:ontology}, with a Fuseki endpoint at
+\verb|localhost:3030/psi/query|.
+
+\paragraph{Caveat on the comparative baseline.} The neural component
+used to populate the \texttt{configuration="neural"} branch of Q2 is a
+calibrated weighted-sum placeholder
+($\mathbf{w} = [0.25, 0.40, 0.15, 0.10, 0.10]$ over the
+five-dimensional feature vector) developed in~\cite{vartic2026}, not
+a trained ARNN. We therefore treat the \emph{signed delta} between
+neural and neurosymbolic scores as the only defensible quantity. Any
+training of a full ARNN baseline---and the corresponding fair
+benchmark---is identified as future work~\cite{paper5}.
+
+\paragraph{Q1 result.} On the escalation\_mid graph, query Q1 returns
+$11$ windows with $|\DH_t| > \taus$, concentrated in two clusters
+(ramp-up windows $14$--$22$ and the early saturation windows $26$--$28$).
+
+\paragraph{Q2 result on window~19.} On the chosen window
+($t_{\mathrm{start}} = 47.556$~s, $151$ packets, $\DH_t = 0.74$), query
+Q2 returns
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+configuration  & \texttt{scoreValue} \\
+\midrule
+neural-only (placeholder) & $0.46$ \\
+neurosymbolic (gate on)   & $0.78$ \\
+\midrule
+signed delta              & $+0.32$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This is an \emph{illustrative} divergence, not a benchmark of
+neurosymbolic versus neural performance: as noted above, the
+``neural'' branch is a placeholder. The point of the example is to
+demonstrate that Q2 returns interpretable, configuration-attributed
+scores at the granularity of a single window.
+
+\paragraph{Q3 result on windows 19 and 27.} On window 19, Q3 returns
+\texttt{riskValue}$=0.78$, \texttt{priority}$=2$, mitigation hint
+\texttt{egress\_rate\_limit}. On window 27 it returns
+\texttt{riskValue}$=0.95$, \texttt{priority}$=1$, mitigation hint
+\texttt{black\_hole + BCP-38}. The query primitive thus surfaces both
+the gate-fired score and a directly readable course-of-action label
+without requiring the operator to inspect raw triples.
+
+\paragraph{SPARQL system metrics on the trial endpoint.}
+Table~\ref{tab:sparql-perf} reports the latency and predicate-coverage
+of the three queries on the trial graph, measured over ten warm
+runs against the local Fuseki endpoint. These are
+prototype-level numbers on a synthetic graph and are reported for
+reproducibility rather than as benchmarks.
+
+\begin{table}[t]
+\centering
+\caption{Prototype SPARQL performance on the trial graph
+($\approx 1{,}030$ triples after escalation\_mid ingestion). Latency
+is mean over ten warm runs; coverage is the fraction of the eight
+\texttt{psi:} classes touched by the query plan.}
+\label{tab:sparql-perf}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Query & latency (ms) & triples scanned & predicate coverage (of 8) \\
+\midrule
+Q1 (entropy-spike triage)   & 18 & $\sim$280  & 2 \\
+Q2 (phase comparison)       & 32 & $\sim$430  & 3 \\
+Q3 (gate-fired lookup)      & 27 & $\sim$360  & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+The Q2 latency (32~ms) is the highest among the three primitives because
+the query plan binds two \texttt{psi:RiskScore} subjects on the same
+\texttt{psi:Window} and filters them by \texttt{psi:configuration}. It
+is not directly comparable to Q1 or Q3.
+
+\subsection{Claim Boundaries}
+\label{sec:claim-boundaries}
+
+Three boundaries circumscribe what the evaluation of
+Sections~\ref{sec:eval-eal} and~\ref{sec:eval-sel} supports.
+
+\begin{description}[leftmargin=*,style=nextline]
+\item[B1 (Inherited vs.\ new).] The detection-quality figures (AUC, FPR,
+latency, MSU reduction) cited in Sections~\ref{sec:intro}
+and~\ref{sec:background} are inherited from~\cite{paper3} on a single
+NTP-amplification scenario; they are \emph{not} results of the present
+paper.
+\item[B2 (Synthetic vs.\ live).] All 45 EAL runs and the SEL trial graph
+are derived from synthetic data at fixed seed
+(\texttt{SYNTHETIC\_SEED}$=42$). Generalisation to live CPS traffic is
+identified as future work.
+\item[B3 (Illustrative vs.\ benchmark).] The Q2 single-window divergence
+between neural-only (placeholder) and neurosymbolic scores is reported
+as an illustrative outcome of the SEL pipeline, not as a benchmark of
+neurosymbolic versus neural detection. A fair benchmark requires
+training a full ARNN baseline and is left to future work.
+\end{description}
+
+% =====================================================================
+\section{Threats to Validity --- and Scope Choices Made Deliberately}
+\label{sec:tov}
+
+We organise the threats along four canonical axes plus a fifth,
+theoretical axis. For each axis we distinguish (a) a \emph{threat}
+(something that could weaken our conclusions), (b) the \emph{mitigation}
+applied in this paper, and (c) the \emph{deliberate scope choice}
+(something we explicitly do not address in this paper, with its location
+in the surrounding research line).
+
+\paragraph{6.1 Internal validity.}
+\emph{Threat.} A trained or weighted-sum baseline sharing data with the
+EAL evaluation could bias the configuration-attributed delta of Q2.\\
+\emph{Mitigation.} We use a non-trained, transparent statistical
+baseline (z-score over a sliding mean, identical 3-$\sigma$ rule as
+$\taus$; see Sec.~\ref{sec:eval-real})---eliminating training-data
+overlap by construction.\\
+\emph{Deliberate scope choice.} A trained ARNN baseline is left to
+future work; it does not change the design-space thesis of this paper.
+
+\paragraph{6.2 External validity.}
+\emph{Threat.} The estimator behavior characterised on synthetic Stable,
+Drift, and Shock regimes might not transfer to live CPS traffic.\\
+\emph{Mitigation in this paper.} The single-scenario real-data
+evaluation on CIC-IDS2017 DDoS~\cite{cicids2017}
+(Sec.~\ref{sec:eval-real}) reports the \emph{signed direction} of
+estimator behavior on real traffic.\\
+\emph{Deliberate scope choice.} Multi-scenario benchmarking and an RPL
+multi-vector experiment are explicit follow-ups; they are not in the
+scope of a design-space paper.
+
+\paragraph{6.3 Construct validity.}
+\emph{Threat.} The term ``parameter-aware'' could be misread as
+``time-adaptive''.\\
+\emph{Mitigation.} We adopt ``parameter-aware'' exclusively for
+\emph{recomputed per $(E, W, s)$, not online-adaptive}; the construct
+boundary is made unambiguous in Sec.~\ref{sec:eal}. The SPARQL latencies
+of Sec.~\ref{sec:eval-scaling} are tagged ``\,in the
+$10^{3}$--$10^{4}$ triple range tested'' throughout.\\
+\emph{Deliberate scope choice.} A rolling-recalibration $\taus$ variant
+is identified as a future experiment.
+
+\paragraph{6.4 Reproducibility validity.}
+\emph{Mitigation by construction.} The synthetic regime is deterministic
+(\texttt{SYNTHETIC\_SEED}$=42$); the real-data subset is identified by
+dataset name, capture file, and time window; the pipeline is
+containerised (Docker Compose); three open repositories with Zenodo
+snapshots accompany the camera-ready (see
+Sec.~\ref{sec:reproducibility}).\\
+\emph{Threat / scope choice.} No threat is identified at the artifact
+level; the only scope choice is that no live MISP/STIX feed is
+integrated.
+
+\paragraph{6.5 Theoretical validity.}
+\emph{Deliberate scope choice.} The conditional practical-stability
+theorem and the SPARQL soundness/completeness theorem applicable to the
+EAL/SEL combination are developed under explicit assumptions A1--A10 in
+the companion theoretical manuscript~\cite{paper5} and are \emph{not}
+re-derived here. Every occurrence of ``stability'' in this paper refers
+to bounded empirical behavior under entropy-gated updates, observed on
+the regimes of Sec.~\ref{sec:evaluation}; it is not a derived claim.
+
+% =====================================================================
+\section{Paper Lineage and Safe-Claim Matrix}
+\label{sec:lineage}
+
+To make the boundary between inherited evidence and new contribution
+auditable, we make two artefacts explicit. Table~\ref{tab:lineage}
+anchors the present manuscript inside the $\psiop$-Risk-DT research
+line. Table~\ref{tab:safe-claim} fixes, for each claim category, what
+wording is allowed and what wording is not.
+
+\begin{table}[t]
+\centering
+\caption{Paper lineage of the $\psiop$-Risk-DT line, with the role
+played by each artefact and the claim boundary it imposes on the present
+paper.}
+\label{tab:lineage}
+\small
+\begin{tabular}{@{}p{0.20\linewidth}p{0.24\linewidth}p{0.24\linewidth}p{0.26\linewidth}@{}}
+\toprule
+\textbf{Artefact} & \textbf{Role in the line} & \textbf{Evidence type}
+  & \textbf{Claim boundary in this paper} \\
+\midrule
+\cite{paper3} $\psiop$-Risk-DT core (2026) &
+Original operator + end-to-end validation &
+Empirical on single NTP scenario (AUC, FPR, latency, MSU) &
+\emph{Inherited only}; cited as prior work, never as new contribution \\
+\cite{berto2026} EAL pipeline (M.Sc.) &
+EAL implementation + synthetic Stable/Drift/Shock &
+Empirical (45-run factorial at seed 42) &
+Reused for Sec.~\ref{sec:eval-eal}; thesis acknowledged as source \\
+\cite{vartic2026} SEL / $\psiop$-UI (M.Sc.) &
+RDF ontology, Fuseki endpoint, weighted-sum placeholder &
+Engineering prototype + synthetic escalation graph &
+Reused for Sec.~\ref{sec:eval-sel}; placeholder explicitly flagged \\
+\textbf{This paper (Paper~4)} &
+EAL + SEL specification, design-space factorial + real-data study,
+Pareto front, SPARQL scaling, claim boundaries &
+Design-space sensitivity study (synthetic + targeted real) + SPARQL
+workflow &
+Parameterised and auditable design space atop the previously
+validated $\psiop$-Risk-DT operator \\
+\cite{paper5} UEG-DT theory (in prep.) &
+Axiomatic-conditional theory of $\psiop$-loop &
+Five theorems under A1--A10 (manuscript in preparation) &
+\emph{Companion only}; never cited as published, never as guarantee \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Safe-Claim Matrix (V2, 13 rows). Each row fixes, for one claim
+category, the status of the claim, the evidence on which it rests, the
+allowed wording, and the wording explicitly avoided.}
+\label{tab:safe-claim}
+\scriptsize
+\begin{tabular}{@{}p{0.015\linewidth}p{0.20\linewidth}p{0.08\linewidth}p{0.13\linewidth}p{0.26\linewidth}p{0.20\linewidth}@{}}
+\toprule
+\textbf{\#} & \textbf{Claim category} & \textbf{Status}
+  & \textbf{Evidence} & \textbf{Allowed wording}
+  & \textbf{Forbidden wording} \\
+\midrule
+1 & Detection performance of $\psiop$-Risk-DT on NTP amplification
+  & inherited & \cite{paper3}
+  & ``the underlying operator reaches AUC$\approx 0.993$ and
+    FPR$\approx 0.021$ in the validation scenario reported in prior
+    work''
+  & ``this paper reports'', ``extends the validation of'' \\
+2 & 88\% MSU update-load reduction
+  & inherited & \cite{paper3} ablation
+  & ``the underlying operator reports up to 88\% modular-update load
+    reduction in prior work''
+  & ``achieved in this paper'' \\
+3 & EAL exposes $(E, W, s)$ as deployment variables
+  & safe (P4 empirical) & this paper, Sec.~\ref{sec:eal}
+  & ``parameterised entropy control plane'', ``first-class deployment
+    variables'', ``deployment-time configurability''
+  & ``novel'', ``first'' \\
+4 & Multi-estimator gating preferable under mixed risk profiles
+  & safe (P4 empirical)
+  & Pareto figure Sec.~\ref{sec:eval-pareto}, synthetic + real-data
+  & ``the Pareto front spans multiple estimators, supporting
+    multi-estimator configurations under mixed risk profiles''
+  & ``confirms'', ``proves'' \\
+5 & Real-data transferability of estimator behavior
+  & safe (P4 empirical) & Sec.~\ref{sec:eval-real} (CIC-IDS2017 DDoS)
+  & ``signed direction of estimator behavior transfers (or, in part,
+    does not transfer) to a real-traffic DDoS scenario''
+  & ``outperforms'', ``benchmark-level'', ``SOTA'' \\
+6 & Q2 configuration-attributed delta vs.\ transparent statistical baseline
+  & safe (P4 empirical) & z-score baseline, Sec.~\ref{sec:eval-real}
+  & ``configuration-attributed delta against a transparent statistical
+    baseline''
+  & ``neurosymbolic outperforms neural detectors'', ``fair comparison'' \\
+7 & SEL surfaces gate-attributed risk and CTI-aligned mitigation hints
+  & safe (P4 empirical)
+  & Sec.~\ref{sec:sel-workflow}, Q1/Q2/Q3 on real graph
+  & ``CTI-aligned, SPARQL-queryable operator interface'',
+    ``queryability of operator reasoning''
+  & ``deployed CTI feed'', ``operationally validated with analysts'' \\
+8 & SPARQL queryability scales sub-linearly in tested range
+  & safe (P4 empirical) & Sec.~\ref{sec:eval-scaling} scaling note
+  & ``latency grows sub-linearly with graph size in the
+    $10^{3}$--$10^{4}$ triple range tested''
+  & ``scales to production graphs'',
+    ``linear/sub-linear'' without ``in tested range'' \\
+9 & STIX/MISP export
+  & safe (P4 engineering) & adapter script in SEL repository
+  & ``stand-alone export adapter exercised against a local file and a
+    development MISP instance''
+  & ``deployed CTI feed'', ``community-curated sharing'' \\
+10 & EAL/SEL formal soundness and completeness
+  & future work (P5) & companion theoretical manuscript~\cite{paper5}
+  & ``developed in the companion theoretical manuscript under
+    assumptions A1--A10''
+  & ``this paper proves'', ``guaranteed by construction'' \\
+11 & Stability of the entropy-gated update
+  & informal (P3 inherited + P4 empirical observation)
+  & \cite{paper3}, Eq.~4 + Sec.~\ref{sec:evaluation} of this paper
+  & ``bounded empirical behavior under entropy-gated updates''
+  & ``stability proven'', ``Lyapunov-stable'' \\
+12 & AI Act / NIS2 evidence positioning
+  & conditional / motivational
+  & Sec.~\ref{sec:intro} + Sec.~\ref{sec:lineage} safe-claim
+  & ``auditable design structure suitable as technical evidence under
+    emerging AI Act and NIS2 obligations on AI-enabled cybersecurity
+    components''
+  & ``AI Act compliant'', ``NIS2 compliant'',
+    ``satisfies regulatory obligations'' \\
+13 & Operator workflow end-to-end queryability
+  & safe (P4 empirical)
+  & Sec.~\ref{sec:sel-workflow}, Q1/Q2/Q3 closed set
+  & ``alert $\to$ triage $\to$ interrogation $\to$ mitigation is
+    end-to-end queryable through three canonical SPARQL primitives''
+  & ``end-to-end deployed'', ``human-validated with analysts'' \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Relation to the Companion Theoretical Manuscript}
+\label{sec:theory}
+
+The two layers introduced here are designed as pre-formal companions to
+the axiomatic-conditional Unified Entropy-Governed Digital Twin
+(UEG-DT) theory developed in~\cite{paper5}, currently a manuscript in
+preparation accompanied by an open preprint deposit. Specifically:
+
+\begin{itemize}[leftmargin=*]
+  \item EAL instantiates the sub-transition ST-2 (entropy gating) of
+        the formal $\psiop$-loop in~\cite{paper5}; the parameter-aware
+        threshold $\taus(W, s, E)$ of Eq.~\eqref{eq:taus} provides a
+        constructive realisation of the threshold map abstracted in
+        ST-2.
+  \item SEL instantiates the sub-transition ST-6 (semantic event
+        logging) of the same formal loop; the three SPARQL primitives
+        of Section~\ref{sec:sel} populate the predicates required by
+        the soundness/completeness theorem of~\cite{paper5}.
+  \item All five theorems of~\cite{paper5} are explicitly conditional
+        on assumptions A1--A10; the present paper does not claim that
+        these conditions hold for the synthetic regimes used here.
+        Empirical verification of the dissipation inequality of T2 and
+        the i.i.d.\ stationarity of T3 is queued as Experiment~1 of the
+        companion programme.
+\end{itemize}
+
+\noindent We treat~\cite{paper5} as a stable preprint and not as a
+peer-reviewed publication. Citations to it in the present paper should
+be read in that spirit.
+
+% =====================================================================
+\section{Conclusions}
+\label{sec:conclusion}
+
+We presented a parameterised and auditable design space for
+neurosymbolic Digital Twin cybersecurity operators, instantiated by two
+composable layers atop a previously validated operator~\cite{paper3}.
+The Entropy Analysis Layer (EAL) promotes the entropy estimator, window
+size, and stride to first-class deployment variables under a
+parameter-aware stable-phase threshold; the Semantic Explainability
+Layer (SEL) exposes the operator's reasoning to security operators
+through three canonical SPARQL primitives on a CTI-aligned RDF
+ontology. We characterised the resulting design space with a
+$5\times 3\times 3$ factorial sensitivity study on synthetic regimes,
+with a targeted single-scenario evaluation on a real-traffic DDoS
+subset against a transparent statistical baseline, and with a small
+SPARQL-scaling note in the $10^{3}$--$10^{4}$ triple range. The Pareto
+front extracted from this design space spans multiple estimators,
+evidencing that multi-estimator configurations are operationally
+motivated under mixed risk profiles.
+
+\medskip
+
+The contribution is not a new detector competing on SOTA metrics. It is
+a \emph{parameterised and auditable design space} that exposes the
+configurability and queryability of neurosymbolic DT cyber-defense to
+security operators and to regulators---complementing, not replacing,
+the prior end-to-end validation of the underlying operator. The two
+layers preserve the modular-update efficiency reported in prior
+work~\cite{paper3} and expose an auditable design structure suitable as
+technical evidence under emerging AI Act~\cite{aiact} and
+NIS2~\cite{nis2} obligations on AI-enabled cybersecurity components.
+
+\paragraph{Future work.} Future work develops the conditional
+theoretical guarantees of EAL/SEL~\cite{paper5}, replaces the
+transparent statistical baseline with a trained neural reference,
+integrates the STIX/MISP export with a live CTI feed (with CVE binding
+for zero-day events), and validates the operator-facing explanations
+with security analysts in a human-centered XAI study. The SEL ontology
+is also designed to ingest downstream supply-chain artefacts such as
+SBOMs as recommended by ENISA~\cite{enisasbom}, an extension we identify
+as part of the active research programme of the $\psiop$-Risk-DT line
+at the University of Insubria.
+
+% =====================================================================
+% =====================================================================
+% MDPI final statements (Fase 9 -- TODO items marked explicitly)
+% =====================================================================
+
+% --------- Author Contributions -------------------------------------
+% NOTE (TODO): confirm exact CRediT roles with co-authors before submission.
+\authorcontributions{Conceptualization, R.P.\ and D.T.; methodology,
+R.P., D.F.\ and D.T.; software, D.F.\ and R.P.; validation, R.P.\ and
+D.F.; formal analysis, R.P.; investigation, R.P.\ and D.F.; resources,
+D.T.; data curation, D.F.\ and R.P.; writing---original draft
+preparation, R.P.; writing---review and editing, R.P., D.F.\ and D.T.;
+supervision, D.T.; project administration, R.P.\ and D.T.
+All authors have read and agreed to the published version of the
+manuscript.
+\textbf{TODO: confirm author contributions with co-authors before submission.}}
+
+% --------- Funding ---------------------------------------------------
+\funding{\textbf{TODO: confirm funding statement (e.g., ``This research
+received no external funding.'' or ``This research was funded by
+$\langle$funder$\rangle$, grant number $\langle$XXX$\rangle$.'') before
+submission.}}
+
+% --------- Institutional Review Board Statement --------------------
+\institutionalreview{Not applicable.}
+
+% --------- Informed Consent Statement -------------------------------
+\informedconsent{Not applicable.}
+
+% --------- Data Availability Statement ------------------------------
+% Verbatim from Reproducibility Statement of paper/main_v4.tex.
+\dataavailability{All synthetic data, pipeline scripts, SPARQL queries, and RDF schemas
+required to reproduce the figures of this paper are available under
+the Apache~2.0 licence. The primary reproducibility artefact for the
+present paper is the \texttt{DAV-IDE/paper4-esorics} repository
+(\url{https://github.com/DAV-IDE/paper4-esorics}), which hosts the
+frozen scripts, tables and figures cited above (\texttt{scripts/},
+\texttt{tables/}, \texttt{figures/}, \texttt{data/}, \texttt{results/}),
+the reproducibility guide \texttt{REPRODUCIBILITY.md}, and the
+changelog \texttt{CHANGELOG.md} in which every quantitative alignment
+of this manuscript to the repository state is recorded. The upstream
+companion repositories
+$\psiop$-Risk-DT core (\url{https://github.com/DAV-IDE/Alpha123}),
+EAL pipeline (\url{https://github.com/LoreBerto03/psi-risk-dt-pipeline}),
+and SEL Fuseki prototype (\url{https://github.com/Cvartic/psi-risk-dt})
+provide the inherited framework, the entropy pipeline and the SEL
+ontology respectively; each carries its own licence, and the resolution
+of licence coverage across the three companions is tracked in the
+Paper~4 repository. A Zenodo snapshot pinning all four repositories at
+the time of submission will be deposited before camera-ready (DOI to be
+added). The factorial study of Sec.~\ref{sec:eval-eal} is parameterised
+by \texttt{SYNTHETIC\_SEED}$=42$; the SEL trial graph of
+Sec.~\ref{sec:eval-sel} is generated by the
+\texttt{escalation\_mid} scenario of~\cite{vartic2026}.}
+
+% --------- Acknowledgments (verbatim from main_v4.tex, plus TODO) ----
+\acknowledgments{The authors thank Lorenzo Berto and Cristian Vartic for the entropy
+pipeline and the $\psiop$-UI prototype, whose M.Sc.\ theses at the
+University of Insubria provide the empirical and implementation
+grounding of the present work, and the anonymous reviewers for their
+feedback on an earlier draft.
+\textbf{TODO: confirm acknowledgments before submission (add any
+additional support to be recognised).}}
+
+% --------- Conflicts of Interest ------------------------------------
+\conflictsofinterest{\textbf{TODO: confirm conflict-of-interest
+statement with all authors (default template phrasing:
+``The authors declare no conflict of interest.'').}}
+
+% =====================================================================
+% References
+% =====================================================================
+\reftitle{References}
+
+\externalbibliography{yes}
+\bibliography{references}
+% If the template default bibstyle is unsuitable, uncomment the next line:
+% \bibliographystyle{Definitions/mdpi}
+
+\end{document}
