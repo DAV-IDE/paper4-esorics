@@ -1,0 +1,22 @@
+{
+  "source_dataset": "CIC-IDS2017 TrafficLabelling / Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+  "n_baseline": 3,
+  "n_eal": 9,
+  "n_total_points": 12,
+  "n_detected": 3,
+  "n_missed": 9,
+  "pareto_front": [
+    {
+      "label": "z/dport-entr.",
+      "fpr": 0.06451612903225806,
+      "delay": 600.0,
+      "kind": "baseline",
+      "auc_roc": 0.5268817204301075
+    }
+  ],
+  "notes": [
+    "Real-data granularity is per-minute (see CHANGELOG_REAL.md).",
+    "Original (W,s) grid produced 0 detections; native-minute rescaled grid used instead.",
+    "AUC_ROC reported for all EAL configs even when the fixed tau leaves fires=0."
+  ]
+}

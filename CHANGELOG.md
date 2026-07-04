@@ -2,6 +2,35 @@
 
 All notable changes to the Paper 4 manuscript and reproducibility kit.
 
+## [v4.1.0] — 2026-07-04
+
+Extends the reproducibility kit with a **real-data rerun** on CIC-IDS2017
+Friday-WorkingHours-Afternoon-DDoS (parquet redistribution) and a
+**τ recalibration sweep** (4 k × 3 warmup × 9 EAL configs = 108 cells).
+All proxy artefacts are untouched: the two pipelines coexist. This entry
+summarises the additions; the detailed empirical narrative (Findings 1–6)
+lives in `CHANGELOG_REAL.md`.
+
+### Added
+- `scripts/{ingest_real,baseline_zscore_real,eal_factorial_real,build_table_and_pareto_real,tau_sweep_real,build_tau_sweep_artifacts,_inspect_parquet}.py` — 7 new scripts.
+- `results/real/` (4 baseline JSON — the 3 per-second CSV are `.gitignore`d by `results/**/*.csv`) and `results/eal_real/` (21 top-level EAL JSON + `tau_sweep/` 108 cells + `tau_sweep_by_k/` 12 aggregates).
+- `results/table_pareto_manifest_real.json` — provenance manifest for the real run.
+- `figures/pareto_design_space_real.{pdf,png}` and `figures/tau_sweep_heatmap.{pdf,png}`.
+- `tables/real_data_real.tex` and `tables/real_tau_sweep.tex`.
+- `CHANGELOG_REAL.md` — Findings 1–6 (rerun and τ sweep).
+- Makefile targets `real-rerun`, `tau-sweep`, `real-all`.
+- README §4b documenting the parquet source (`bvsam/cic-ids-2017` on HuggingFace, SHA256 pinned) and the new Make targets.
+
+### Key empirical finding (V2 thesis support)
+- Best operating point on real data: **Permutation entropy (W=16, s=2), warmup=1200 s, k=1.5** → FPR=0.038, delay=60 s, fires=8, AUC=0.710. Pareto-dominates the transparent z-score baseline (dport-entr., FPR=0.065, delay=600 s) on both axes.
+- Detection matrix (warmup=1200 s): 4/9 configs at k=1.5, 3/9 at k=2.0, 2/9 at k=2.5, 2/9 at k=3.0.
+- warmup=600 s yields σ_stable=NaN for all 9 configs — too few pre-attack minutes for stable-phase calibration.
+
+### Not changed
+- No proxy artefacts modified. `results/proxy/`, `results/eal/`, `figures/pareto_design_space.{pdf,png}`, `tables/real_data.tex`, `tables/sparql_scaling.tex` remain the baseline for §5.4 proxy-vs-real comparison.
+
+---
+
 ## [v4.0.0] — 2026-06-06
 
 ### Added
