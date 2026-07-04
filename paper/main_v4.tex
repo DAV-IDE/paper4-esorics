@@ -964,31 +964,38 @@ regenerates Table~\ref{tab:real-data} without any code change. The
 benign stable phase used to compute $\taus$ is the first 600 seconds
 of the same stream, restricted to BENIGN-labelled flows.
 
-\paragraph{Reduced factorial design (9 runs).} We deliberately reduce
-the synthetic $5 \times 3 \times 3 = 45$ to a real-data
-$2\times 2\times 2 + 1 = 9$ runs, summarised in
-Table~\ref{tab:real-factorial}. Sample entropy at $W=256$ is excluded
-because its $O(W^{2})$ cost is impractical on a 225k-record subset; one
-extra run at \textsc{Sample}$@W{=}128$ documents Sample behavior on the
-smallest tested window.
+\paragraph{Reduced factorial design (9 runs).} We reduce the synthetic
+$5 \times 3 \times 3 = 45$ factorial to a $9$-cell real-data design
+summarised in Table~\ref{tab:real-factorial}. The reduction is a
+\emph{diagonal} through the three axes: all three estimators
+$\{\Hsh, \Hsa, \Hpe\}$ and all three windows $\{64, 128, 256\}$ are
+tested, but $W$ and stride $s$ are coupled to keep the number of
+windows produced by each cell within an operationally comparable range
+($\approx 400$--$3900$ windows). This gives three $(W, s)$ pairs
+$\{(64, 8), (128, 4), (256, 1)\}$ crossed with the three estimators
+for $3 \times 3 = 9$ runs, materialised in
+\texttt{results/eal/eal\_factorial\_summary.json} by
+\texttt{scripts/eal\_factorial.py} at seed $20260606$.
 
 \begin{table}[t]
 \centering
-\caption{Reduced real-data factorial design ($2\times 2\times 2 + 1$),
-relative to the synthetic $5\times 3\times 3$ factorial of
-Sec.~\ref{sec:eval-eal}.}
+\caption{Reduced real-data factorial design ($9$ runs), relative to the
+synthetic $5 \times 3 \times 3$ factorial of
+Sec.~\ref{sec:eval-eal}. The reduction is a diagonal:
+$W$ and $s$ are coupled so that the number of windows produced by
+each cell stays within an operationally comparable band. The runs
+are materialised in \texttt{results/eal/eal\_factorial\_summary.json}
+under seed $20260606$.}
 \label{tab:real-factorial}
 \small
 \begin{tabular}{@{}llll@{}}
 \toprule
 \textbf{Axis} & \textbf{Synthetic} & \textbf{Real-data} & \textbf{Rationale} \\
 \midrule
-Estimator $E$ & $\{\Hsh, \Hsa, \Hpe\}$ & $\{\Hsh, \Hpe\}$ + 1 Sample@$W{=}128$
-              & Sample $O(W^{2})$ at $W{=}256$ impractical \\
-Window $W$    & $\{64, 128, 256\}$    & $\{128, 256\}$
-              & $W{=}64$ noisy on flow-level features \\
-Stride $s$    & $\{1, 4, 8\}$         & $\{1, 8\}$
-              & endpoint values capture FPR$_A$ trade-off \\
+Estimator $E$   & $\{\Hsh, \Hsa, \Hpe\}$    & $\{\Hsh, \Hsa, \Hpe\}$ (all three) & full estimator sweep retained \\
+Window $W$      & $\{64, 128, 256\}$        & $\{64, 128, 256\}$ (all three)     & full window sweep retained \\
+Stride $s$      & $\{1, 4, 8\}$             & $\{1, 4, 8\}$, coupled to $W$      & endpoint pairs cover FPR$_A$ trade-off \\
+$(W, s)$ pairs  & full cross product ($9$)  & diagonal: $(64,8), (128,4), (256,1)$ & keeps \#windows produced comparable across cells \\
 \bottomrule
 \end{tabular}
 \end{table}
