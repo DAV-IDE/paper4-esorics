@@ -85,13 +85,15 @@ baseline_zscore_summary.json
 
 **Expected numbers** (also in Table 8, rows 1–3):
 
-| Feature | AUC | FPR | Detection delay | Fires |
-|---------|-----|-----|-----------------|-------|
-| z/pkt-rate | 0.502 | 0.005 | 0 s | 96 |
-| z/byte-rate | 0.505 | 0.006 | 0 s | 105 |
-| z/dport-entropy | 0.488 | 0.0001 | 1034 s | 21 |
+| Feature | FPR$_A$ | Detection delay | Fires |
+|---------|--------|-----------------|-------|
+| z/pkt-rate | 0.005 | 0 s | 96 |
+| z/byte-rate | 0.006 | 0 s | 105 |
+| z/dport-entropy | 0.0001 | 1,034 s | 21 |
 
-Tolerance: ±0.001 on AUC, ±1 fire (rounding).
+**AUC is not computed by this pipeline** — both `baseline_zscore.py` and `eal_factorial.py` emit `AUC_ROC = AUC_PR = NaN` in the metrics JSON, and Table 8 in the paper renders the AUC columns as `--`. The rationale is documented in the paper (§5.2, "Reporting rules"): AUC on univariate second-level series requires a per-second attack label plus a continuous score, which is neither meaningful nor honest to synthesise post-hoc on this pipeline. The transparent metrics for the baseline are therefore FPR$_A$, detection delay, and fires; AUC is reported only for the inherited Paper 3 numbers cited in §5.1.
+
+Tolerance: ±1 fire (rounding), ±0.001 on FPR, exact delay.
 
 ---
 
@@ -114,17 +116,19 @@ python scripts/eal_factorial.py \
 
 **Expected detection outcomes** (also in Table 8, rows 4–12):
 
-| Config | AUC | FPR | Detection delay | Fires | Verdict |
-|--------|-----|-----|-----------------|-------|---------|
-| Shannon (64, 8) | — | — | n/a | 0 | **missed** |
-| Shannon (128, 4) | — | — | n/a | 0 | **missed** |
-| Shannon (256, 1) | — | — | n/a | 0 | **missed** |
-| Sample (64, 8) | — | — | n/a | 0 | **missed** |
-| Sample (128, 4) | 0.440 | 0.035 | 355 s | 400 | detected |
-| Sample (256, 1) | 0.404 | 0.158 | 255 s | 1952 | detected |
-| Permutation (64, 8) | — | — | n/a | 0 | **missed** |
-| Permutation (128, 4) | — | — | n/a | 0 | **missed** |
-| Permutation (256, 1) | — | — | n/a | 0 | **missed** |
+| Config | FPR$_A$ | Detection delay | Fires | Verdict |
+|--------|--------|-----------------|-------|---------|
+| Shannon (64, 8) | 0.000 | n/a | 0 | **missed** |
+| Shannon (128, 4) | 0.000 | n/a | 0 | **missed** |
+| Shannon (256, 1) | 0.006 | n/a | 61 | **missed** |
+| Sample (64, 8) | 0.000 | n/a | 0 | **missed** |
+| Sample (128, 4) | 0.035 | 355 s | 400 | detected |
+| Sample (256, 1) | 0.158 | 255 s | 1,952 | detected |
+| Permutation (64, 8) | 0.000 | n/a | 0 | **missed** |
+| Permutation (128, 4) | 0.000 | n/a | 0 | **missed** |
+| Permutation (256, 1) | 0.000 | n/a | 0 | **missed** |
+
+As with the baseline, AUC is not computed by `eal_factorial.py` — the JSON emits `NaN` and Table 8 renders `--`. See the note under Stage B.
 
 **Interpretation:** only 2 of 9 EAL configs detect the attack on this scenario. This is reported honestly in §5.3 as empirical support for the design-space thesis (E, W, s must be deployment-time variables, not design-time constants).
 
@@ -166,15 +170,15 @@ python scripts/sparql_scaling.py \
 * **Q2** — phase-based comparison (group by attack phase)
 * **Q3** — gate-fired explainability lookup (joins Window → Explanation → Mitigation)
 
-**Expected latencies** (also in Table 9):
+**Expected latencies** (also in Table 9, generated from `results/sparql/sparql_scaling_summary.json`):
 
 | Graph size | Q1 (ms) | Q2 (ms) | Q3 (ms) | Q1 bindings | Q3 bindings |
 |------------|---------|---------|---------|-------------|-------------|
-| 1k triples | 11.55 | 11.85 | 4.56 | 34 | 13 |
-| 10k triples | 74.26 | 85.00 | 15.44 | 321 | 110 |
-| 50k triples | 344.90 | 465.62 | 66.65 | 1543 | 505 |
+| 1k triples | 4.17 | 4.99 | 1.77 | 34 | 13 |
+| 10k triples | 24.72 | 34.82 | 5.65 | 321 | 110 |
+| 50k triples | 109.90 | 189.01 | 23.70 | 1,543 | 505 |
 
-Tolerance: ±20% on latency (hardware-dependent); bindings must match exactly.
+Tolerance: ±20% on latency (hardware-dependent — the values above are the ones committed in `tables/sparql_scaling.tex` and reported in the paper §5.4); bindings must match exactly.
 
 **Honesty caveat (paper, §5.4):** "We make no claim of scaling to production graphs of 10⁶ triples or above."
 

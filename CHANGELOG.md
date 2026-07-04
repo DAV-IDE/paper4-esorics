@@ -2,6 +2,43 @@
 
 All notable changes to the Paper 4 manuscript and reproducibility kit.
 
+## [v4.0.1] — 2026-07-04
+
+Coherence audit fixes (see PR "Coherence audit fixes"). No changes to any
+numerical result, script logic, or manuscript claim; only alignment of
+three documentation surfaces that had drifted apart.
+
+### Fixed
+- **SPARQL latencies (B1)**: the paper §5.4 and `REPRODUCIBILITY.md`
+  Stage E cited Q1/Q2/Q3 latencies ~3× higher than those actually
+  committed in `tables/sparql_scaling.tex` and
+  `results/sparql/sparql_scaling_summary.json`. Manuscript and protocol
+  are now aligned to the committed JSON (Q1: 4.2→110 ms, Q2: 5.0→189 ms,
+  Q3: 1.8→23.7 ms across 1k→50k triples).
+- **AUC documentation (B2)**: `REPRODUCIBILITY.md` Stages B and C
+  declared expected AUC values (0.502 / 0.505 / 0.488 / 0.440 / 0.404)
+  that the scripts never produce (JSON has `AUC_ROC = AUC_PR = NaN`).
+  The tables in the protocol now match what `baseline_zscore.py` and
+  `eal_factorial.py` actually emit; a note explains why AUC is not
+  computed on this pipeline (see also §5.2 reporting rules).
+- **Non-existent `experiments/day1/` paths (B3)**: the paper §5.2/5.3/5.4
+  captions, the auto-generated header of `tables/real_data.tex`, and
+  `scripts/build_table_and_pareto.py` referenced a directory that does
+  not exist in the repo. Replaced with the actual paths (`scripts/`,
+  `data/`, `results/`).
+- **CI over-strict on SPARQL table (M5)**: `.github/workflows/reproduce.yml`
+  ran `git diff --exit-code` on all of `tables/`, which would fail on
+  any runner with different CPU speed (SPARQL latency has ±20% tolerance).
+  Split into a strict diff on `real_data.tex` (deterministic) and a
+  structural check on `sparql_scaling.tex` (bindings and triple counts
+  only; latency cells intentionally excluded).
+
+### Note
+- `tables/real_data.tex` renders AUC columns as `--` (unchanged). This
+  is now consistent across manuscript, protocol and generated tables.
+
+---
+
 ## [v4.0.0] — 2026-06-06
 
 ### Added
