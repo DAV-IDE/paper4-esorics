@@ -861,9 +861,25 @@ $\mathrm{FP}_{\mathrm{pre}}$.
 
 \paragraph{Headline results.} Table~\ref{tab:headline} reports detection
 delays in window units for the best-performing configurations on the
-Drift and Shock regimes; full per-cell figures (including all 45 runs)
-are tabulated in the companion repository
-(\url{https://github.com/LoreBerto03/psi-risk-dt-pipeline}).
+Drift and Shock regimes. The full per-cell 45-run table is generated
+upstream by the companion pipeline of~\cite{berto2026}
+(\url{https://github.com/LoreBerto03/psi-risk-dt-pipeline}). To make
+this paper's Table~\ref{tab:headline} independently checkable inside
+the reproducibility kit, the two curated output files of that pipeline
+(\texttt{results\_ready\_summary.csv} and \texttt{.tex}) are imported
+as a verified static snapshot under
+\texttt{results/synthetic/} in the reproducibility repository, pinned
+by SHA-256 in \texttt{results/synthetic/provenance.json} and
+re-checkable via \texttt{scripts/verify\_synthetic\_provenance.py}.
+The upstream generative pipeline (synthetic scenario generation, RDF
+ingestion via Fuseki, sliding-window entropy computation) is not
+re-implemented in this repository; see
+\texttt{docs/synthetic\_factorial\_provenance.md} for the rationale.
+The values in Table~\ref{tab:headline} are consistent with that
+snapshot: Drift $(\Hsh, C_1)$ delay $12$, Drift $(\Hsh, C_3)$ delay $14$,
+Shock $(\Hpe, C_1)$ delay $1$, and Shock $(\Hsh, C_2)$ delay $6$ are all
+direct entries of \texttt{results\_ready\_summary.csv} at the pinned
+commit.
 
 \begin{table}[t]
 \centering
@@ -871,7 +887,11 @@ are tabulated in the companion repository
 units. Lower is better. False-positive counts are over the
 stable phase of Scenario~A and the pre-event prefix of Scenarios~B
 and~C respectively. All figures at \texttt{SYNTHETIC\_SEED}$=42$;
-extended from~\cite{berto2026}.}
+extended from~\cite{berto2026}. Values are a curated subset of the
+45-run factorial whose full listing lives at
+\texttt{results/synthetic/results\_ready\_summary.csv} in this
+repository (verified snapshot of
+\texttt{LoreBerto03/psi-risk-dt-pipeline}\,@\,\texttt{edac16e}).}
 \label{tab:headline}
 \small
 \begin{tabular}{@{}llcccr@{}}
