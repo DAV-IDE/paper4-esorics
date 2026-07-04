@@ -22,11 +22,35 @@ Anti-cheat constraints (same as baseline_zscore.py):
 """
 
 from __future__ import annotations
-import argparse, json, math
+import argparse, json, math, sys, warnings
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np, pandas as pd
+
+# sklearn is used only to compute ROC-AUC and PR-AUC. If it is not
+# installed, we fall back to NaN for those two columns of the output
+# JSON and PRINT AN EXPLICIT WARNING on stderr so the reader knows why
+# AUC is NaN. Previously a bare `except Exception: auc = nan` also
+# swallowed genuine value errors (e.g. all-same-class inputs) into a
+# silent NaN, indistinguishable from a missing dependency.
+try:
+    from sklearn.metrics import roc_auc_score, average_precision_score  # noqa: F401
+    _SKLEARN_AVAILABLE = True
+except ImportError as _sklearn_err:
+    _SKLEARN_AVAILABLE = False
+    warnings.warn(
+        f"scikit-learn is not installed ({_sklearn_err!s}); AUC-ROC and "
+        "AUC-PR columns will be NaN in the output JSON. Install with "
+        "`pip install scikit-learn` to enable AUC computation.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
+    print(
+        "[eal_factorial] WARNING: scikit-learn missing; AUC-ROC and "
+        "AUC-PR will be NaN. Install scikit-learn to enable.",
+        file=sys.stderr,
+    )
 
 
 # ------------------- Entropy estimators -------------------
@@ -172,17 +196,18 @@ def run_eal(per_second: pd.DataFrame, cfg: EALConfig) -> tuple[pd.DataFrame, dic
 
     mask = ~np.isnan(h)
     y_m, h_m, f_m = y[mask], h[mask], f_[mask]
-    try:
+    if _SKLEARN_AVAILABLE:
         from sklearn.metrics import roc_auc_score, average_precision_score
-
-        auc_roc = float(roc_auc_score(y_m, h_m)) if len(set(y_m)) > 1 else float("nan")
-        auc_pr = (
-            float(average_precision_score(y_m, h_m))
-            if len(set(y_m)) > 1
-            else float("nan")
-        )
-    except Exception:
-        auc_roc = auc_pr = float("nan")
+        if len(set(y_m)) > 1:
+            auc_roc = float(roc_auc_score(y_m, h_m))
+            auc_pr = float(average_precision_score(y_m, h_m))
+        else:
+            # Only one class present in the masked labels; AUC undefined.
+            auc_roc = float("nan")
+            auc_pr = float("nan")
+    else:
+        auc_roc = float("nan")
+        auc_pr = float("nan")
 
     n_neg = int((y_m == 0).sum())
     fp = int(((y_m == 0) & (f_m == 1)).sum())
