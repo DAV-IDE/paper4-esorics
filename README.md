@@ -9,6 +9,83 @@ This repository contains everything needed to **regenerate from scratch** Tables
 
 ---
 
+## Reviewer status (July 2026)
+
+This section summarises the current state of the repository from a
+reviewer's point of view. See the individual documents referenced
+below for full detail.
+
+### What is regenerated end-to-end inside this repository
+
+- **Table 8** (real-data / proxy factorial) and its Pareto figure —
+  from `scripts/baseline_zscore.py`, `scripts/eal_factorial.py`,
+  `scripts/build_table_and_pareto.py`, seed `20260606`. Full
+   4-command reproduction in §3 below.
+- **Table 9** (SPARQL scaling Q1/Q2/Q3 × {1k, 10k, 50k}) — from
+  `scripts/sparql_scaling.py`, 11 reps, first dropped as warm-up.
+  Protocol in [`docs/sparql_protocol.md`](docs/sparql_protocol.md).
+- **Wording audit** — `scripts/audit_wording.sh` enforces the
+  Safe-Claim Matrix. Protocol in
+  [`docs/wording_audit.md`](docs/wording_audit.md).
+
+### What is imported as a verified snapshot (NOT regenerated here)
+
+- **Table 6** (45-run synthetic entropy factorial) — the two curated
+  outputs of the upstream companion pipeline
+  [`LoreBerto03/psi-risk-dt-pipeline`](https://github.com/LoreBerto03/psi-risk-dt-pipeline)
+  are stored as a verified static snapshot under
+  [`results/synthetic/`](results/synthetic/), pinned by SHA-256 in
+  [`results/synthetic/provenance.json`](results/synthetic/provenance.json)
+  and re-checkable via
+  `python scripts/verify_synthetic_provenance.py`. The rationale for
+  a snapshot instead of a submodule or re-implementation is in
+  [`docs/synthetic_factorial_provenance.md`](docs/synthetic_factorial_provenance.md).
+  The upstream generative pipeline (Docker + Fuseki + RDF ingest +
+  sliding-window entropy) is not re-implemented in this repository.
+
+### Known limitations reviewers should be aware of
+
+- **AUC-ROC / AUC-PR are NaN in the current baseline JSONs** because
+  the older version of `scripts/eal_factorial.py` and
+  `scripts/baseline_zscore.py` silently swallowed a missing
+  `scikit-learn` import. This is now fixed: `scikit-learn` is listed
+  in `requirements.txt`, the fallback prints an explicit stderr
+  warning, and a genuine value error no longer masquerades as
+  "AUC undefined". After `pip install -r requirements.txt` and a
+  re-run, the AUC columns will be populated on the next regeneration
+  (not carried out in this commit to keep the diff focused on the
+  fix; the JSONs continue to reflect the state observed at v4.0.0).
+- **License status of the imported synthetic snapshot is currently
+  unresolved** — the upstream companion repository has no LICENSE
+  file and no license declaration in its README. Redistribution
+  status must be confirmed with Lorenzo Bertoletti and Davide
+  Facheris before this repository is published or its ESORICS
+  artefact submitted. See
+  [`results/synthetic/provenance.json`](results/synthetic/provenance.json)
+  and
+  [`docs/synthetic_factorial_provenance.md`](docs/synthetic_factorial_provenance.md)
+  for the mitigation steps already applied.
+- **PR #3 is not yet merged into `main`**, so the paper text still
+  describes the proxy-only rerun of §5.2. The real CIC-IDS2017
+  rerun (PR #3 branch `real-data-integration-tau-sweep`) will be
+  merged separately; the paper narrative for that rerun will be
+  updated in a follow-up PR after the merge, per the empirical-
+  honesty rule (any change in ordering must be reported as an
+  empirical finding, not silently overwritten).
+
+### Empirical honesty rule
+
+The fundamental methodological rule of this repository is:
+if the repository produces numbers, paths, tables or figures
+different from the paper manuscript, **the paper is updated so as
+to be consistent with the reproducible repository, not the other
+way around**. The source of truth is the verified repository:
+scripts, JSONs, generated tables, generated figures, and manifests.
+Claims are never strengthened; if the repository does not support a
+claim, the claim is reduced or qualified in the paper.
+
+---
+
 ## TL;DR — full reproduction in one command
 
 ```bash
