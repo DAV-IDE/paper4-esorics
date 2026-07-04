@@ -37,6 +37,8 @@ Thumbs.db
 # Keep tables/ and figures/ — they ARE the deliverable
 
 results/**/*.csv
+# ...except statically imported companion-repo artefacts (see results/synthetic/provenance.json)
+!results/synthetic/*.csv
 
 .toggle-profile
 .pre-commit-cache/

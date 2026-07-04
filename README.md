@@ -9,6 +9,91 @@ This repository contains everything needed to **regenerate from scratch** Tables
 
 ---
 
+## Reviewer status (July 2026)
+
+This section summarises the current state of the repository from a
+reviewer's point of view. See the individual documents referenced
+below for full detail.
+
+### What is regenerated end-to-end inside this repository
+
+- **Table 8** (real-data / proxy factorial) and its Pareto figure —
+  from `scripts/baseline_zscore.py`, `scripts/eal_factorial.py`,
+  `scripts/build_table_and_pareto.py`, seed `20260606`. Full
+   4-command reproduction in §3 below.
+- **Table 9** (SPARQL scaling Q1/Q2/Q3 × {1k, 10k, 50k}) — from
+  `scripts/sparql_scaling.py`, 11 reps, first dropped as warm-up.
+  Protocol in [`docs/sparql_protocol.md`](docs/sparql_protocol.md).
+- **Wording audit** — `scripts/audit_wording.sh` enforces the
+  Safe-Claim Matrix. Protocol in
+  [`docs/wording_audit.md`](docs/wording_audit.md).
+
+### What is imported as a verified snapshot (NOT regenerated here)
+
+- **Table 6** (45-run synthetic entropy factorial) — the two curated
+  outputs of the upstream companion pipeline
+  [`LoreBerto03/psi-risk-dt-pipeline`](https://github.com/LoreBerto03/psi-risk-dt-pipeline)
+  are stored as a verified static snapshot under
+  [`results/synthetic/`](results/synthetic/), pinned by SHA-256 in
+  [`results/synthetic/provenance.json`](results/synthetic/provenance.json)
+  and re-checkable via
+  `python scripts/verify_synthetic_provenance.py`. The rationale for
+  a snapshot instead of a submodule or re-implementation is in
+  [`docs/synthetic_factorial_provenance.md`](docs/synthetic_factorial_provenance.md).
+  The upstream generative pipeline (Docker + Fuseki + RDF ingest +
+  sliding-window entropy) is not re-implemented in this repository.
+
+### Known limitations reviewers should be aware of
+
+- **AUC-ROC / AUC-PR are now populated** in the baseline and EAL JSONs
+  and in `tables/real_data.tex` after this branch installs
+  `scikit-learn` via `requirements.txt` and re-runs the pipeline.
+  Values are computed by `scripts/baseline_zscore.py` and
+  `scripts/eal_factorial.py` using
+  `sklearn.metrics.roc_auc_score` and
+  `sklearn.metrics.average_precision_score` on the real binary label
+  vector (`post_warmup["label"]`) and the continuous z-score /
+  entropy-hazard score. **Interpretation caveat:** all AUC-ROC values
+  sit in [0.40, 0.54] on the Friday-DDoS proxy — essentially random
+  ranking. This is the expected output of the baseline / proxy
+  pipeline and **is not a positive detection claim**; the paper's
+  contribution is configurability, FPR, delay, Pareto structure and
+  auditability, not AUC. If `scikit-learn` is missing (pre-
+  `pip install -r requirements.txt` environment) the AUC columns
+  fall back to NaN / `--` with an explicit stderr warning; FPR,
+  delay and fires are unaffected. Full policy in
+  [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) § Stage B.
+- **License status of the imported synthetic snapshot is currently
+  unresolved** — the upstream companion repository has no LICENSE
+  file and no license declaration in its README. Redistribution
+  status must be confirmed with Lorenzo Bertoletti and Davide
+  Facheris before this repository is published or its ESORICS
+  artefact submitted. See
+  [`results/synthetic/provenance.json`](results/synthetic/provenance.json)
+  and
+  [`docs/synthetic_factorial_provenance.md`](docs/synthetic_factorial_provenance.md)
+  for the mitigation steps already applied.
+- **PR #3 is not yet merged into `main`**, so the paper text still
+  describes the proxy-only rerun of §5.2. The real CIC-IDS2017
+  rerun (PR #3 branch `real-data-integration-tau-sweep`) will be
+  merged separately; the paper narrative for that rerun will be
+  updated in a follow-up PR after the merge, per the empirical-
+  honesty rule (any change in ordering must be reported as an
+  empirical finding, not silently overwritten).
+
+### Empirical honesty rule
+
+The fundamental methodological rule of this repository is:
+if the repository produces numbers, paths, tables or figures
+different from the paper manuscript, **the paper is updated so as
+to be consistent with the reproducible repository, not the other
+way around**. The source of truth is the verified repository:
+scripts, JSONs, generated tables, generated figures, and manifests.
+Claims are never strengthened; if the repository does not support a
+claim, the claim is reduced or qualified in the paper.
+
+---
+
 ## TL;DR — full reproduction in one command
 
 ```bash

@@ -61,6 +61,8 @@ import argparse
 import json
 import logging
 import math
+import sys
+import warnings
 from collections import deque
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -68,6 +70,33 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+
+# sklearn is used only to compute ROC-AUC and PR-AUC. If it is not
+# installed, we fall back to NaN for those two columns of the output
+# JSON/CSV and PRINT AN EXPLICIT WARNING so the reader knows why AUC
+# is NaN. Previously a bare `except Exception: return nan` also
+# swallowed genuine value errors (e.g. all-same-class inputs) into a
+# silent NaN, indistinguishable from a missing dependency.
+try:
+    from sklearn.metrics import (
+        roc_auc_score as _roc_auc_score,
+        average_precision_score as _average_precision_score,
+    )
+    _SKLEARN_AVAILABLE = True
+except ImportError as _sklearn_err:
+    _SKLEARN_AVAILABLE = False
+    warnings.warn(
+        f"scikit-learn is not installed ({_sklearn_err!s}); AUC-ROC and "
+        "AUC-PR columns will be NaN in the baseline output. Install with "
+        "`pip install scikit-learn` to enable AUC computation.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
+    print(
+        "[baseline_zscore] WARNING: scikit-learn missing; AUC-ROC and "
+        "AUC-PR will be NaN. Install scikit-learn to enable.",
+        file=sys.stderr,
+    )
 
 # ---------------------------------------------------------------------
 # Logging
@@ -250,24 +279,19 @@ def compute_metrics(df: pd.DataFrame, feature_col: str, cfg: Config) -> dict:
     f_m = fire[mask]
 
     def auc_roc(y, s):
-        try:
-            from sklearn.metrics import roc_auc_score
-
-            return float(roc_auc_score(y, s)) if len(set(y)) > 1 else float("nan")
-        except Exception:
+        if not _SKLEARN_AVAILABLE:
             return float("nan")
+        if len(set(y)) <= 1:
+            # AUC undefined when only one class present.
+            return float("nan")
+        return float(_roc_auc_score(y, s))
 
     def auc_pr(y, s):
-        try:
-            from sklearn.metrics import average_precision_score
-
-            return (
-                float(average_precision_score(y, s))
-                if len(set(y)) > 1
-                else float("nan")
-            )
-        except Exception:
+        if not _SKLEARN_AVAILABLE:
             return float("nan")
+        if len(set(y)) <= 1:
+            return float("nan")
+        return float(_average_precision_score(y, s))
 
     # FPR at fixed k=3 threshold
     n_neg = int((y_m == 0).sum())

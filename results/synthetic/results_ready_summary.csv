@@ -1,0 +1,46 @@
+scenario,configuration_id,W,stride,entropy_metric,t_detect,detection_delay,pre_event_false_positives,peak_abs_delta_h
+A (stable),C1,128,1,Shannon,N/A,N/A,65,0.060870
+A (stable),C1,128,1,Sample,N/A,N/A,44,0.481177
+A (stable),C1,128,1,Permutation,N/A,N/A,38,0.004424
+A (stable),C2,64,1,Shannon,N/A,N/A,82,0.107063
+A (stable),C2,64,1,Sample,N/A,N/A,122,1.280934
+A (stable),C2,64,1,Permutation,N/A,N/A,41,0.014517
+A (stable),C3,256,1,Shannon,N/A,N/A,69,0.033929
+A (stable),C3,256,1,Sample,N/A,N/A,49,0.109597
+A (stable),C3,256,1,Permutation,N/A,N/A,31,0.001425
+A (stable),C4,128,4,Shannon,N/A,N/A,9,0.085075
+A (stable),C4,128,4,Sample,N/A,N/A,11,0.632523
+A (stable),C4,128,4,Permutation,N/A,N/A,10,0.010998
+A (stable),C5,128,8,Shannon,N/A,N/A,3,0.111599
+A (stable),C5,128,8,Sample,N/A,N/A,7,0.670674
+A (stable),C5,128,8,Permutation,N/A,N/A,7,0.011916
+B (gradual drift),C1,128,1,Shannon,1012,12,31,0.061926
+B (gradual drift),C1,128,1,Sample,1075,75,24,0.693147
+B (gradual drift),C1,128,1,Permutation,1369,369,3,0.005594
+B (gradual drift),C2,64,1,Shannon,1036,36,34,0.109091
+B (gradual drift),C2,64,1,Sample,1027,27,32,1.373049
+B (gradual drift),C2,64,1,Permutation,1047,47,5,0.015883
+B (gradual drift),C3,256,1,Shannon,1014,14,27,0.034885
+B (gradual drift),C3,256,1,Sample,1030,30,17,0.155601
+B (gradual drift),C3,256,1,Permutation,1371,371,0,0.001709
+B (gradual drift),C4,128,4,Shannon,1120,120,1,0.095333
+B (gradual drift),C4,128,4,Sample,1080,80,8,0.745107
+B (gradual drift),C4,128,4,Permutation,1372,372,3,0.011130
+B (gradual drift),C5,128,8,Shannon,1080,80,0,0.108411
+B (gradual drift),C5,128,8,Sample,1080,80,4,1.111351
+B (gradual drift),C5,128,8,Permutation,1376,376,4,0.014342
+C (shock),C1,128,1,Shannon,1500,50,61,0.061144
+C (shock),C1,128,1,Sample,1602,152,29,0.429730
+C (shock),C1,128,1,Permutation,1451,1,40,0.005943
+C (shock),C2,64,1,Shannon,1456,6,52,0.108601
+C (shock),C2,64,1,Sample,1599,149,47,1.060872
+C (shock),C2,64,1,Permutation,1455,5,32,0.032429
+C (shock),C3,256,1,Shannon,1591,141,106,0.033544
+C (shock),C3,256,1,Sample,1660,210,19,0.122984
+C (shock),C3,256,1,Permutation,1622,172,41,0.002003
+C (shock),C4,128,4,Shannon,1456,6,22,0.182253
+C (shock),C4,128,4,Sample,1604,154,4,0.491249
+C (shock),C4,128,4,Permutation,1460,10,19,0.009860
+C (shock),C5,128,8,Shannon,1456,6,12,0.348823
+C (shock),C5,128,8,Sample,1608,158,3,0.600752
+C (shock),C5,128,8,Permutation,1464,14,8,0.015550

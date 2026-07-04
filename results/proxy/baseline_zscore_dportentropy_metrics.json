@@ -1,7 +1,7 @@
 {
   "feature": "dport_entropy",
-  "AUC_ROC": NaN,
-  "AUC_PR": NaN,
+  "AUC_ROC": 0.487600885893656,
+  "AUC_PR": 0.3020749499823908,
   "FPR_at_k3": 0.00010097950116126426,
   "detected": true,
   "detection_delay_s": 1034.0,

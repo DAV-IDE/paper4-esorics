@@ -1,0 +1,52 @@
+{
+  "artifact_type": "45-run entropy factorial (5 seeds x 3 windows x 3 scenarios)",
+  "purpose": "Anchor Paper 4 Table 6 to a verifiable snapshot within the paper4-esorics reproducibility kit. The upstream generative pipeline (synthetic scenario generation, RDF ingestion via Fuseki, sliding-window entropy computation) is NOT re-implemented here; it remains in the companion repository referenced below.",
+  "source": {
+    "repository": "LoreBerto03/psi-risk-dt-pipeline",
+    "url": "https://github.com/LoreBerto03/psi-risk-dt-pipeline",
+    "commit_sha": "edac16e9f0edd99a949e2aa7e1e92ae505e2027e",
+    "commit_date": "2026-06-11T08:55:47Z",
+    "commit_message": "Add GitHub supplementary thesis materials",
+    "branch": "master"
+  },
+  "imported_files": [
+    {
+      "local_path": "results/synthetic/results_ready_summary.csv",
+      "source_path": "results/tables/final/results_ready_summary.csv",
+      "source_url": "https://raw.githubusercontent.com/LoreBerto03/psi-risk-dt-pipeline/edac16e9f0edd99a949e2aa7e1e92ae505e2027e/results/tables/final/results_ready_summary.csv",
+      "sha256": "7c1bf77efaa59c9996a51dad01cd3a8b68e0a39d19bf49f3aa70b9c06c7766b3",
+      "size_bytes_expected": null,
+      "row_count": 45,
+      "description": "Curated 45-run summary: (scenario, config, W, stride, entropy_metric) -> (t_detect, delay, pre-event FPs, peak |Delta H|). Backs Paper 4 Table 6."
+    },
+    {
+      "local_path": "results/synthetic/results_ready_summary.tex",
+      "source_path": "results/tables/final/results_ready_summary.tex",
+      "source_url": "https://raw.githubusercontent.com/LoreBerto03/psi-risk-dt-pipeline/edac16e9f0edd99a949e2aa7e1e92ae505e2027e/results/tables/final/results_ready_summary.tex",
+      "sha256": "0dbfef4152d4c8d3ccc35343288efac6c55230aff50e1ef872cda11221bdb2d1",
+      "size_bytes_expected": null,
+      "description": "Publication-ready longtable of the same 45-run summary. Rendered as Table 6 in paper/main_v4.tex."
+    }
+  ],
+  "import": {
+    "date": "2026-07-04",
+    "imported_by": "Roberto Pazzi <roberto.pazzi@uninsubria.it>",
+    "method": "Static snapshot import via raw.githubusercontent.com. No modification of file contents; SHA-256 pinned above.",
+    "rationale": "The upstream pipeline is Docker/Fuseki-based and would add heavy build dependencies to paper4-esorics that are unrelated to the ESORICS submission's core reproducibility scope (real CIC-IDS2017 rerun + SPARQL scaling). Importing the two artefacts as a verified snapshot preserves the paper's claim about the 45-run factorial while keeping paper4-esorics lean. The upstream pipeline remains fully accessible and executable from the companion repository for readers who wish to regenerate the CSV from scratch."
+  },
+  "paper_references": {
+    "cited_as": "Reference [3] in paper/main_v4.tex",
+    "table_in_paper": "Table 6 (Results-ready summary of the entropy-based sensitivity analysis)",
+    "section": "Section 5.1 (Synthetic factorial sensitivity analysis)"
+  },
+  "license_status": {
+    "status": "UNCLEAR — companion repository has no LICENSE file and no license declaration in README.md as of the pinned commit.",
+    "action_taken": "Imported only the minimum artefacts (2 files) strictly necessary to back Paper 4 Table 6, as reproducibility material with explicit provenance. Redistribution status must be confirmed with the authors (Lorenzo Bertoletti, Davide Facheris) before public release of the paper4-esorics repository or its ESORICS artefact submission.",
+    "recommended_followup": "Ask upstream authors to add an explicit reproducibility-friendly license (e.g. CC-BY-4.0 for data, MIT/Apache-2.0 for code) to LoreBerto03/psi-risk-dt-pipeline, OR obtain written authorization from the authors to redistribute these two files as part of the ESORICS artefact."
+  },
+  "verification": {
+    "script": "scripts/verify_synthetic_provenance.py",
+    "how_to_run": "python scripts/verify_synthetic_provenance.py",
+    "expected_output": "OK for each file if local SHA-256 matches the value pinned in this manifest."
+  }
+}

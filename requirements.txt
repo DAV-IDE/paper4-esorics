@@ -7,3 +7,7 @@ scipy>=1.11,<1.15
 matplotlib>=3.8,<3.10
 rdflib>=7.0,<8.0
 pyarrow>=14.0,<18.0
+# Required for AUC-ROC / AUC-PR computation in scripts/eal_factorial.py
+# and scripts/baseline_zscore.py. If missing, those scripts still run
+# but write NaN in the AUC columns and print an explicit warning.
+scikit-learn>=1.4,<1.7
