@@ -1,7 +1,7 @@
 {
   "feature": "pkt_rate",
-  "AUC_ROC": NaN,
-  "AUC_PR": NaN,
+  "AUC_ROC": 0.5021144672219684,
+  "AUC_PR": 0.2969219205630507,
   "FPR_at_k3": 0.005351913561547006,
   "detected": true,
   "detection_delay_s": 0.0,

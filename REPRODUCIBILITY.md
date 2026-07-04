@@ -85,13 +85,34 @@ baseline_zscore_summary.json
 
 **Expected numbers** (also in Table 8, rows 1–3):
 
-| Feature | AUC | FPR | Detection delay | Fires |
-|---------|-----|-----|-----------------|-------|
-| z/pkt-rate | 0.502 | 0.005 | 0 s | 96 |
-| z/byte-rate | 0.505 | 0.006 | 0 s | 105 |
-| z/dport-entropy | 0.488 | 0.0001 | 1034 s | 21 |
+| Feature | AUC$_\text{ROC}$ | AUC$_\text{PR}$ | FPR | Detection delay | Fires |
+|---------|-------|-------|-----|-----------------|-------|
+| z/pkt-rate | 0.502 | 0.297 | 0.005 | 0 s | 96 |
+| z/byte-rate | 0.505 | 0.296 | 0.006 | 0 s | 105 |
+| z/dport-entropy | 0.488 | 0.302 | 0.0001 | 1034 s | 21 |
 
 Tolerance: ±0.001 on AUC, ±1 fire (rounding).
+
+**AUC computation policy.** The AUC-ROC and AUC-PR columns are computed
+by `scripts/baseline_zscore.py` using `sklearn.metrics.roc_auc_score`
+and `sklearn.metrics.average_precision_score` on the post-warmup
+(`t >= warmup_seconds`) window: `y = post_warmup["label"]` (binary
+ground-truth from the CIC-IDS2017-aligned proxy) and
+`s = post_warmup["z_score_<feature>"]` (continuous z-score). NaN
+z-scores from warm-up residue are masked out. If only one class is
+present, AUC is left NaN by design. **If `scikit-learn` is missing**
+(pre-`pip install -r requirements.txt` environment), both AUC columns
+fall back to NaN / `--` and `baseline_zscore.py` prints an explicit
+stderr warning; the FPR, delay and fires columns are unaffected.
+
+**Reading the values.** All three baselines and every EAL cell in the
+table below sit near AUC-ROC ≈ 0.5 / AUC-PR ≈ base-rate. This is the
+expected output of the baseline / proxy pipeline on the Friday-DDoS
+afternoon subset: the fixed 3-sigma z-score gate is not a
+discriminative ranker on this scenario. Paper 4's contribution is
+**configurability, FPR, delay, Pareto structure and auditability**
+of the parameterised design space, not AUC. The AUC columns are
+reported for reproducibility only, not as a positive detection claim.
 
 ---
 
@@ -114,19 +135,23 @@ python scripts/eal_factorial.py \
 
 **Expected detection outcomes** (also in Table 8, rows 4–12):
 
-| Config | AUC | FPR | Detection delay | Fires | Verdict |
-|--------|-----|-----|-----------------|-------|---------|
-| Shannon (64, 8) | — | — | n/a | 0 | **missed** |
-| Shannon (128, 4) | — | — | n/a | 0 | **missed** |
-| Shannon (256, 1) | — | — | n/a | 0 | **missed** |
-| Sample (64, 8) | — | — | n/a | 0 | **missed** |
-| Sample (128, 4) | 0.440 | 0.035 | 355 s | 400 | detected |
-| Sample (256, 1) | 0.404 | 0.158 | 255 s | 1952 | detected |
-| Permutation (64, 8) | — | — | n/a | 0 | **missed** |
-| Permutation (128, 4) | — | — | n/a | 0 | **missed** |
-| Permutation (256, 1) | — | — | n/a | 0 | **missed** |
+| Config | AUC$_\text{ROC}$ | AUC$_\text{PR}$ | FPR | Detection delay | Fires | Verdict |
+|--------|-------|-------|-----|-----------------|-------|---------|
+| Shannon (64, 8) | 0.452 | 0.267 | 0.000 | n/a | 0 | **missed** |
+| Shannon (128, 4) | 0.499 | 0.268 | 0.000 | n/a | 0 | **missed** |
+| Shannon (256, 1) | 0.537 | 0.303 | 0.006 | n/a | 61 | **missed** |
+| Sample (64, 8) | 0.506 | 0.290 | 0.000 | n/a | 0 | **missed** |
+| Sample (128, 4) | 0.440 | 0.253 | 0.035 | 355 s | 400 | detected |
+| Sample (256, 1) | 0.404 | 0.237 | 0.158 | 255 s | 1952 | detected |
+| Permutation (64, 8) | 0.493 | 0.276 | 0.000 | n/a | 0 | **missed** |
+| Permutation (128, 4) | 0.443 | 0.249 | 0.000 | n/a | 0 | **missed** |
+| Permutation (256, 1) | 0.419 | 0.240 | 0.000 | n/a | 0 | **missed** |
 
-**Interpretation:** only 2 of 9 EAL configs detect the attack on this scenario. This is reported honestly in §5.3 as empirical support for the design-space thesis (E, W, s must be deployment-time variables, not design-time constants).
+AUC columns computed via `scripts/eal_factorial.py` (same sklearn-based
+protocol as Stage B). When `scikit-learn` is missing, AUC falls back
+to NaN / `--` with an explicit stderr warning.
+
+**Interpretation:** only 2 of 9 EAL configs detect the attack on this scenario, and every AUC-ROC value sits in the [0.40, 0.54] band (essentially random-ranking on this proxy). This is reported honestly in §5.3 as empirical support for the design-space thesis (E, W, s must be deployment-time variables, not design-time constants). **The AUC values must not be read as a positive detection claim**: the paper's contribution on this dataset is that a *configurable* Pareto front exists, not that any single cell of the factorial is a competitive detector.
 
 ---
 

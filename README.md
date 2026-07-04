@@ -45,16 +45,24 @@ below for full detail.
 
 ### Known limitations reviewers should be aware of
 
-- **AUC-ROC / AUC-PR are NaN in the current baseline JSONs** because
-  the older version of `scripts/eal_factorial.py` and
-  `scripts/baseline_zscore.py` silently swallowed a missing
-  `scikit-learn` import. This is now fixed: `scikit-learn` is listed
-  in `requirements.txt`, the fallback prints an explicit stderr
-  warning, and a genuine value error no longer masquerades as
-  "AUC undefined". After `pip install -r requirements.txt` and a
-  re-run, the AUC columns will be populated on the next regeneration
-  (not carried out in this commit to keep the diff focused on the
-  fix; the JSONs continue to reflect the state observed at v4.0.0).
+- **AUC-ROC / AUC-PR are now populated** in the baseline and EAL JSONs
+  and in `tables/real_data.tex` after this branch installs
+  `scikit-learn` via `requirements.txt` and re-runs the pipeline.
+  Values are computed by `scripts/baseline_zscore.py` and
+  `scripts/eal_factorial.py` using
+  `sklearn.metrics.roc_auc_score` and
+  `sklearn.metrics.average_precision_score` on the real binary label
+  vector (`post_warmup["label"]`) and the continuous z-score /
+  entropy-hazard score. **Interpretation caveat:** all AUC-ROC values
+  sit in [0.40, 0.54] on the Friday-DDoS proxy — essentially random
+  ranking. This is the expected output of the baseline / proxy
+  pipeline and **is not a positive detection claim**; the paper's
+  contribution is configurability, FPR, delay, Pareto structure and
+  auditability, not AUC. If `scikit-learn` is missing (pre-
+  `pip install -r requirements.txt` environment) the AUC columns
+  fall back to NaN / `--` with an explicit stderr warning; FPR,
+  delay and fires are unaffected. Full policy in
+  [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) § Stage B.
 - **License status of the imported synthetic snapshot is currently
   unresolved** — the upstream companion repository has no LICENSE
   file and no license declaration in its README. Redistribution

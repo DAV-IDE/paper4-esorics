@@ -1,7 +1,7 @@
 {
   "feature": "byte_rate",
-  "AUC_ROC": NaN,
-  "AUC_PR": NaN,
+  "AUC_ROC": 0.5045251487543102,
+  "AUC_PR": 0.29638081687687257,
   "FPR_at_k3": 0.006260729071998384,
   "detected": true,
   "detection_delay_s": 0.0,
