@@ -24,7 +24,7 @@ else
   INPUT_LABEL := proxy
 endif
 
-.PHONY: all data baseline eal table sparql smoke clean help
+.PHONY: all data baseline eal table sparql smoke clean help real-rerun tau-sweep real-all
 
 help:
 	@echo "Paper 4 reproducibility targets:"
@@ -94,3 +94,44 @@ clean:
 	rm -f  $(TABLES)/real_data.tex $(TABLES)/sparql_scaling.tex
 	rm -f  $(FIGURES)/pareto_design_space.pdf $(FIGURES)/pareto_design_space.png
 	@echo "Cleaned."
+
+# ---------------------------------------------------------------------
+# Real-data rerun on CIC-IDS2017 Friday DDoS parquet + tau recalibration
+# See CHANGELOG_REAL.md for the empirical findings (1-6).
+# ---------------------------------------------------------------------
+
+REAL_PARQUET := $(DATA)/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv.parquet
+
+real-rerun: $(TABLES)/real_data_real.tex
+
+$(RESULTS)/real/baseline_zscore_summary.json: $(REAL_PARQUET)
+	@mkdir -p $(RESULTS)/real
+	$(PYTHON) scripts/ingest_real.py --input $< --out $(RESULTS)/real
+	$(PYTHON) scripts/baseline_zscore_real.py --input $< --out $(RESULTS)/real
+
+$(RESULTS)/eal_real/eal_factorial_summary.json: $(REAL_PARQUET)
+	@mkdir -p $(RESULTS)/eal_real
+	$(PYTHON) scripts/eal_factorial_real.py --input $< --out $(RESULTS)/eal_real
+
+$(TABLES)/real_data_real.tex: $(RESULTS)/real/baseline_zscore_summary.json $(RESULTS)/eal_real/eal_factorial_summary.json
+	$(PYTHON) scripts/build_table_and_pareto_real.py \
+		--baseline $(RESULTS)/real/baseline_zscore_summary.json \
+		--eal      $(RESULTS)/eal_real/eal_factorial_summary.json \
+		--tex      $(TABLES)/real_data_real.tex \
+		--fig      $(FIGURES)/pareto_design_space_real
+
+tau-sweep: $(TABLES)/real_tau_sweep.tex
+
+$(TABLES)/real_tau_sweep.tex: $(RESULTS)/eal_real/eal_factorial_summary.json
+	$(PYTHON) scripts/tau_sweep_real.py --input $(REAL_PARQUET) --out $(RESULTS)/eal_real
+	$(PYTHON) scripts/build_tau_sweep_artifacts.py --sweep $(RESULTS)/eal_real/tau_sweep_summary.json --tex $(TABLES)/real_tau_sweep.tex --fig $(FIGURES)/tau_sweep_heatmap
+
+real-all: real-rerun tau-sweep
+	@echo ""
+	@echo "=== Real-data pipeline complete ==="
+	@echo "  - $(TABLES)/real_data_real.tex"
+	@echo "  - $(TABLES)/real_tau_sweep.tex"
+	@echo "  - $(FIGURES)/pareto_design_space_real.pdf"
+	@echo "  - $(FIGURES)/tau_sweep_heatmap.pdf"
+	@echo ""
+	@echo "See CHANGELOG_REAL.md for the empirical findings (1-6)."

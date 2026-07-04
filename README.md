@@ -49,10 +49,13 @@ paper4-reproducibility-kit/
 │   └── pareto_design_space.png
 │
 ├── results/                   ← raw numerical artefacts (JSON + CSV)
-│   ├── proxy/                         # baseline z-score outputs
-│   ├── eal/                           # 9 per-config metrics + summary
+│   ├── proxy/                         # baseline z-score outputs (proxy)
+│   ├── real/                          # baseline z-score outputs (real parquet)
+│   ├── eal/                           # 9 per-config metrics + summary (proxy)
+│   ├── eal_real/                      # real-data EAL + tau_sweep/ (108) + tau_sweep_by_k/ (12)
 │   ├── sparql/                        # latency × graph-size summary
-│   └── table_pareto_manifest.json     # provenance manifest
+│   ├── table_pareto_manifest.json     # provenance manifest (proxy)
+│   └── table_pareto_manifest_real.json  # provenance manifest (real)
 │
 ├── paper/
 │   └── main_v4.tex                    # current LaTeX source (Springer LNCS)
@@ -129,6 +132,8 @@ Expected wall-clock on a 2024 laptop (8-core CPU, no GPU): **≈ 4 min total**.
 
 The default pipeline uses a **proxy stream** that matches the published marginal statistics of CIC-IDS2017 *Friday-WorkingHours-Afternoon-DDos*. This is declared explicitly in the paper (header note, §5.2, captions of Table 8 and Figure Pareto, §5.4).
 
+### 4a. Swap proxy → real CSV via `make REAL=1 all` (legacy path)
+
 To run the **identical pipeline** on the real CSV (zero code change):
 
 ```bash
@@ -147,6 +152,26 @@ make REAL=1 all
 ```
 
 The scripts emit identical CSV/JSON schemas regardless of source. **Any change in the qualitative ordering between proxy and real will be reported as an empirical finding**, never silently edited away (see §5.4 of the paper).
+
+### 4b. Real-data rerun on parquet + τ recalibration sweep (new)
+
+A parallel real-data pipeline lives alongside the proxy pipeline: it operates on the parquet redistribution of CIC-IDS2017 Friday DDoS (`bvsam/cic-ids-2017` on HuggingFace, SHA256 `7c5876d52189fc01af54bad6cf23afe9f7fbc0e3ca6c3595920754f0c3ba8f66`) and includes a 108-cell τ recalibration sweep (4 k × 3 warmup × 9 configs).
+
+```bash
+# 1. Fetch the parquet (23 MB) into data/
+#    (see CHANGELOG_REAL.md §1 for the exact URL and SHA256 check)
+
+# 2. Run the real-data pipeline (baseline + 9 EAL configs on real parquet)
+make real-rerun
+
+# 3. Run the tau recalibration sweep (~10 min single-thread)
+make tau-sweep
+
+# Or both at once:
+make real-all
+```
+
+Outputs land in `results/eal_real/`, `results/real/`, `figures/*_real.*` and `figures/tau_sweep_heatmap.*`, `tables/real_data_real.tex` and `tables/real_tau_sweep.tex`. **The proxy artefacts are untouched** — the two pipelines coexist so proxy-vs-real deltas remain visible for §5.4 comparison. Full empirical narrative (Findings 1–6, including the operational τ recalibration result) is in `CHANGELOG_REAL.md`.
 
 ---
 
