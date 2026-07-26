@@ -30,7 +30,7 @@
 \newcommand{\Hsh}{\ensuremath{H^{\mathrm{Sh}}}}
 \newcommand{\Hsa}{\ensuremath{H^{\mathrm{Sa}}}}
 \newcommand{\Hpe}{\ensuremath{H^{\mathrm{Pe}}}}
-\newcommand{\DH}{\ensuremath{\Delta H}}
+\newcommand{\EntropyDeviation}{\ensuremath{\Delta H}}
 \newcommand{\taus}{\ensuremath{\tau_{s}}}
 
 % --------- ORCID marker macros (used inside \Author{...}) -----------
@@ -145,7 +145,7 @@ symbolic update over a knowledge graph of the twin's state are a
 credible substrate for this regime~\cite{garcez2023,raedt2020}. The
 $\psiop$-Risk-DT operator introduced in prior work~\cite{paper3} is one
 such design: an entropy-gated update rule
-$\psiop : (\DH_t, G_t) \mapsto (a_t, G_{t+1})$ that injects new triples
+$\psiop : (\EntropyDeviation_t, G_t) \mapsto (a_t, G_{t+1})$ that injects new triples
 into the DT's RDF graph only when an information-theoretic deviation
 and a neural activation are jointly above threshold. That operator was
 previously validated end-to-end on a single containerised
@@ -302,7 +302,7 @@ Given an observation stream $\{O_t\}$ over a Digital Twin replica and a
 baseline entropy $H_{\mathrm{base}}$, the operator computes an entropy
 deviation
 \begin{equation}
-\DH_t \;=\; \frac{H(X_t) - H_{\mathrm{base}}}{\max(\varepsilon,
+\EntropyDeviation_t \;=\; \frac{H(X_t) - H_{\mathrm{base}}}{\max(\varepsilon,
 H_{\mathrm{base}})},
 \label{eq:dh}
 \end{equation}
@@ -313,7 +313,7 @@ threshold are \emph{jointly} crossed:
 \begin{equation}
 G_{t+1} \;=\;
 \begin{cases}
-G_t \cup \psiop_{\mathrm{inject}}(a_t) & \text{if } \DH_t > \taus
+G_t \cup \psiop_{\mathrm{inject}}(a_t) & \text{if } \EntropyDeviation_t > \taus
                                           \;\wedge\; a_t > \theta,\\
 G_t                                    & \text{otherwise.}
 \end{cases}
@@ -375,7 +375,7 @@ engines.
 \subsection{Design Goals}
 
 The EAL is responsible for transforming a one-dimensional mismatch
-signal $\Delta_t = O_t - E_t$ into the entropy deviation $\DH_t$
+signal $\Delta_t = O_t - E_t$ into the entropy deviation $\EntropyDeviation_t$
 consumed by Eq.~\eqref{eq:gate}. We require it to satisfy three
 properties.
 
@@ -516,7 +516,7 @@ selectively bindable to cyber-threat intelligence vocabularies.
                              explanation. \\
 \texttt{psi:FeatureVector} & Five-dimensional feature vector attached to
                              the Window. \\
-\texttt{psi:EntropySignal} & The triple $(E, \DH_t, \taus)$ produced by
+\texttt{psi:EntropySignal} & The triple $(E, \EntropyDeviation_t, \taus)$ produced by
                              EAL for the Window. \\
 \texttt{psi:AttackPhase}   & Labelled phase (stable, ramp-up,
                              saturation, burst, silence). \\
@@ -561,7 +561,7 @@ schema-only (\emph{conceptual mapping}).}
   & \texttt{stix:ObservedData}           & conceptual \\
 \texttt{FeatureVector}   & 5-D feature vector attached to a Window
   & \texttt{stix:ObservedData}           & conceptual \\
-\texttt{EntropySignal}   & $(E, \DH_t, \taus)$ produced by EAL
+\texttt{EntropySignal}   & $(E, \EntropyDeviation_t, \taus)$ produced by EAL
   & ---                                  & prototype \\
 \texttt{AttackPhase}     & Labelled phase (stable, ramp-up, saturation,
                           burst, silence)
@@ -632,7 +632,7 @@ granularity exercised in this paper; deployment-time variants admit
 standard \texttt{FILTER}/\texttt{LIMIT} extensions.
 
 \paragraph{Q1 --- Entropy-spike triage.} Return all windows of a
-scenario in which $|\DH_t|$ exceeds the parameter-aware threshold:
+scenario in which $|\EntropyDeviation_t|$ exceeds the parameter-aware threshold:
 
 \begin{lstlisting}[language=SPARQL]
 PREFIX psi: <https://insubria.it/psi-risk-dt#>
@@ -711,7 +711,7 @@ materialisation.
 (\emph{entropy-spike triage}) over the Fuseki endpoint to retrieve all
 windows in the current scenario where the entropy deviation exceeded
 $\taus$. The response is a ranked list of
-(Window, $\DH_t$, configuration) triples. Q1 is the entry point of the
+(Window, $\EntropyDeviation_t$, configuration) triples. Q1 is the entry point of the
 workflow and is intentionally configuration-aware: filtering on
 \texttt{psi:configuration} returns the windows that \emph{one specific
 deployment} would have flagged.
@@ -1228,11 +1228,11 @@ training of a full ARNN baseline---and the corresponding fair
 benchmark---is identified as future work~\cite{paper5}.
 
 \paragraph{Q1 result.} On the escalation\_mid graph, query Q1 returns
-$11$ windows with $|\DH_t| > \taus$, concentrated in two clusters
+$11$ windows with $|\EntropyDeviation_t| > \taus$, concentrated in two clusters
 (ramp-up windows $14$--$22$ and the early saturation windows $26$--$28$).
 
 \paragraph{Q2 result on window~19.} On the chosen window
-($t_{\mathrm{start}} = 47.556$~s, $151$ packets, $\DH_t = 0.74$), query
+($t_{\mathrm{start}} = 47.556$~s, $151$ packets, $\EntropyDeviation_t = 0.74$), query
 Q2 returns
 
 \begin{center}
