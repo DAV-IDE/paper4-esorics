@@ -1133,7 +1133,7 @@ space whose points are individually accountable.
 \label{sec:eval-scaling}
 
 To characterise the queryability of the SEL outside the
-$\sim$1{,}030-triple trial graph of Section~\ref{sec:eval-sel}, we run
+hand-curated illustrative trial graph of Section~\ref{sec:eval-sel}, we run
 the three canonical primitives Q1, Q2, Q3 on synthetic SEL-aligned
 graphs at three sizes: $\sim$1k, $\sim$10k, $\sim$50k triples. Each
 graph instantiates the canonical chain
@@ -1216,6 +1216,12 @@ $45$~s). Sliding windows of $5{,}000$~ms at $2{,}500$~ms stride yield a
 trial graph populated with the eight \texttt{psi:} classes of
 Table~\ref{tab:ontology}, with a Fuseki endpoint at
 \verb|localhost:3030/psi/query|.
+The trial graph used in this SEL evaluation is the
+\texttt{example\_data.ttl} illustrative dataset published in the
+Vartic reproducibility artifact~\cite{vartic2026}
+(commit \texttt{af7ccbc}, 140~triples), which populates the
+\texttt{psi:} classes with a hand-curated worked example spanning
+three representative windows across the three phases.
 
 \paragraph{Caveat on the comparative baseline.} The neural component
 used to populate the \texttt{configuration="neural"} branch of Q2 is a
@@ -1231,7 +1237,7 @@ benchmark---is identified as future work~\cite{paper5}.
 $11$ windows with $|\EntropyDeviation_t| > \taus$, concentrated in two clusters
 (ramp-up windows $14$--$22$ and the early saturation windows $26$--$28$).
 
-\paragraph{Q2 result on window~19.} On the chosen window
+\paragraph{Q2 result on window~19.} On the chosen worked-example window
 ($t_{\mathrm{start}} = 47.556$~s, $151$ packets, $\EntropyDeviation_t = 0.74$), query
 Q2 returns
 
@@ -1255,44 +1261,51 @@ demonstrate that Q2 returns interpretable, configuration-attributed
 scores at the granularity of a single window.
 
 \paragraph{Q3 result on windows 19 and 27.} On window 19, Q3 returns
-\texttt{riskValue}$=0.78$, \texttt{priority}$=2$, mitigation hint
-\texttt{egress\_rate\_limit}. On window 27 it returns
+the illustrative annotation \texttt{riskValue}$=0.78$, \texttt{priority}$=2$,
+mitigation hint \texttt{egress\_rate\_limit}. On window 27 it returns
 \texttt{riskValue}$=0.95$, \texttt{priority}$=1$, mitigation hint
-\texttt{black\_hole + BCP-38}. The query primitive thus surfaces both
-the gate-fired score and a directly readable course-of-action label
-without requiring the operator to inspect raw triples.
+\texttt{black\_hole + BCP-38}. These values are pre-populated in the
+trial graph as worked-example annotations and are not the output of a
+trained scoring pipeline; the point of the example is that Q3 surfaces
+both the gate-fired score and a directly readable course-of-action
+label at the granularity of a single window, without requiring the
+operator to inspect raw triples.
 
-\paragraph{SPARQL system metrics on the trial endpoint.}
-Table~\ref{tab:sparql-perf} reports the latency and predicate-coverage
-of the three queries on the trial graph, measured over ten warm
-runs against the local Fuseki endpoint. These are
-prototype-level numbers on a synthetic graph and are reported for
-reproducibility rather than as benchmarks.
+\paragraph{SPARQL predicate coverage on the trial endpoint.}
+Table~\ref{tab:sparql-perf} reports the predicate-coverage
+of the three queries on the trial graph. These figures characterise
+which of the eight \texttt{psi:} classes each query primitive touches;
+system-level latency benchmarks against a production-scale endpoint
+are deferred to a dedicated evaluation~\cite{paper5}.
 
 \begin{table}[t]
 \centering
-\caption{Prototype SPARQL performance on the trial graph
-($\approx 1{,}030$ triples after escalation\_mid ingestion). Latency
-is mean over ten warm runs; coverage is the fraction of the eight
-\texttt{psi:} classes touched by the query plan.}
+\caption{Predicate coverage of the three illustrative SPARQL queries
+on the trial graph (\texttt{example\_data.ttl}, hand-curated worked
+example populating the \texttt{psi:} classes). Coverage is the
+fraction of the eight \texttt{psi:} classes touched by the query plan.
+Latency figures are omitted at this stage: system-level performance
+will be reported in a dedicated evaluation against a production-scale
+endpoint~\cite{paper5}.}
 \label{tab:sparql-perf}
 \small
-\begin{tabular}{@{}lccc@{}}
+\begin{tabular}{@{}lc@{}}
 \toprule
-Query & latency (ms) & triples scanned & predicate coverage (of 8) \\
+Query & predicate coverage (of 8) \\
 \midrule
-Q1 (entropy-spike triage)   & 18 & $\sim$280  & 2 \\
-Q2 (phase comparison)       & 32 & $\sim$430  & 3 \\
-Q3 (gate-fired lookup)      & 27 & $\sim$360  & 5 \\
+Q1 (entropy-spike triage)   & 2 \\
+Q2 (phase comparison)       & 3 \\
+Q3 (gate-fired lookup)      & 5 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \noindent
-The Q2 latency (32~ms) is the highest among the three primitives because
+Among the three primitives, Q2 is the one whose predicate-coverage
+crosses the largest set of \texttt{psi:} classes because
 the query plan binds two \texttt{psi:RiskScore} subjects on the same
-\texttt{psi:Window} and filters them by \texttt{psi:configuration}. It
-is not directly comparable to Q1 or Q3.
+\texttt{psi:Window} and filters them by \texttt{psi:configuration}. Q1
+and Q3 have narrower plans.
 
 \subsection{Claim Boundaries}
 \label{sec:claim-boundaries}
@@ -1310,11 +1323,17 @@ paper.
 are derived from synthetic data at fixed seed
 (\texttt{SYNTHETIC\_SEED}$=42$). Generalisation to live CPS traffic is
 identified as future work.
-\item[B3 (Illustrative vs.\ benchmark).] The Q2 single-window divergence
-between neural-only (placeholder) and neurosymbolic scores is reported
-as an illustrative outcome of the SEL pipeline, not as a benchmark of
-neurosymbolic versus neural detection. A fair benchmark requires
-training a full ARNN baseline and is left to future work.
+\item[B3 (Illustrative vs.\ benchmark).] All numeric outputs of the SEL
+trial graph in Section~\ref{sec:eval-sel}---the Q2 single-window signed
+delta between neural-only (placeholder) and neurosymbolic scores, and
+the Q3 \texttt{scoreValue}, \texttt{priority}, mitigation hint and any
+\texttt{referencedCVE} annotation---are reported as illustrative worked
+examples of the SEL pipeline surface, not as benchmarks of
+neurosymbolic versus neural detection or as empirical
+mitigation/CTI outputs. A fair benchmark requires training a full ARNN
+baseline and is left to future work; the CTI/mitigation annotations
+require a live CTI feed integration explicitly out of scope here
+(cf.\ Sec.~\ref{sec:lineage} Safe-Claim Matrix rows~7 and~14).
 \end{description}
 
 % =====================================================================
@@ -1355,8 +1374,13 @@ scope of a design-space paper.
 \emph{Mitigation.} We adopt ``parameter-aware'' exclusively for
 \emph{recomputed per $(E, W, s)$, not online-adaptive}; the construct
 boundary is made unambiguous in Sec.~\ref{sec:eal}. The SPARQL latencies
-of Sec.~\ref{sec:eval-scaling} are tagged ``\,in the
-$10^{3}$--$10^{4}$ triple range tested'' throughout.\\
+of Sec.~\ref{sec:eval-scaling} (empirical scaling of
+Table~\ref{tab:sparql-scaling} on the auto-generated synthetic
+SEL-aligned graphs) are tagged ``\,in the
+$10^{3}$--$10^{4}$ triple range tested'' throughout; these are distinct
+from the illustrative trial graph of Sec.~\ref{sec:eval-sel}, for which
+no latency claim is made (Table~\ref{tab:sparql-perf} reports predicate
+coverage only).\\
 \emph{Deliberate scope choice.} A rolling-recalibration $\taus$ variant
 is identified as a future experiment.
 
@@ -1380,6 +1404,7 @@ re-derived here. Every occurrence of ``stability'' in this paper refers
 to bounded empirical behavior under entropy-gated updates, observed on
 the regimes of Sec.~\ref{sec:evaluation}; it is not a derived claim.
 
+% =====================================================================
 % =====================================================================
 \section{Paper Lineage and Safe-Claim Matrix}
 \label{sec:lineage}
@@ -1431,7 +1456,7 @@ Five theorems under A1--A10 (manuscript in preparation) &
 
 \begin{table}[t]
 \centering
-\caption{Safe-Claim Matrix (V2, 13 rows). Each row fixes, for one claim
+\caption{Safe-Claim Matrix (V3, 14 rows). Each row fixes, for one claim
 category, the status of the claim, the evidence on which it rests, the
 allowed wording, and the wording explicitly avoided.}
 \label{tab:safe-claim}
@@ -1479,7 +1504,10 @@ allowed wording, and the wording explicitly avoided.}
   & Sec.~\ref{sec:sel-workflow}, Q1/Q2/Q3 on real graph
   & ``CTI-aligned, SPARQL-queryable operator interface'',
     ``queryability of operator reasoning''
-  & ``deployed CTI feed'', ``operationally validated with analysts'' \\
+  & ``deployed CTI feed'', ``operationally validated with analysts'',
+    ``the reported \texttt{scoreValue}, \texttt{priority},
+    \texttt{referencedCVE} and mitigation hint values are empirical
+    outputs of the pipeline'' \\
 8 & SPARQL queryability scales sub-linearly in tested range
   & safe (P4 empirical) & Sec.~\ref{sec:eval-scaling} scaling note
   & ``latency grows sub-linearly with graph size in the
@@ -1515,6 +1543,18 @@ allowed wording, and the wording explicitly avoided.}
   & ``alert $\to$ triage $\to$ interrogation $\to$ mitigation is
     end-to-end queryable through three canonical SPARQL primitives''
   & ``end-to-end deployed'', ``human-validated with analysts'' \\
+14 & SEL trial-graph SPARQL exemplification
+  & safe (illustrative)
+  & Sec.~\ref{sec:eval-sel}, Table~\ref{tab:sparql-perf} on the
+    hand-curated trial graph
+  & ``SPARQL query structure and predicate coverage are illustrated on
+    a hand-curated trial graph; no production-scale latency claim is
+    made''
+  & ``benchmark latency'', ``production-scale performance'',
+    numerical latency figures on the trial graph,
+    ``the trial-graph \texttt{scoreValue}, \texttt{priority},
+    \texttt{referencedCVE} and mitigation hints are empirical outputs''
+    \\
 \bottomrule
 \end{tabular}
 \end{table}
