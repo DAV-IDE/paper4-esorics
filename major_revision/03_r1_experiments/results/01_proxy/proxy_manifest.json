@@ -1,0 +1,13 @@
+{
+ "command": "exp_single.py --dataset proxy --full-grid --out ../results/01_proxy",
+ "python": "3.14.3",
+ "numpy": "2.5.3",
+ "pandas": "3.0.6",
+ "commit": "c1b04d721a6b6b52f42d5804ddb742331dc10e79",
+ "started_utc": "2026-10-03T14:49:48Z",
+ "dataset": "CIC-IDS2017-aligned proxy (synthetic flows)",
+ "seed": 20260606,
+ "series_sha256": "36002fb4b99823b93a0763dc140fdcaf69f34fcaa77bd8fc11fa96f70cf809d9",
+ "finished_utc": "2026-10-03T14:50:30Z",
+ "n_rows": 540
+}

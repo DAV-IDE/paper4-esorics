@@ -1,0 +1,24 @@
+{
+ "command": "exp_single.py --dataset real_second --input ../results/01_real_second_v2/friday_full_per_second.csv --out ../results/01_real_second_v2 --tag real_second_csvwin --start-epoch 1499452200 --end-epoch 1499457761",
+ "python": "3.14.3",
+ "numpy": "2.5.3",
+ "pandas": "3.0.6",
+ "commit": "c1b04d721a6b6b52f42d5804ddb742331dc10e79",
+ "started_utc": "2026-10-03T17:25:23Z",
+ "dataset": "CIC-IDS2017 official PCAP Friday-WorkingHours.pcap, complete per-second reconstruction",
+ "input": "../results/01_real_second_v2/friday_full_per_second.csv",
+ "input_sha256": "6559dce4219bc30487f32ede42e172a8d3dc1a77277419e3af917de3c4e57c7f",
+ "feature": "pkt_rate",
+ "interval_epoch": [
+  1499452200,
+  1499457761
+ ],
+ "n_seconds": 5562,
+ "ddos_seconds": 1260,
+ "other_attack_seconds_excluded": 0,
+ "exclusion_rule": "windows overlapping Botnet/PortScan seconds are excluded from calibration and from DDoS FP counts; their fires are reported as fires_excluded",
+ "t_first_other_attack_s": 1560.0,
+ "t_event_ddos_s": 1560.0,
+ "finished_utc": "2026-10-03T17:26:20Z",
+ "n_rows": 1620
+}

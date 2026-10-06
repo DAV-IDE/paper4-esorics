@@ -1,0 +1,21 @@
+{
+ "file": "Friday-WorkingHours.pcap",
+ "source_page": "https://cicresearch.ca/CICDataset/CIC-IDS-2017/browse.php?p=CIC-IDS-2017%2FPCAPs",
+ "download_url": "https://cicresearch.ca/CICDataset/CIC-IDS-2017/download.php?file=CIC-IDS-2017%2FPCAPs%2FFriday-WorkingHours.pcap",
+ "md5_url": "https://cicresearch.ca/CICDataset/CIC-IDS-2017/download.php?file=CIC-IDS-2017%2FPCAPs%2FFriday-WorkingHours.md5",
+ "publisher": "Canadian Institute for Cybersecurity (CIC), University of New Brunswick",
+ "registration": "CIC dataset download form submitted 2026-10-03 ~16:43 UTC on behalf of Roberto Pazzi (University of Insubria), with user authorisation",
+ "download_started_utc": "2026-10-03T16:44:26Z (HTTP Date header)",
+ "download_finished_utc": "2026-10-03T16:49Z (file mtime)",
+ "http_status": 200,
+ "transfer": "chunked, no Content-Length, no range support",
+ "size_bytes": 8839309056,
+ "format": "pcapng (SHB magic 0a0d0d0a, little-endian)",
+ "md5_official": "7366c552425956e610bd69f57feb7e7a",
+ "md5_computed": "7366c552425956e610bd69f57feb7e7a",
+ "sha256_computed": "beff0dcce1eebc9b2454582f4dc8ed0ba0112b2c619a710bf03af93147254cd0",
+ "md5_file_sha256": "6be11b1ae4c1f1516d7c67c3884c29b3cc2970cc0899d09a371a50f581cd596c",
+ "tool": "curl (cookie session), md5sum/sha256sum GNU coreutils",
+ "recorded_utc": "2026-10-03T16:55:48Z",
+ "md5_match": true
+}

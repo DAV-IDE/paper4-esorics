@@ -1,0 +1,15 @@
+{
+ "command": "exp_single.py --dataset real_minute --input /tmp/repo/data/Friday_TrafficLabelling.parquet --out ../results/01_real_minute",
+ "python": "3.14.3",
+ "numpy": "2.5.3",
+ "pandas": "3.0.6",
+ "commit": "c1b04d721a6b6b52f42d5804ddb742331dc10e79",
+ "started_utc": "2026-10-03T14:48:33Z",
+ "dataset": "CIC-IDS2017 Friday-Afternoon-DDoS TrafficLabelling, HF mirror bvsam/cic-ids-2017, minute aggregation",
+ "input": "/tmp/repo/data/Friday_TrafficLabelling.parquet",
+ "input_sha256": "7c5876d52189fc01af54bad6cf23afe9f7fbc0e3ca6c3595920754f0c3ba8f66",
+ "n_minutes": 93,
+ "attack_minutes": 21,
+ "finished_utc": "2026-10-03T14:48:36Z",
+ "n_rows": 1080
+}

@@ -7,6 +7,11 @@
 
 This repository contains everything needed to **regenerate from scratch** Tables 8 and 9 and Figure (Pareto design space) of the paper. All numeric results in §5.2, §5.3 and §5.4 of `paper/main_v4.tex` are produced by the scripts in `scripts/` with fixed random seed `20260606`.
 
+> **Major revision R1 (MDPI Future Internet, 2026-10).** The artefacts of the revised manuscript
+> (frozen results, experiment scripts, canonical SPARQL queries `sparql/Q1.rq`–`Q3.rq`, table/figure
+> generator) are in [`major_revision/`](major_revision/README.md) on branch `major-revision-r1`.
+> The sections below describe the earlier v4 kit and are kept for provenance.
+
 ---
 
 ## Reviewer status (July 2026)

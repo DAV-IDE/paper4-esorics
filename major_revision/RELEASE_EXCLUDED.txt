@@ -1,0 +1,6 @@
+# Files deliberately excluded from the public release (2026-10-06). The last three are also listed in the frozen SHA256SUMS_R1*.txt manifests (verify those with --ignore-missing).
+# sha256  path (relative to major_revision/)  reason
+c0886b725c17a1d9a837ef92c915b68ce603f652c3174b143efef1aeae2c4b37  03_r1_experiments/docs/P4_R1_DECISION_MEMO.md  internal working note
+f9754e5a32e769e0fab24671f5d2e167295ce8cdc49d47c40f37b0886014ede2  03_r1_experiments/docs/P4_R1_INTERMEDIATE_REPORT.md  internal working note
+994cf6da2ee3133f8dfde728fa733ba3e318ab0b1e2a62afc251403653e6d880  03_r1_experiments/docs/P4_R1_STEP1C_REPORT.md  internal working note
+6559dce4219bc30487f32ede42e172a8d3dc1a77277419e3af917de3c4e57c7f  03_r1_experiments/results/01_real_second_v2/friday_full_per_second.csv  derived from the CIC capture; regenerate with mr_v2/pcap_to_per_second.py

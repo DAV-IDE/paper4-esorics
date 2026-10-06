@@ -1,0 +1,18 @@
+# Q2 -- Phase-based comparison (canonical v1.0, Paper 4 Major Revision R1)
+# For every Window (or a chosen one, bound at run time via VALUES/initBindings ?w),
+# compare the RiskScore produced with ("nesy") and without ("neural") the
+# symbolic gate, and attach the labelled AttackPhase when available.
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?phase ?neu ?nesy ((?nesy - ?neu) AS ?delta) WHERE {
+  ?w  a psi:Window .
+  ?rn a psi:RiskScore ;
+      psi:onWindow ?w ;
+      psi:configuration "neural" ;
+      psi:scoreValue ?neu .
+  ?rs a psi:RiskScore ;
+      psi:onWindow ?w ;
+      psi:configuration "nesy" ;
+      psi:scoreValue ?nesy .
+  OPTIONAL { ?w psi:belongsToPhase ?phase . ?phase a psi:AttackPhase . }
+}
+ORDER BY ?phase ?w

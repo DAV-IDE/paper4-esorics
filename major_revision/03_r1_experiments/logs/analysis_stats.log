@@ -1,0 +1,7 @@
+/tmp/repo/major_revision/mr/analysis_stats.py:108: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  m = smf.ols(f, data=fin).fit()
+/tmp/repo/major_revision/mr/analysis_stats.py:108: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  m = smf.ols(f, data=fin).fit()
+/tmp/repo/major_revision/mr/analysis_stats.py:108: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+  m = smf.ols(f, data=fin).fit()
+analysis done

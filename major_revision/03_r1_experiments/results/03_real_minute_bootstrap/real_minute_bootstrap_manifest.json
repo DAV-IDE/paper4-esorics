@@ -1,0 +1,44 @@
+{
+ "command": "exp_bootstrap_real.py --input /tmp/repo/data/Friday_TrafficLabelling.parquet --out ../results/03_real_minute_bootstrap",
+ "status": "ROBUSTNESS ANALYSIS - NOT PRIMARY EVIDENCE",
+ "rng_seed": 20261005,
+ "B": 1000,
+ "block_lengths": [
+  3,
+  4,
+  6
+ ],
+ "surrogate_lengths": [
+  26,
+  64
+ ],
+ "pre_attack_benign_minutes": 26,
+ "t_event_s": 1560.0,
+ "t_attack_end_s": 2760.0,
+ "grid": [
+  [
+   8,
+   4
+  ],
+  [
+   16,
+   2
+  ],
+  [
+   32,
+   1
+  ]
+ ],
+ "variants": [
+  "U_raw",
+  "S_norm",
+  "B_norm",
+  "B_fixed015"
+ ],
+ "rules": [
+  "mu_sigma",
+  "q997",
+  "mad"
+ ],
+ "note": "evaluation stream never resampled; only calibration sample is bootstrapped"
+}

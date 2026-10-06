@@ -1,0 +1,26 @@
+{
+ "blocks_total": 9997876,
+ "packets_total": 9997874,
+ "packets_kept": 2626240,
+ "spb_dropped": 0,
+ "bytes_out": 2007694204,
+ "first_ts_in": 1499428779.599128,
+ "last_ts_in": 1499457761.169108,
+ "first_ts_kept": 1499450400.036929,
+ "last_ts_kept": 1499457761.169108,
+ "non_packet_blocks": 2,
+ "input": "/tmp/pcap/Friday-WorkingHours.pcap",
+ "input_sha256_streamed": "beff0dcce1eebc9b2454582f4dc8ed0ba0112b2c619a710bf03af93147254cd0",
+ "output": null,
+ "output_sha256": null,
+ "window_epoch": [
+  1499450400.0,
+  1499457900.0
+ ],
+ "command": "/tmp/repo/major_revision/mr/pcapng_extract_window.py --in /tmp/pcap/Friday-WorkingHours.pcap --start 1499450400 --end 1499457900 --dry-run",
+ "runtime_s": 184.2,
+ "dry_run": true,
+ "tsres": [
+  1e-06
+ ]
+}

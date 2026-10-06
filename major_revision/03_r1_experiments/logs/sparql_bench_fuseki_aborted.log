@@ -1,0 +1,55 @@
+[note] run #1 aborted at n=5000 rdflib (Q2 rdflib >60 s per call, projected hours at 50k); restarted with monotone censoring
+[fuseki] n=1000 canonical canonical_v1 Q1 full median=9.12ms bindings=9
+[fuseki] n=1000 canonical canonical_v1 Q2 full median=10.31ms bindings=41
+[fuseki] n=1000 canonical canonical_v1 Q2 point median=8.98ms bindings=1
+[fuseki] n=1000 canonical canonical_v1 Q3 full median=6.12ms bindings=14
+[fuseki] n=1000 canonical canonical_v1 Q3 point median=4.92ms bindings=2
+[fuseki] n=1000 canonical paper_v1 Q1 full median=5.49ms bindings=9
+[fuseki] n=1000 canonical paper_v1 Q2 full median=6.03ms bindings=41
+[fuseki] n=1000 canonical paper_v1 Q2 point median=5.25ms bindings=1
+[fuseki] n=1000 canonical paper_v1 Q3 full median=9.60ms bindings=82
+[fuseki] n=1000 canonical paper_v1 Q3 point median=6.01ms bindings=2
+[rdflib] n=1000 canonical canonical_v1 Q1 censored=False warmup=0.13s
+[rdflib] n=1000 canonical canonical_v1 Q2 censored=False warmup=0.56s
+[rdflib] n=1000 canonical canonical_v1 Q3 censored=False warmup=0.02s
+[rdflib] n=1000 canonical paper_v1 Q1 censored=False warmup=0.01s
+[rdflib] n=1000 canonical paper_v1 Q2 censored=False warmup=0.53s
+[rdflib] n=1000 canonical paper_v1 Q3 censored=False warmup=0.02s
+[fuseki] n=1000 legacy bench_v1 Q1 full median=9.29ms bindings=34
+[fuseki] n=1000 legacy bench_v1 Q2 full median=8.35ms bindings=100
+[fuseki] n=1000 legacy bench_v1 Q3 full median=5.76ms bindings=13
+[rdflib] n=1000 legacy bench_v1 Q1 censored=False warmup=0.01s
+[rdflib] n=1000 legacy bench_v1 Q2 censored=False warmup=0.01s
+[rdflib] n=1000 legacy bench_v1 Q3 censored=False warmup=0.00s
+[fuseki] n=5000 canonical canonical_v1 Q1 full median=12.30ms bindings=23
+[fuseki] n=5000 canonical canonical_v1 Q2 full median=16.12ms bindings=208
+[fuseki] n=5000 canonical canonical_v1 Q2 point median=7.88ms bindings=1
+[fuseki] n=5000 canonical canonical_v1 Q3 full median=7.09ms bindings=38
+[fuseki] n=5000 canonical canonical_v1 Q3 point median=8.74ms bindings=2
+[fuseki] n=5000 canonical paper_v1 Q1 full median=8.49ms bindings=23
+[fuseki] n=5000 canonical paper_v1 Q2 full median=7.76ms bindings=208
+[fuseki] n=5000 canonical paper_v1 Q2 point median=4.34ms bindings=1
+[fuseki] n=5000 canonical paper_v1 Q3 full median=19.55ms bindings=416
+[fuseki] n=5000 canonical paper_v1 Q3 point median=4.25ms bindings=2
+[rdflib] n=5000 canonical canonical_v1 Q1 censored=False warmup=0.34s
+[rdflib] n=5000 canonical canonical_v1 Q2 censored=True warmup=67.30s
+[rdflib] n=5000 canonical canonical_v1 Q3 censored=False warmup=0.11s
+[rdflib] n=5000 canonical paper_v1 Q1 censored=False warmup=0.02s
+[rdflib] n=5000 canonical paper_v1 Q2 censored=True warmup=67.93s
+[rdflib] n=5000 canonical paper_v1 Q3 censored=False warmup=0.06s
+[fuseki] n=5000 legacy bench_v1 Q1 full median=13.13ms bindings=158
+[fuseki] n=5000 legacy bench_v1 Q2 full median=17.58ms bindings=500
+[fuseki] n=5000 legacy bench_v1 Q3 full median=8.65ms bindings=53
+[rdflib] n=5000 legacy bench_v1 Q1 censored=False warmup=0.03s
+[rdflib] n=5000 legacy bench_v1 Q2 censored=False warmup=0.04s
+[rdflib] n=5000 legacy bench_v1 Q3 censored=False warmup=0.01s
+[fuseki] n=10000 canonical canonical_v1 Q1 full median=15.64ms bindings=45
+[fuseki] n=10000 canonical canonical_v1 Q2 full median=35.39ms bindings=416
+[fuseki] n=10000 canonical canonical_v1 Q2 point median=13.25ms bindings=1
+[fuseki] n=10000 canonical canonical_v1 Q3 full median=9.54ms bindings=74
+[fuseki] n=10000 canonical canonical_v1 Q3 point median=4.57ms bindings=2
+[fuseki] n=10000 canonical paper_v1 Q1 full median=8.76ms bindings=45
+[fuseki] n=10000 canonical paper_v1 Q2 full median=13.08ms bindings=416
+[fuseki] n=10000 canonical paper_v1 Q2 point median=3.89ms bindings=1
+[fuseki] n=10000 canonical paper_v1 Q3 full median=25.43ms bindings=832
+[fuseki] n=10000 canonical paper_v1 Q3 point median=3.88ms bindings=2

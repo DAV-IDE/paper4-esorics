@@ -1,0 +1,8 @@
+# VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9)
+PREFIX psi: <http://example.org/psi#>
+SELECT ?w ?ex ?mh WHERE {
+  ?w a psi:Window ;
+     psi:gateFired ?gf ;
+     psi:hasExplanation ?ex .
+  ?ex psi:suggestsMitigation ?mh .
+}

@@ -1,0 +1,27 @@
+% Table 9: tau-recalibration sweep (real CIC-IDS2017)
+\begin{table*}[t]
+\centering
+\caption{Threshold recalibration sweep on real CIC-IDS2017 Friday-Afternoon DDoS. Cells report \emph{fires}/\emph{FPR}/\emph{delay(s)} when detected, ``miss'' when $\varepsilon_t$ never exceeds a finite $\tau$, and ``$\tau{=}\infty$'' when the stable-phase window is too short to estimate $(\mu,\sigma)$. AUC$_{ROC}$ is measured once per $(W,s)$ and independent of $k$ or warmup.}
+\label{tab:real-tau-sweep}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccc|cccc|cccc|cccc|}
+\toprule
+ &  &  & AUC & \multicolumn{4}{c|}{warmup=600s (10 min pre-atk)} & \multicolumn{4}{c|}{warmup=1200s (20 min pre-atk)} & \multicolumn{4}{c|}{warmup=1500s (25 min pre-atk)} \\
+Estimator & $W$ & $s$ & ROC & $k{=}1.5$ & $k{=}2.0$ & $k{=}2.5$ & $k{=}3.0$ & $k{=}1.5$ & $k{=}2.0$ & $k{=}2.5$ & $k{=}3.0$ & $k{=}1.5$ & $k{=}2.0$ & $k{=}2.5$ & $k{=}3.0$ \\
+\midrule
+Shannon & 8 & 4 & 0.629 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & 12/0.15/300 & 12/0.15/300 & miss & miss & 32/0.43/60 & 12/0.17/300 & 12/0.17/300 & miss \\
+Shannon & 16 & 2 & 0.391 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & 32/0.54/660 & 18/0.27/660 & 10/0.12/660 & 6/0.12/3060 & 18/0.30/660 & 10/0.13/660 & 6/0.13/3060 & 2/0.04/3180 \\
+Shannon & 32 & 1 & 0.656 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ \\
+Sample & 8 & 4 & 0.427 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & miss & miss & miss & miss & miss & miss & miss & miss \\
+Sample & 16 & 2 & 0.493 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & 14/0.17/0 & 14/0.17/0 & 14/0.17/0 & 14/0.17/0 & 4/0.06/0 & miss & miss & miss \\
+Sample & 32 & 1 & 0.568 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ \\
+Permutation & 8 & 4 & 0.330 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & miss & miss & miss & miss & miss & miss & miss & miss \\
+Permutation & 16 & 2 & 0.710 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & 8/0.04/60 & miss & miss & miss & miss & miss & miss & miss \\
+Permutation & 32 & 1 & 0.990 & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ & $\tau{=}\infty$ \\
+\bottomrule
+\end{tabular}}
+\vspace{2pt}
+\begin{minipage}{\textwidth}\footnotesize
+\emph{Reading key.} A cell shows how many post-warmup minutes the detector fires (\emph{fires}), the false-positive rate on pre-attack benign minutes (\emph{FPR}), and the detection delay from first attack minute (\emph{delay}). ``$\tau{=}\infty$'' cells indicate the number of stable-phase samples was below the estimator's minimum (5), so $\sigma$ could not be estimated \textemdash\ a configurability/auditability finding, not a bug. Notice that AUC ranking does \emph{not} transfer to the operational cells: Permutation$(32,1)$ with AUC$=0.990$ remains inoperative because $W=32$ requires more than 25 benign minutes; Permutation$(16,2)$ with AUC$=0.732$ becomes operative at warmup$=$1200~s, $k=1.5$ (fires=8, FPR=0.04, delay=60~s), outperforming the baseline Pareto point.
+\end{minipage}
+\end{table*}

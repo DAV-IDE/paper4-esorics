@@ -1,0 +1,60 @@
+{
+ "command": "exp_bootstrap_real_second.py --input ../results/01_real_second_v2/friday_full_per_second.csv --out ../results/03_real_second_bootstrap_v2 --B 200 --blocks 60 120 --procs 2",
+ "status": "calibration-uncertainty analysis on primary real data (C)",
+ "rng_seed": 20261006,
+ "B": 200,
+ "blocks_s": [
+  60,
+  120
+ ],
+ "t_event_s": 24981.0,
+ "t_attack_end_s": 26240.0,
+ "n_seconds": 28983,
+ "variants": [
+  "U_raw",
+  "B_norm"
+ ],
+ "rules": [
+  "mu_sigma",
+  "q997"
+ ],
+ "grid": [
+  [
+   64,
+   1
+  ],
+  [
+   64,
+   4
+  ],
+  [
+   64,
+   8
+  ],
+  [
+   128,
+   1
+  ],
+  [
+   128,
+   4
+  ],
+  [
+   128,
+   8
+  ],
+  [
+   256,
+   1
+  ],
+  [
+   256,
+   4
+  ],
+  [
+   256,
+   8
+  ]
+ ],
+ "note": "evaluation stream never resampled; only calibration sample is bootstrapped"
+}

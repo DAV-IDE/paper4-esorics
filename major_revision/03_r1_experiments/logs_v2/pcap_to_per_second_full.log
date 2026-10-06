@@ -1,0 +1,10 @@
+[pcap] 1,000,000 packets (34s)
+[pcap] 2,000,000 packets (73s)
+[pcap] 3,000,000 packets (140s)
+[pcap] 4,000,000 packets (176s)
+[pcap] 5,000,000 packets (201s)
+[pcap] 6,000,000 packets (213s)
+[pcap] 7,000,000 packets (230s)
+[pcap] 8,000,000 packets (245s)
+[pcap] 9,000,000 packets (271s)
+{"n_seconds": 28983, "first_second_ADT": "08:59:39", "last_second_ADT": "17:02:41", "packets_total": 9997874, "malformed": 0, "output_sha256": "6559dce4219bc30487f32ede42e172a8d3dc1a77277419e3af917de3c4e57c7f"}

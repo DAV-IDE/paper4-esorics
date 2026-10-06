@@ -1,0 +1,70 @@
+{
+ "item": "I-16",
+ "script": "mr/derive_delay_windows.py",
+ "script_sha256": "0af5611cf89736c4b54aaf5eb5f720f991bcc41d35675ffcf60f97f892b13a11",
+ "definition": "I-16 (R1-5): detection delay in number of windows. Post-processing only, no experiment re-run.\nDefinition (causal grid of Algorithm 1, window k ends at sample e_k = W-1+k*s, decision at t[e_k]):\n  d_win = #{k : t_event <= t_end_k <= t_detect}\n        = number of window decisions taken from attack onset up to and including the first detecting one (d_win >= 1).\nAll series used here have uniform time steps starting at t=0 (synthetic dt=1 sample, per-second dt=1 s,\nminute dt=60 s), so t_end_k = (W-1+k*s)*dt. Each t_detect is checked to lie on that grid.\nThe proxy drops seconds without flows (datasets.proxy_per_second), so its time axis is NOT uniform for every seed:\nfor the proxy the exact time axis of each seed is regenerated with the frozen generator and d_win is counted\ndirectly on t[e_k] (time axis only; no entropy, gate or metric is recomputed).",
+ "bootstrap_for_median_ci": {
+  "type": "percentile",
+  "B": 2000,
+  "seed": 0
+ },
+ "inputs": {
+  "results/03_synthetic_multiseed/synthetic_multiseed_long.csv.gz": "1219d0743d7f4cdafceaa10fd121b0ba2b2a2b1b0b3561d298c94b2f8d630ff3",
+  "results/03_proxy_multiseed/proxy_multiseed_long.csv.gz": "ba716cb3558288c8b0a568e2efbc921b3f3a7121fdb10cf62e926eb21d86c14a",
+  "results/01_real_second_v2/real_second_csvwin_cells.csv": "8f0656faab0289515d7cdd2b05a1d6e5468304f7cba591756979c2df09f24105",
+  "results/01_real_second_v2/real_second_full_cells.csv": "4e8265691e68c73e9a8adc925b34c78792cff7fa221397d9a21cc3be6baf91c8",
+  "results/01_real_second_v2/real_second_full_n_bytes_cells.csv": "2d190b957881f5e20e022a9c232ae1c805c27f5f1c9cbf1622be4285587f1365",
+  "results/01_real_second_v2/real_second_full_n_flows_started_cells.csv": "b80a8755eb599bd40d8f9c5908d2bb04579d66e8feb57e03ca117d857b96e6b5",
+  "results/01_real_minute/real_minute_cells.csv": "7e1bf3001fff9fe51b91315c251d0f177f08dc81a39b6f01c64bb58d00d20bb4"
+ },
+ "outputs": {
+  "results/04_stats/delay_windows_synthetic_runs.csv.gz": "816f1aa8cf31e23eb5b77f40dcb1bf69eead994bbdcde47c2631e0410aa8afb6",
+  "results/04_stats/delay_windows_synthetic_cells.csv": "6d3c6450aa651857d93e50aafb933160005a73e53206b7af3ee08e186c665ae2",
+  "results/04_stats/delay_windows_proxy_cells.csv": "d91a7597591ab18ecd4c40238ed645ff7cab3b95fc7074f8b4368ba81a74522a",
+  "results/04_stats/delay_windows_real_second.csv": "d86415721b3bc7cc31f7ddc9939fd848b758f658b97392424e21ed7e4bc84d0f",
+  "results/04_stats/delay_windows_real_minute.csv": "c55beb2bba074c9fa18bc38b50fa2b19308ddd191256f36d6a7a22e147ac3337"
+ },
+ "checks": {
+  "synthetic": {
+   "rows": 21600,
+   "detected": 14212,
+   "off_grid": 0,
+   "dwin_lt1": 0,
+   "dwin_min": 1.0,
+   "dwin_max": 1249.0
+  },
+  "proxy": {
+   "rows": 5400,
+   "detected": 3593,
+   "off_grid": 0,
+   "dwin_lt1": 0,
+   "dwin_min": 1.0,
+   "dwin_max": 3694.0,
+   "seeds_with_dropped_seconds": {
+    "159098576": 1,
+    "2681624976": 1,
+    "2792840284": 1,
+    "2969109327": 1
+   }
+  },
+  "real_second": {
+   "rows": 6480,
+   "detected": 5015,
+   "off_grid": 0,
+   "dwin_lt1": 0,
+   "dwin_min": 1.0,
+   "dwin_max": 1371.0
+  },
+  "real_minute": {
+   "rows": 1080,
+   "detected": 159,
+   "off_grid": 0,
+   "dwin_lt1": 0,
+   "dwin_min": 1.0,
+   "dwin_max": 33.0
+  }
+ },
+ "python": "3.14.3",
+ "numpy": "2.5.3",
+ "pandas": "3.0.6"
+}

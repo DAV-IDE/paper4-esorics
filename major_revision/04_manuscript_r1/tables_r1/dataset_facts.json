@@ -1,0 +1,22 @@
+{
+ "real_csv": {
+  "file": "/tmp/repo/data/Friday_TrafficLabelling.parquet",
+  "sha256": "7c5876d52189fc01af54bad6cf23afe9f7fbc0e3ca6c3595920754f0c3ba8f66",
+  "rows": 225745,
+  "labels": {
+   "DDoS": 128027,
+   "BENIGN": 97718
+  },
+  "ddos_frac": 0.5671310549513832
+ },
+ "proxy_csv": {
+  "file": "/tmp/repo/data/cic_proxy_friday_ddos.csv",
+  "sha256": "ede839db96658a6455dde0ae39b932f9d3ff88106e00fe9a7d758b0e37e621ec",
+  "rows": 246078,
+  "labels": {
+   "BENIGN": 158285,
+   "DDoS": 87793
+  },
+  "ddos_frac": 0.35676899194564327
+ }
+}

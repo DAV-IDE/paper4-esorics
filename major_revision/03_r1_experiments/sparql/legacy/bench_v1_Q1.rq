@@ -1,0 +1,8 @@
+# VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9)
+PREFIX psi: <http://example.org/psi#>
+SELECT ?w ?h WHERE {
+  ?w a psi:Window ;
+     psi:hasEntropySignal ?es .
+  ?es psi:entropyValue ?h .
+  FILTER (?h > 3.5)
+}

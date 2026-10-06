@@ -1,0 +1,1166 @@
+[
+ {
+  "label": "synthetic/drift_gradual/B_norm/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.9282326285015249,
+   "shapiro_resid_p": 8.531635996118557e-11,
+   "levene_W": 1.1479137254609082,
+   "levene_p": 0.31585989157017985,
+   "n_detected_rows": 298,
+   "censored_rows_excluded": 152
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 78.57832889696826,
+  "friedman_p": 5.1881299494727296e-11,
+  "kendall_W": 0.18709125927849585,
+  "cochran_q": 88.85303514376997,
+  "cochran_p": 6.24707035841395e-13,
+  "mean_rank_by_cell": {
+   "Sample|C3": 4.366666666666666,
+   "Permutation|C2": 5.183333333333334,
+   "Permutation|C1": 6.65,
+   "Sample|C1": 6.8,
+   "Shannon|C2": 7.2,
+   "Permutation|C4": 7.566666666666666,
+   "Shannon|C3": 7.733333333333333,
+   "Sample|C4": 7.933333333333334,
+   "Permutation|C5": 8.483333333333333,
+   "Shannon|C1": 8.7,
+   "Sample|C5": 8.95,
+   "Permutation|C3": 9.15,
+   "Shannon|C4": 9.3,
+   "Shannon|C5": 10.683333333333334,
+   "Sample|C2": 11.3
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 13.5,
+    "p": 0.6361173242422264,
+    "p_holm": 0.6361173242422264
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -185.0,
+    "p": 0.03241782097491788,
+    "p_holm": 0.09725346292475365
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -80.5,
+    "p": 0.2846673980635477,
+    "p_holm": 0.5693347961270954
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -999999999613.0,
+    "p": 0.00015384795573762671,
+    "p_holm": 0.00046154386721288014
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -90.0,
+    "p": 0.17059839516878128,
+    "p_holm": 0.17059839516878128
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 500000000033.5,
+    "p": 0.002204480733242731,
+    "p_holm": 0.004408961466485462
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 416.0,
+    "p": 4.421919584274292e-06,
+    "p_holm": 1.3265758752822876e-05
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.6142115233487573,
+    "p_holm": 0.6142115233487573
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -202.5,
+    "p": 0.0050126127898693085,
+    "p_holm": 0.010025225579738617
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -20.0,
+    "p": 0.28018897358806516,
+    "p_holm": 0.5507345193613706
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -286.0,
+    "p": 0.015208108389233043,
+    "p_holm": 0.045624325167699126
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -26.0,
+    "p": 0.2753672596806853,
+    "p_holm": 0.5507345193613706
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.20934594380367122,
+    "p_holm": 0.3263350638796032
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -180.0,
+    "p": 0.004054085036178149,
+    "p_holm": 0.012162255108534446
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.1631675319398016,
+    "p_holm": 0.3263350638796032
+   }
+  ]
+ },
+ {
+  "label": "synthetic/shock/B_norm/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.7291264536797044,
+   "shapiro_resid_p": 2.5671806665274344e-25,
+   "levene_W": 31.460674317766788,
+   "levene_p": 1.0219460205453324e-55,
+   "n_detected_rows": 411,
+   "censored_rows_excluded": 39
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 304.2536162005786,
+  "friedman_p": 1.5325838877072156e-56,
+  "kendall_W": 0.7244133719061395,
+  "cochran_q": 203.9760956175299,
+  "cochran_p": 8.456141500007403e-36,
+  "mean_rank_by_cell": {
+   "Shannon|C3": 1.7333333333333334,
+   "Shannon|C1": 2.75,
+   "Sample|C3": 4.0,
+   "Shannon|C4": 4.466666666666667,
+   "Sample|C1": 5.883333333333334,
+   "Shannon|C5": 6.016666666666667,
+   "Sample|C4": 7.033333333333333,
+   "Sample|C5": 8.216666666666667,
+   "Permutation|C2": 9.266666666666667,
+   "Sample|C2": 9.816666666666666,
+   "Permutation|C1": 10.633333333333333,
+   "Permutation|C4": 11.683333333333334,
+   "Permutation|C5": 12.666666666666666,
+   "Permutation|C3": 12.716666666666667,
+   "Shannon|C2": 13.116666666666667
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 25.0,
+    "p": 4.944296592062291e-06,
+    "p_holm": 9.888593184124583e-06
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 30.0,
+    "p": 2.3476502077785057e-06,
+    "p_holm": 7.042950623335517e-06
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 6.5,
+    "p": 1.0521410308891113e-05,
+    "p_holm": 1.0521410308891113e-05
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 5.0,
+    "p": 0.07839375596839385,
+    "p_holm": 0.07839375596839385
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -999999999969.0,
+    "p": 4.704647153722088e-06,
+    "p_holm": 1.4073151990987791e-05
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -999999999975.5,
+    "p": 4.691050663662597e-06,
+    "p_holm": 1.4073151990987791e-05
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 238.0,
+    "p": 3.177874094726491e-06,
+    "p_holm": 9.505131780472024e-06
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 240.5,
+    "p": 3.1683772601573416e-06,
+    "p_holm": 9.505131780472024e-06
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 6.5,
+    "p": 7.028736703273952e-06,
+    "p_holm": 9.505131780472024e-06
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 26.0,
+    "p": 4.4140495986239305e-06,
+    "p_holm": 8.828099197247861e-06
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 30.0,
+    "p": 2.1989441541655967e-06,
+    "p_holm": 6.59683246249679e-06
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 4.0,
+    "p": 7.542317633738144e-05,
+    "p_holm": 7.542317633738144e-05
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 24.0,
+    "p": 3.9031878168284135e-06,
+    "p_holm": 7.806375633656827e-06
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 28.0,
+    "p": 2.2443807271300836e-06,
+    "p_holm": 6.7331421813902505e-06
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 8.0,
+    "p": 0.0004583808627519996,
+    "p_holm": 0.0004583808627519996
+   }
+  ]
+ },
+ {
+  "label": "proxy/B_norm/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 9,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.5731503733154375,
+   "shapiro_resid_p": 4.464445383123002e-25,
+   "levene_W": 10.843206130642988,
+   "levene_p": 3.7560646758453537e-13,
+   "n_detected_rows": 266,
+   "censored_rows_excluded": 4
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 196.6668721109399,
+  "friedman_p": 3.218098761265896e-38,
+  "kendall_W": 0.8194453004622495,
+  "cochran_q": 18.5,
+  "cochran_p": 0.017774898943864772,
+  "mean_rank_by_cell": {
+   "Shannon|W256s1": 1.7166666666666666,
+   "Sample|W256s1": 1.7166666666666666,
+   "Sample|W128s4": 4.416666666666667,
+   "Shannon|W128s4": 4.416666666666667,
+   "Sample|W64s8": 4.816666666666666,
+   "Shannon|W64s8": 4.816666666666666,
+   "Permutation|W256s1": 7.4,
+   "Permutation|W128s4": 7.8,
+   "Permutation|W64s8": 7.9
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "W128s4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 242.0,
+    "p": 1.8196601460056054e-06,
+    "p_holm": 5.458980438016816e-06
+   },
+   {
+    "level": "W128s4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 242.0,
+    "p": 1.8196601460056054e-06,
+    "p_holm": 5.458980438016816e-06
+   },
+   {
+    "level": "W128s4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "W256s1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 239.0,
+    "p": 3.6422755990521437e-06,
+    "p_holm": 1.0926826797156432e-05
+   },
+   {
+    "level": "W256s1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 239.0,
+    "p": 3.6422755990521437e-06,
+    "p_holm": 1.0926826797156432e-05
+   },
+   {
+    "level": "W256s1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "W64s8",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 284.0,
+    "p": 1.7300371292901245e-06,
+    "p_holm": 5.190111387870373e-06
+   },
+   {
+    "level": "W64s8",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 284.0,
+    "p": 1.7300371292901245e-06,
+    "p_holm": 5.190111387870373e-06
+   },
+   {
+    "level": "W64s8",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   }
+  ]
+ },
+ {
+  "label": "synthetic/drift_gradual/U_raw/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.9183256533270994,
+   "shapiro_resid_p": 0.0014491972079659807,
+   "levene_W": 2.129635693503649,
+   "levene_p": 0.0915367913128492,
+   "n_detected_rows": 53,
+   "censored_rows_excluded": 397
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 153.7146459340204,
+  "friedman_p": 1.2967753331324928e-25,
+  "kendall_W": 0.36598725222385814,
+  "cochran_q": 151.16398713826368,
+  "cochran_p": 4.204694432486197e-25,
+  "mean_rank_by_cell": {
+   "Sample|C1": 4.833333333333333,
+   "Shannon|C3": 5.583333333333333,
+   "Sample|C4": 5.966666666666667,
+   "Sample|C5": 6.9,
+   "Sample|C3": 7.883333333333334,
+   "Permutation|C4": 8.883333333333333,
+   "Permutation|C1": 8.883333333333333,
+   "Permutation|C2": 8.883333333333333,
+   "Sample|C2": 8.883333333333333,
+   "Permutation|C5": 8.883333333333333,
+   "Permutation|C3": 8.883333333333333,
+   "Shannon|C1": 8.883333333333333,
+   "Shannon|C2": 8.883333333333333,
+   "Shannon|C4": 8.883333333333333,
+   "Shannon|C5": 8.883333333333333
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 499999999450.5,
+    "p": 0.000316057106299292,
+    "p_holm": 0.0009481713188978759
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -499999999450.5,
+    "p": 0.000316057106299292,
+    "p_holm": 0.0009481713188978759
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.2022538131741496,
+    "p_holm": 0.2022538131741496
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.0010372803794099336,
+    "p_holm": 0.0031118411382298006
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.03283104296002666,
+    "p_holm": 0.06566208592005332
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.0019084358873341983,
+    "p_holm": 0.005725307662002595
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.0019084358873341983,
+    "p_holm": 0.005725307662002595
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.012042078873322377,
+    "p_holm": 0.03612623661996713
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.012042078873322377,
+    "p_holm": 0.03612623661996713
+   }
+  ]
+ },
+ {
+  "label": "synthetic/shock/U_raw/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.9039355818494973,
+   "shapiro_resid_p": 0.05734972396421724,
+   "levene_W": 0.42013642806520207,
+   "levene_p": 0.6649715232613856,
+   "n_detected_rows": 19,
+   "censored_rows_excluded": 431
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 71.14445688689966,
+  "friedman_p": 1.1966912620764925e-09,
+  "kendall_W": 0.16939156401642777,
+  "cochran_q": 70.23728813559322,
+  "cochran_p": 1.7481880922214478e-09,
+  "mean_rank_by_cell": {
+   "Shannon|C4": 6.633333333333334,
+   "Shannon|C1": 6.65,
+   "Shannon|C5": 7.416666666666667,
+   "Sample|C1": 8.066666666666666,
+   "Sample|C4": 8.066666666666666,
+   "Permutation|C1": 8.316666666666666,
+   "Permutation|C3": 8.316666666666666,
+   "Permutation|C2": 8.316666666666666,
+   "Sample|C3": 8.316666666666666,
+   "Sample|C2": 8.316666666666666,
+   "Permutation|C5": 8.316666666666666,
+   "Permutation|C4": 8.316666666666666,
+   "Shannon|C2": 8.316666666666666,
+   "Sample|C5": 8.316666666666666,
+   "Shannon|C3": 8.316666666666666
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.7277235466695502,
+    "p_holm": 0.7277235466695502
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.07019976757894046,
+    "p_holm": 0.21059930273682137
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.16033129917520073,
+    "p_holm": 0.32066259835040145
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.7277235466695502,
+    "p_holm": 0.7277235466695502
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.03967816220258632,
+    "p_holm": 0.11903448660775895
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.1005659457763472,
+    "p_holm": 0.2011318915526944
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 1.0,
+    "p_holm": 1.0
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.20219734918428967,
+    "p_holm": 0.606592047552869
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.20219734918428967,
+    "p_holm": 0.606592047552869
+   }
+  ]
+ },
+ {
+  "label": "proxy/U_raw/mu_sigma/per_window",
+  "n_seeds": 30,
+  "n_cells": 9,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.8928808869068,
+   "shapiro_resid_p": 1.5796532187275812e-06,
+   "levene_W": 2.0781020930913225,
+   "levene_p": 0.07600305134677414,
+   "n_detected_rows": 92,
+   "censored_rows_excluded": 178
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 146.53642653642646,
+  "friedman_p": 1.0339873405869e-27,
+  "kendall_W": 0.6105684439017769,
+  "cochran_q": 148.52589641434264,
+  "cochran_p": 3.9795667764989586e-28,
+  "mean_rank_by_cell": {
+   "Sample|W128s4": 2.1666666666666665,
+   "Sample|W256s1": 2.7333333333333334,
+   "Shannon|W256s1": 3.6,
+   "Shannon|W128s4": 4.566666666666666,
+   "Sample|W64s8": 6.25,
+   "Shannon|W64s8": 6.283333333333333,
+   "Permutation|W256s1": 6.333333333333333,
+   "Permutation|W64s8": 6.533333333333333,
+   "Permutation|W128s4": 6.533333333333333
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "W128s4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 999999999565.0,
+    "p": 2.8595454422669837e-06,
+    "p_holm": 8.578636326800952e-06
+   },
+   {
+    "level": "W128s4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 499999998146.0,
+    "p": 0.000316057106299292,
+    "p_holm": 0.0005017637422483544
+   },
+   {
+    "level": "W128s4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -3134.0,
+    "p": 0.0002508818711241772,
+    "p_holm": 0.0005017637422483544
+   },
+   {
+    "level": "W256s1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 999999999147.0,
+    "p": 6.5649261135025385e-06,
+    "p_holm": 1.9694778340507617e-05
+   },
+   {
+    "level": "W256s1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 999999998616.0,
+    "p": 3.676981752081121e-05,
+    "p_holm": 7.353963504162243e-05
+   },
+   {
+    "level": "W256s1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -167.0,
+    "p": 0.1845754382998378,
+    "p_holm": 0.1845754382998378
+   },
+   {
+    "level": "W64s8",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.4993370937056525,
+    "p_holm": 1.0
+   },
+   {
+    "level": "W64s8",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.4993370937056525,
+    "p_holm": 1.0
+   },
+   {
+    "level": "W64s8",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 0.0,
+    "p": 0.7600750831012725,
+    "p_holm": 1.0
+   }
+  ]
+ },
+ {
+  "label": "synthetic/drift_gradual/legacy_published",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.827956892732615,
+   "shapiro_resid_p": 1.6409563064179916e-21,
+   "levene_W": 13.407599824964995,
+   "levene_p": 1.9110218740697275e-26,
+   "n_detected_rows": 445,
+   "censored_rows_excluded": 5
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 167.42693478131162,
+  "friedman_p": 2.264757947867524e-28,
+  "kendall_W": 0.3986355590031229,
+  "cochran_q": 22.647058823529413,
+  "cochran_p": 0.06626060806544504,
+  "mean_rank_by_cell": {
+   "Shannon|C2": 3.5833333333333335,
+   "Shannon|C3": 3.783333333333333,
+   "Shannon|C1": 4.316666666666666,
+   "Sample|C2": 4.366666666666666,
+   "Sample|C1": 7.0,
+   "Sample|C3": 7.683333333333334,
+   "Permutation|C2": 7.833333333333333,
+   "Shannon|C4": 8.5,
+   "Permutation|C1": 8.916666666666666,
+   "Shannon|C5": 9.9,
+   "Sample|C4": 10.066666666666666,
+   "Permutation|C4": 10.35,
+   "Permutation|C3": 10.783333333333333,
+   "Sample|C5": 11.433333333333334,
+   "Permutation|C5": 11.483333333333333
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 44.0,
+    "p": 0.10416580959391925,
+    "p_holm": 0.10416580959391925
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 128.5,
+    "p": 2.2622177348924877e-05,
+    "p_holm": 6.786653204677463e-05
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 36.0,
+    "p": 0.0006621726849672013,
+    "p_holm": 0.0013243453699344025
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 94.5,
+    "p": 5.0766471163761653e-05,
+    "p_holm": 0.00015229941349128497
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 103.0,
+    "p": 0.00011002035043627217,
+    "p_holm": 0.00022004070087254434
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 11.0,
+    "p": 0.36543635941926456,
+    "p_holm": 0.36543635941926456
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": 93.5,
+    "p": 0.013964450363701697,
+    "p_holm": 0.013964450363701697
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 195.0,
+    "p": 1.0244548320770264e-07,
+    "p_holm": 3.073364496231079e-07
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 44.5,
+    "p": 0.0007150040997921035,
+    "p_holm": 0.001430008199584207
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -38.0,
+    "p": 0.4344393623923336,
+    "p_holm": 0.4344393623923336
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 118.0,
+    "p": 0.013567038020421243,
+    "p_holm": 0.03733678651958461
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 168.0,
+    "p": 0.012445595506528203,
+    "p_holm": 0.03733678651958461
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -152.0,
+    "p": 0.11797786286217396,
+    "p_holm": 0.11797786286217396
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 156.0,
+    "p": 0.018000432230714656,
+    "p_holm": 0.03600086446142931
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 240.0,
+    "p": 0.01173699235832961,
+    "p_holm": 0.03521097707498883
+   }
+  ]
+ },
+ {
+  "label": "synthetic/shock/legacy_published",
+  "n_seeds": 30,
+  "n_cells": 15,
+  "anova_assumptions": {
+   "shapiro_resid_W": 0.6049111491838146,
+   "shapiro_resid_p": 1.600870828755602e-30,
+   "levene_W": 5.592636493184429,
+   "levene_p": 5.771988858031849e-10,
+   "n_detected_rows": 442,
+   "censored_rows_excluded": 8
+  },
+  "anova_used": false,
+  "anova_note": "ANOVA NOT used: residual normality and/or homoscedasticity rejected, or censoring present",
+  "friedman_chi2": 290.6737974305348,
+  "friedman_p": 1.0377368160052071e-53,
+  "kendall_W": 0.6920804700727019,
+  "cochran_q": 31.169811320754718,
+  "cochran_p": 0.005247867513789165,
+  "mean_rank_by_cell": {
+   "Shannon|C2": 1.8333333333333333,
+   "Permutation|C2": 3.466666666666667,
+   "Shannon|C4": 4.05,
+   "Shannon|C5": 4.466666666666667,
+   "Permutation|C1": 4.8,
+   "Shannon|C1": 6.516666666666667,
+   "Shannon|C3": 7.433333333333334,
+   "Permutation|C4": 7.95,
+   "Permutation|C3": 8.933333333333334,
+   "Permutation|C5": 9.8,
+   "Sample|C2": 10.633333333333333,
+   "Sample|C1": 11.916666666666666,
+   "Sample|C5": 12.683333333333334,
+   "Sample|C3": 12.75,
+   "Sample|C4": 12.766666666666667
+  },
+  "posthoc_wilcoxon_holm": [
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -160.0,
+    "p": 4.620462435458986e-05,
+    "p_holm": 9.240924870917972e-05
+   },
+   {
+    "level": "C1",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": -8.0,
+    "p": 0.9180821360929782,
+    "p_holm": 0.9180821360929782
+   },
+   {
+    "level": "C1",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 153.0,
+    "p": 1.7333066441991056e-06,
+    "p_holm": 5.1999199325973165e-06
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -143.0,
+    "p": 1.7278603148724103e-06,
+    "p_holm": 5.1835809446172305e-06
+   },
+   {
+    "level": "C2",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 4.0,
+    "p": 0.004633853601386123,
+    "p_holm": 0.004633853601386123
+   },
+   {
+    "level": "C2",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 148.0,
+    "p": 1.7311263949197288e-06,
+    "p_holm": 5.1835809446172305e-06
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -88.5,
+    "p": 0.1618966507205637,
+    "p_holm": 0.24826892465353012
+   },
+   {
+    "level": "C3",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 8.0,
+    "p": 0.12413446232676506,
+    "p_holm": 0.24826892465353012
+   },
+   {
+    "level": "C3",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 97.5,
+    "p": 1.7278603148724103e-06,
+    "p_holm": 5.1835809446172305e-06
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -134.0,
+    "p": 0.0008598413092976997,
+    "p_holm": 0.0008598413092976997
+   },
+   {
+    "level": "C4",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 80.0,
+    "p": 3.213638843389345e-05,
+    "p_holm": 6.42727768677869e-05
+   },
+   {
+    "level": "C4",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 174.0,
+    "p": 1.6720605779929798e-06,
+    "p_holm": 5.016181733978939e-06
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Sample",
+    "median_diff_delay(a-b)": -140.0,
+    "p": 0.1588114300599175,
+    "p_holm": 0.1588114300599175
+   },
+   {
+    "level": "C5",
+    "a": "Permutation",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 88.0,
+    "p": 3.635809739737374e-06,
+    "p_holm": 7.271619479474748e-06
+   },
+   {
+    "level": "C5",
+    "a": "Sample",
+    "b": "Shannon",
+    "median_diff_delay(a-b)": 160.0,
+    "p": 1.49906413609225e-06,
+    "p_holm": 4.49719240827675e-06
+   }
+  ]
+ }
+]

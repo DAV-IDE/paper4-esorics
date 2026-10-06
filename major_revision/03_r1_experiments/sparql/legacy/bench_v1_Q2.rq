@@ -1,0 +1,9 @@
+# VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9)
+PREFIX psi: <http://example.org/psi#>
+SELECT ?phase ?w ?r WHERE {
+  ?w a psi:Window ;
+     psi:belongsToPhase ?phase ;
+     psi:hasRiskScore ?rs .
+  ?rs psi:riskValue ?r .
+}
+ORDER BY ?phase ?r

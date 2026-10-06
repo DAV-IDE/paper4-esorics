@@ -1,0 +1,19 @@
+{
+  "estimator": "Shannon",
+  "W": 8,
+  "s": 4,
+  "k": 1.5,
+  "mu_stable": 2.4034701921412713,
+  "sigma_stable": 0.26147800594196674,
+  "tau": 2.7956872010542213,
+  "AUC_ROC": 0.6103479853479853,
+  "AUC_PR": 0.34557091653865846,
+  "FPR_post_warmup": 0.15384615384615385,
+  "detected": true,
+  "detection_delay_s": 300.0,
+  "n_fires_post_warmup": 12,
+  "n_attack_seconds": 1260,
+  "n_warmup_seconds": 1200,
+  "granularity": "native minute",
+  "warmup_s": 1200
+}

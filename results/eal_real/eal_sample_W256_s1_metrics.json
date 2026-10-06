@@ -1,0 +1,18 @@
+{
+  "estimator": "Sample",
+  "W": 256,
+  "s": 1,
+  "k": 3.0,
+  "mu_stable": NaN,
+  "sigma_stable": NaN,
+  "tau": Infinity,
+  "AUC_ROC": NaN,
+  "AUC_PR": NaN,
+  "FPR_post_warmup": NaN,
+  "detected": false,
+  "detection_delay_s": NaN,
+  "n_fires_post_warmup": 0,
+  "n_attack_seconds": 1260,
+  "n_warmup_seconds": 600,
+  "granularity": "native minute"
+}

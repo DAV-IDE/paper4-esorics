@@ -1,0 +1,102 @@
+{
+ "synthetic_seed42": {
+  "rows": 45,
+  "mismatches": []
+ },
+ "proxy_seed20260606": {
+  "cells": 9,
+  "mismatches": [
+   {
+    "cell": "Shannon/64/8",
+    "key": "AUC_ROC",
+    "pub": 0.45163088372403487,
+    "rep": 0.45163420047439373
+   },
+   {
+    "cell": "Shannon/64/8",
+    "key": "AUC_PR",
+    "pub": 0.266529512993764,
+    "rep": 0.266500277500231
+   },
+   {
+    "cell": "Shannon/256/1",
+    "key": "AUC_PR",
+    "pub": 0.30295766515870876,
+    "rep": 0.30295946188162887
+   },
+   {
+    "cell": "Permutation/64/8",
+    "key": "AUC_ROC",
+    "pub": 0.49316191020048694,
+    "rep": 0.4936176524294898
+   },
+   {
+    "cell": "Permutation/64/8",
+    "key": "AUC_PR",
+    "pub": 0.2760060785415579,
+    "rep": 0.27640252315446445
+   },
+   {
+    "cell": "Permutation/128/4",
+    "key": "AUC_ROC",
+    "pub": 0.44346071701768375,
+    "rep": 0.44347750806637576
+   },
+   {
+    "cell": "Permutation/128/4",
+    "key": "AUC_PR",
+    "pub": 0.24916263830160323,
+    "rep": 0.2491499165484344
+   },
+   {
+    "cell": "Permutation/256/1",
+    "key": "AUC_ROC",
+    "pub": 0.4185848042926834,
+    "rep": 0.4185733511391003
+   },
+   {
+    "cell": "Permutation/256/1",
+    "key": "AUC_PR",
+    "pub": 0.23959990061985192,
+    "rep": 0.23937487665101237
+   }
+  ]
+ },
+ "real_minute_pr3": {
+  "cells": 9,
+  "mismatches": [
+   {
+    "cell": "Permutation/8/4",
+    "key": "AUC_ROC",
+    "pub": 0.33026113671274965,
+    "rep": 0.36251920122887865
+   },
+   {
+    "cell": "Permutation/16/2",
+    "key": "AUC_ROC",
+    "pub": 0.7096908939014203,
+    "rep": 0.7038429406850459
+   },
+   {
+    "cell": "Permutation/16/2",
+    "key": "AUC_PR",
+    "pub": 0.5606894488473435,
+    "rep": 0.5117211948790896
+   },
+   {
+    "cell": "Permutation/32/1",
+    "key": "AUC_ROC",
+    "pub": 0.9898097826086957,
+    "rep": 0.9864130434782609
+   },
+   {
+    "cell": "Permutation/32/1",
+    "key": "AUC_PR",
+    "pub": 0.9553571428571428,
+    "rep": 0.9404761904761905
+   }
+  ],
+  "n_minutes": 93,
+  "attack_minutes": 21
+ }
+}

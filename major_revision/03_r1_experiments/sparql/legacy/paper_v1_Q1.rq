@@ -1,0 +1,10 @@
+# VERBATIM from submitted manuscript (bundle 12/09/2026), Sec. 4.4 listing 1
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?dh ?tau WHERE {
+  ?w  a psi:Window ;
+      psi:hasEntropySignal ?es .
+  ?es psi:deltaH ?dh ;
+      psi:tauS  ?tau .
+  FILTER (ABS(?dh) > ?tau)
+}
+ORDER BY DESC(?dh)

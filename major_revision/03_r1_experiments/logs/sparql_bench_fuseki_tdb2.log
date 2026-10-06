@@ -1,0 +1,446 @@
+[fuseki] n=1000 canonical canonical_v1 Q1 full median=14.51ms bindings=9
+[fuseki] n=1000 canonical canonical_v1 Q2 full median=13.21ms bindings=41
+[fuseki] n=1000 canonical canonical_v1 Q2 point median=10.57ms bindings=1
+[fuseki] n=1000 canonical canonical_v1 Q3 full median=8.86ms bindings=14
+[fuseki] n=1000 canonical canonical_v1 Q3 point median=4.78ms bindings=2
+[fuseki] n=1000 canonical paper_v1 Q1 full median=7.38ms bindings=9
+[fuseki] n=1000 canonical paper_v1 Q2 full median=4.73ms bindings=41
+[fuseki] n=1000 canonical paper_v1 Q2 point median=4.72ms bindings=1
+[fuseki] n=1000 canonical paper_v1 Q3 full median=6.83ms bindings=82
+[fuseki] n=1000 canonical paper_v1 Q3 point median=3.66ms bindings=2
+[fuseki] n=1000 legacy bench_v1 Q1 full median=11.05ms bindings=34
+[fuseki] n=1000 legacy bench_v1 Q2 full median=10.71ms bindings=100
+[fuseki] n=1000 legacy bench_v1 Q3 full median=5.34ms bindings=13
+[fuseki] n=5000 canonical canonical_v1 Q1 full median=12.34ms bindings=23
+[fuseki] n=5000 canonical canonical_v1 Q2 full median=30.56ms bindings=208
+[fuseki] n=5000 canonical canonical_v1 Q2 point median=12.17ms bindings=1
+[fuseki] n=5000 canonical canonical_v1 Q3 full median=7.61ms bindings=38
+[fuseki] n=5000 canonical canonical_v1 Q3 point median=5.29ms bindings=2
+[fuseki] n=5000 canonical paper_v1 Q1 full median=6.16ms bindings=23
+[fuseki] n=5000 canonical paper_v1 Q2 full median=10.48ms bindings=208
+[fuseki] n=5000 canonical paper_v1 Q2 point median=4.24ms bindings=1
+[fuseki] n=5000 canonical paper_v1 Q3 full median=20.54ms bindings=416
+[fuseki] n=5000 canonical paper_v1 Q3 point median=3.17ms bindings=2
+[fuseki] n=5000 legacy bench_v1 Q1 full median=13.83ms bindings=158
+[fuseki] n=5000 legacy bench_v1 Q2 full median=30.16ms bindings=500
+[fuseki] n=5000 legacy bench_v1 Q3 full median=7.32ms bindings=53
+[fuseki] n=10000 canonical canonical_v1 Q1 full median=15.24ms bindings=45
+[fuseki] n=10000 canonical canonical_v1 Q2 full median=48.00ms bindings=416
+[fuseki] n=10000 canonical canonical_v1 Q2 point median=16.23ms bindings=1
+[fuseki] n=10000 canonical canonical_v1 Q3 full median=11.72ms bindings=74
+[fuseki] n=10000 canonical canonical_v1 Q3 point median=5.56ms bindings=2
+[fuseki] n=10000 canonical paper_v1 Q1 full median=9.15ms bindings=45
+[fuseki] n=10000 canonical paper_v1 Q2 full median=14.22ms bindings=416
+[fuseki] n=10000 canonical paper_v1 Q2 point median=4.24ms bindings=1
+[fuseki] n=10000 canonical paper_v1 Q3 full median=34.92ms bindings=832
+[fuseki] n=10000 canonical paper_v1 Q3 point median=4.19ms bindings=2
+[fuseki] n=10000 legacy bench_v1 Q1 full median=23.07ms bindings=321
+[fuseki] n=10000 legacy bench_v1 Q2 full median=34.38ms bindings=1000
+[fuseki] n=10000 legacy bench_v1 Q3 full median=7.97ms bindings=110
+[fuseki] n=25000 canonical canonical_v1 Q1 full median=23.70ms bindings=99
+[fuseki] n=25000 canonical canonical_v1 Q2 full median=68.75ms bindings=1041
+[fuseki] n=25000 canonical canonical_v1 Q2 point median=28.48ms bindings=1
+[fuseki] n=25000 canonical canonical_v1 Q3 full median=18.21ms bindings=212
+[fuseki] n=25000 canonical canonical_v1 Q3 point median=6.65ms bindings=2
+[fuseki] n=25000 canonical paper_v1 Q1 full median=11.44ms bindings=99
+[fuseki] n=25000 canonical paper_v1 Q2 full median=31.92ms bindings=1041
+[fuseki] n=25000 canonical paper_v1 Q2 point median=3.89ms bindings=1
+[fuseki] n=25000 canonical paper_v1 Q3 full median=69.71ms bindings=2082
+[fuseki] n=25000 canonical paper_v1 Q3 point median=6.23ms bindings=2
+[fuseki] n=25000 legacy bench_v1 Q1 full median=38.46ms bindings=773
+[fuseki] n=25000 legacy bench_v1 Q2 full median=81.38ms bindings=2500
+[fuseki] n=25000 legacy bench_v1 Q3 full median=12.08ms bindings=259
+[fuseki] n=50000 canonical canonical_v1 Q1 full median=49.59ms bindings=189
+[fuseki] n=50000 canonical canonical_v1 Q2 full median=124.77ms bindings=2083
+[fuseki] n=50000 canonical canonical_v1 Q2 point median=48.14ms bindings=1
+[fuseki] n=50000 canonical canonical_v1 Q3 full median=29.68ms bindings=446
+[fuseki] n=50000 canonical canonical_v1 Q3 point median=7.42ms bindings=2
+[fuseki] n=50000 canonical paper_v1 Q1 full median=17.80ms bindings=189
+[fuseki] n=50000 canonical paper_v1 Q2 full median=56.40ms bindings=2083
+[fuseki] n=50000 canonical paper_v1 Q2 point median=4.26ms bindings=1
+[fuseki] n=50000 canonical paper_v1 Q3 full median=137.58ms bindings=4166
+[fuseki] n=50000 canonical paper_v1 Q3 point median=4.77ms bindings=2
+[fuseki] n=50000 legacy bench_v1 Q1 full median=61.64ms bindings=1543
+[fuseki] n=50000 legacy bench_v1 Q2 full median=154.86ms bindings=5000
+[fuseki] n=50000 legacy bench_v1 Q3 full median=18.76ms bindings=505
+[
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.2942350905676498,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.5578546938741742,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "mode": "point",
+  "loglog_slope": 0.38674262808647064,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.31761109853770514,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "mode": "point",
+  "loglog_slope": 0.11326489879675979,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.22659015189188442,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.6309789601368256,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "mode": "point",
+  "loglog_slope": -0.034125964799925246,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.7596110170478441,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "mode": "point",
+  "loglog_slope": 0.11913851144271632,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.4526984444533996,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.6682468592138465,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.30866940144417826,
+  "n_sizes": 5
+ }
+]
+[
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 9,
+  "returned": 9,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 41,
+  "returned": 41
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 14,
+  "returned": 14,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 9,
+  "returned": 9,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 41,
+  "returned": 41
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 14,
+  "returned": 82,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 23,
+  "returned": 23,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 208,
+  "returned": 208
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 38,
+  "returned": 38,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 23,
+  "returned": 23,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 208,
+  "returned": 208
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 38,
+  "returned": 416,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 45,
+  "returned": 45,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 416,
+  "returned": 416
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 74,
+  "returned": 74,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 45,
+  "returned": 45,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 416,
+  "returned": 416
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 74,
+  "returned": 832,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 99,
+  "returned": 99,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 1041,
+  "returned": 1041
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 212,
+  "returned": 212,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 99,
+  "returned": 99,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 1041,
+  "returned": 1041
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 212,
+  "returned": 2082,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 189,
+  "returned": 189,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 2083,
+  "returned": 2083
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 446,
+  "returned": 446,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 189,
+  "returned": 189,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 2083,
+  "returned": 2083
+ },
+ {
+  "engine": "fuseki_tdb2",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 446,
+  "returned": 4166,
+  "only_gate_fired": "not checkable (?w not projected)"
+ }
+]

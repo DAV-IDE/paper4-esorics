@@ -1,0 +1,16 @@
+# Q1 -- Entropy-spike triage (canonical v1.0, Paper 4 Major Revision R1)
+# Single source of truth: used verbatim by major_revision/mr/sparql_bench_fuseki.py
+# and to be reproduced verbatim in the manuscript (Sec. 4.4).
+# Returns every Window whose entropy deviation exceeds its parameter-aware
+# threshold, two-sided (|DeltaH_t| > tau_s), most extreme first.
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?config ?dh ?tau WHERE {
+  ?w  a psi:Window ;
+      psi:configuration ?config ;
+      psi:hasEntropySignal ?es .
+  ?es a psi:EntropySignal ;
+      psi:deltaH ?dh ;
+      psi:tauS ?tau .
+  FILTER (ABS(?dh) > ?tau)
+}
+ORDER BY DESC(ABS(?dh)) ?w

@@ -1,0 +1,4 @@
+bd57d594a7eb33689f9a1437efe0ddbad4a629e8449622fc60a4c7564485faaf  ./mr/derive_ci_synthetic.py
+503a972d63e0d4254309c85b090dd6e58cb68e01cea5cc6075f329efc2ba2d11  ./results/04_stats/synthetic_cell_median_ci.csv
+a7fa757812559776801e38646a3283c9a90770c0ce5bfac88c18d060b0359673  ./results/04_stats/synthetic_cell_median_ci.manifest.json
+0201730f5dff625753519492f033110dd95a6f7a5110a32bc15af50859f11908  ./logs_v2/derive_ci_synthetic_2026-10-06.log

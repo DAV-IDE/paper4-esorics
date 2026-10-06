@@ -1,0 +1,19 @@
+{
+  "estimator": "Permutation",
+  "W": 32,
+  "s": 1,
+  "k": 1.5,
+  "mu_stable": NaN,
+  "sigma_stable": NaN,
+  "tau": Infinity,
+  "AUC_ROC": 0.9898097826086957,
+  "AUC_PR": 0.9553571428571428,
+  "FPR_post_warmup": 0.0,
+  "detected": false,
+  "detection_delay_s": NaN,
+  "n_fires_post_warmup": 0,
+  "n_attack_seconds": 1260,
+  "n_warmup_seconds": 1200,
+  "granularity": "native minute",
+  "warmup_s": 1200
+}

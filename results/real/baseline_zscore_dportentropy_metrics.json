@@ -1,0 +1,16 @@
+{
+  "feature": "dport_entropy",
+  "AUC_ROC": 0.5268817204301075,
+  "AUC_PR": 0.2726818380270226,
+  "FPR_at_k3": 0.06451612903225806,
+  "detected": true,
+  "detection_delay_s": 600.0,
+  "n_fires_post_warmup": 5,
+  "n_total_seconds": 5580,
+  "n_post_warmup_seconds": 4980,
+  "n_attack_seconds": 1260,
+  "n_warmup_seconds": 600,
+  "k": 3.0,
+  "window_seconds": 300,
+  "granularity": "native minute (CIC-IDS2017 TrafficLabelling rounds to minute)"
+}

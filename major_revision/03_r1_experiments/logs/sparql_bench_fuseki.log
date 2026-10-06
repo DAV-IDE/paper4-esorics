@@ -1,0 +1,554 @@
+[fuseki] n=1000 canonical canonical_v1 Q1 full median=7.66ms bindings=9
+[fuseki] n=1000 canonical canonical_v1 Q2 full median=8.58ms bindings=41
+[fuseki] n=1000 canonical canonical_v1 Q2 point median=9.44ms bindings=1
+[fuseki] n=1000 canonical canonical_v1 Q3 full median=5.27ms bindings=14
+[fuseki] n=1000 canonical canonical_v1 Q3 point median=4.91ms bindings=2
+[fuseki] n=1000 canonical paper_v1 Q1 full median=4.02ms bindings=9
+[fuseki] n=1000 canonical paper_v1 Q2 full median=4.71ms bindings=41
+[fuseki] n=1000 canonical paper_v1 Q2 point median=3.30ms bindings=1
+[fuseki] n=1000 canonical paper_v1 Q3 full median=6.51ms bindings=82
+[fuseki] n=1000 canonical paper_v1 Q3 point median=3.42ms bindings=2
+[rdflib] n=1000 canonical canonical_v1 Q1 censored=False warmup=0.12s
+[rdflib] n=1000 canonical canonical_v1 Q2 censored=False warmup=0.55s
+[rdflib] n=1000 canonical canonical_v1 Q3 censored=False warmup=0.02s
+[rdflib] n=1000 canonical paper_v1 Q1 censored=False warmup=0.01s
+[rdflib] n=1000 canonical paper_v1 Q2 censored=False warmup=0.52s
+[rdflib] n=1000 canonical paper_v1 Q3 censored=False warmup=0.02s
+[fuseki] n=1000 legacy bench_v1 Q1 full median=8.93ms bindings=34
+[fuseki] n=1000 legacy bench_v1 Q2 full median=7.76ms bindings=100
+[fuseki] n=1000 legacy bench_v1 Q3 full median=5.37ms bindings=13
+[rdflib] n=1000 legacy bench_v1 Q1 censored=False warmup=0.01s
+[rdflib] n=1000 legacy bench_v1 Q2 censored=False warmup=0.01s
+[rdflib] n=1000 legacy bench_v1 Q3 censored=False warmup=0.00s
+[fuseki] n=5000 canonical canonical_v1 Q1 full median=12.19ms bindings=23
+[fuseki] n=5000 canonical canonical_v1 Q2 full median=29.43ms bindings=208
+[fuseki] n=5000 canonical canonical_v1 Q2 point median=9.88ms bindings=1
+[fuseki] n=5000 canonical canonical_v1 Q3 full median=7.88ms bindings=38
+[fuseki] n=5000 canonical canonical_v1 Q3 point median=5.36ms bindings=2
+[fuseki] n=5000 canonical paper_v1 Q1 full median=5.38ms bindings=23
+[fuseki] n=5000 canonical paper_v1 Q2 full median=7.85ms bindings=208
+[fuseki] n=5000 canonical paper_v1 Q2 point median=3.21ms bindings=1
+[fuseki] n=5000 canonical paper_v1 Q3 full median=14.73ms bindings=416
+[fuseki] n=5000 canonical paper_v1 Q3 point median=3.14ms bindings=2
+[rdflib] n=5000 canonical canonical_v1 Q1 censored=False warmup=0.35s
+[rdflib] n=5000 canonical canonical_v1 Q2 censored=True warmup=67.48s
+[rdflib] n=5000 canonical canonical_v1 Q3 censored=False warmup=0.11s
+[rdflib] n=5000 canonical paper_v1 Q1 censored=False warmup=0.02s
+[rdflib] n=5000 canonical paper_v1 Q2 censored=True warmup=67.75s
+[rdflib] n=5000 canonical paper_v1 Q3 censored=False warmup=0.06s
+[fuseki] n=5000 legacy bench_v1 Q1 full median=13.29ms bindings=158
+[fuseki] n=5000 legacy bench_v1 Q2 full median=15.66ms bindings=500
+[fuseki] n=5000 legacy bench_v1 Q3 full median=8.42ms bindings=53
+[rdflib] n=5000 legacy bench_v1 Q1 censored=False warmup=0.03s
+[rdflib] n=5000 legacy bench_v1 Q2 censored=False warmup=0.04s
+[rdflib] n=5000 legacy bench_v1 Q3 censored=False warmup=0.01s
+[fuseki] n=10000 canonical canonical_v1 Q1 full median=18.26ms bindings=45
+[fuseki] n=10000 canonical canonical_v1 Q2 full median=32.94ms bindings=416
+[fuseki] n=10000 canonical canonical_v1 Q2 point median=12.17ms bindings=1
+[fuseki] n=10000 canonical canonical_v1 Q3 full median=9.61ms bindings=74
+[fuseki] n=10000 canonical canonical_v1 Q3 point median=7.51ms bindings=2
+[fuseki] n=10000 canonical paper_v1 Q1 full median=8.82ms bindings=45
+[fuseki] n=10000 canonical paper_v1 Q2 full median=13.54ms bindings=416
+[fuseki] n=10000 canonical paper_v1 Q2 point median=4.62ms bindings=1
+[fuseki] n=10000 canonical paper_v1 Q3 full median=27.71ms bindings=832
+[fuseki] n=10000 canonical paper_v1 Q3 point median=3.31ms bindings=2
+[rdflib] n=10000 canonical canonical_v1 Q1 censored=False warmup=1.31s
+[rdflib] n=10000 canonical canonical_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=10000 canonical canonical_v1 Q3 censored=False warmup=0.38s
+[rdflib] n=10000 canonical paper_v1 Q1 censored=False warmup=0.04s
+[rdflib] n=10000 canonical paper_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=10000 canonical paper_v1 Q3 censored=False warmup=0.10s
+[fuseki] n=10000 legacy bench_v1 Q1 full median=15.77ms bindings=321
+[fuseki] n=10000 legacy bench_v1 Q2 full median=24.84ms bindings=1000
+[fuseki] n=10000 legacy bench_v1 Q3 full median=9.86ms bindings=110
+[rdflib] n=10000 legacy bench_v1 Q1 censored=False warmup=0.06s
+[rdflib] n=10000 legacy bench_v1 Q2 censored=False warmup=0.10s
+[rdflib] n=10000 legacy bench_v1 Q3 censored=False warmup=0.01s
+[fuseki] n=25000 canonical canonical_v1 Q1 full median=17.40ms bindings=99
+[fuseki] n=25000 canonical canonical_v1 Q2 full median=58.60ms bindings=1041
+[fuseki] n=25000 canonical canonical_v1 Q2 point median=18.58ms bindings=1
+[fuseki] n=25000 canonical canonical_v1 Q3 full median=16.82ms bindings=212
+[fuseki] n=25000 canonical canonical_v1 Q3 point median=7.16ms bindings=2
+[fuseki] n=25000 canonical paper_v1 Q1 full median=9.56ms bindings=99
+[fuseki] n=25000 canonical paper_v1 Q2 full median=27.94ms bindings=1041
+[fuseki] n=25000 canonical paper_v1 Q2 point median=3.47ms bindings=1
+[fuseki] n=25000 canonical paper_v1 Q3 full median=64.49ms bindings=2082
+[fuseki] n=25000 canonical paper_v1 Q3 point median=3.59ms bindings=2
+[rdflib] n=25000 canonical canonical_v1 Q1 censored=False warmup=8.21s
+[rdflib] n=25000 canonical canonical_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=25000 canonical canonical_v1 Q3 censored=False warmup=2.53s
+[rdflib] n=25000 canonical paper_v1 Q1 censored=False warmup=0.09s
+[rdflib] n=25000 canonical paper_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=25000 canonical paper_v1 Q3 censored=False warmup=0.29s
+[fuseki] n=25000 legacy bench_v1 Q1 full median=24.96ms bindings=773
+[fuseki] n=25000 legacy bench_v1 Q2 full median=65.13ms bindings=2500
+[fuseki] n=25000 legacy bench_v1 Q3 full median=13.59ms bindings=259
+[rdflib] n=25000 legacy bench_v1 Q1 censored=False warmup=0.14s
+[rdflib] n=25000 legacy bench_v1 Q2 censored=False warmup=0.18s
+[rdflib] n=25000 legacy bench_v1 Q3 censored=False warmup=0.03s
+[fuseki] n=50000 canonical canonical_v1 Q1 full median=22.15ms bindings=189
+[fuseki] n=50000 canonical canonical_v1 Q2 full median=110.52ms bindings=2083
+[fuseki] n=50000 canonical canonical_v1 Q2 point median=33.20ms bindings=1
+[fuseki] n=50000 canonical canonical_v1 Q3 full median=26.40ms bindings=446
+[fuseki] n=50000 canonical canonical_v1 Q3 point median=7.04ms bindings=2
+[fuseki] n=50000 canonical paper_v1 Q1 full median=14.06ms bindings=189
+[fuseki] n=50000 canonical paper_v1 Q2 full median=50.70ms bindings=2083
+[fuseki] n=50000 canonical paper_v1 Q2 point median=4.28ms bindings=1
+[fuseki] n=50000 canonical paper_v1 Q3 full median=131.11ms bindings=4166
+[fuseki] n=50000 canonical paper_v1 Q3 point median=4.19ms bindings=2
+[rdflib] n=50000 canonical canonical_v1 Q1 censored=True warmup=32.83s
+[rdflib] n=50000 canonical canonical_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=50000 canonical canonical_v1 Q3 censored=False warmup=10.37s
+[rdflib] n=50000 canonical paper_v1 Q1 censored=False warmup=0.18s
+[rdflib] n=50000 canonical paper_v1 Q2 SKIPPED (censored earlier)
+[rdflib] n=50000 canonical paper_v1 Q3 censored=False warmup=0.64s
+[fuseki] n=50000 legacy bench_v1 Q1 full median=42.20ms bindings=1543
+[fuseki] n=50000 legacy bench_v1 Q2 full median=122.06ms bindings=5000
+[fuseki] n=50000 legacy bench_v1 Q3 full median=18.44ms bindings=505
+[rdflib] n=50000 legacy bench_v1 Q1 censored=False warmup=0.29s
+[rdflib] n=50000 legacy bench_v1 Q2 censored=False warmup=0.42s
+[rdflib] n=50000 legacy bench_v1 Q3 censored=False warmup=0.05s
+[
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.2665538742583029,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.620357361421301,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "mode": "point",
+  "loglog_slope": 0.30856081891773474,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.40783431949056803,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "mode": "point",
+  "loglog_slope": 0.10722948902888402,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.3172088509142177,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.6159112736130891,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "mode": "point",
+  "loglog_slope": 0.05915265229243714,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.7732002627293552,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "mode": "point",
+  "loglog_slope": 0.04864538010252305,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.3840620619048949,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.7172091430825138,
+  "n_sizes": 5
+ },
+ {
+  "engine": "fuseki",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.3100930980204987,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 1.7967052359040279,
+  "n_sizes": 4
+ },
+ {
+  "engine": "rdflib",
+  "graph": "canonical",
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 1.6202093528327928,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.7315157110557469,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "canonical",
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.8858423119304255,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q1",
+  "mode": "full",
+  "loglog_slope": 0.8686848513201222,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q2",
+  "mode": "full",
+  "loglog_slope": 0.9419776176955671,
+  "n_sizes": 5
+ },
+ {
+  "engine": "rdflib",
+  "graph": "legacy",
+  "query_set": "bench_v1",
+  "query": "Q3",
+  "mode": "full",
+  "loglog_slope": 0.6657835044926788,
+  "n_sizes": 5
+ }
+]
+[
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 9,
+  "returned": 9,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 41,
+  "returned": 41
+ },
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 14,
+  "returned": 14,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 9,
+  "returned": 9,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 41,
+  "returned": 41
+ },
+ {
+  "engine": "fuseki",
+  "target": 1000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 14,
+  "returned": 82,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 23,
+  "returned": 23,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 208,
+  "returned": 208
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 38,
+  "returned": 38,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 23,
+  "returned": 23,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 208,
+  "returned": 208
+ },
+ {
+  "engine": "fuseki",
+  "target": 5000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 38,
+  "returned": 416,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 45,
+  "returned": 45,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 416,
+  "returned": 416
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 74,
+  "returned": 74,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 45,
+  "returned": 45,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 416,
+  "returned": 416
+ },
+ {
+  "engine": "fuseki",
+  "target": 10000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 74,
+  "returned": 832,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 99,
+  "returned": 99,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 1041,
+  "returned": 1041
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 212,
+  "returned": 212,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 99,
+  "returned": 99,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 1041,
+  "returned": 1041
+ },
+ {
+  "engine": "fuseki",
+  "target": 25000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 212,
+  "returned": 2082,
+  "only_gate_fired": "not checkable (?w not projected)"
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q1",
+  "expected": 189,
+  "returned": 189,
+  "sorted_by_abs_desc": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q2",
+  "expected": 2083,
+  "returned": 2083
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "canonical_v1",
+  "query": "Q3",
+  "expected": 446,
+  "returned": 446,
+  "only_gate_fired": true
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q1",
+  "expected": 189,
+  "returned": 189,
+  "sorted_by_abs_desc": false
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q2",
+  "expected": 2083,
+  "returned": 2083
+ },
+ {
+  "engine": "fuseki",
+  "target": 50000,
+  "query_set": "paper_v1",
+  "query": "Q3",
+  "expected": 446,
+  "returned": 4166,
+  "only_gate_fired": "not checkable (?w not projected)"
+ }
+]

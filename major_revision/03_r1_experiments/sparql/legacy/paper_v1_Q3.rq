@@ -1,0 +1,11 @@
+# VERBATIM from submitted manuscript (bundle 12/09/2026), Sec. 4.4 listing 3
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?score ?priority ?expl ?hint WHERE {
+  ?r a psi:RiskScore ;
+     psi:onWindow ?w ;
+     psi:scoreValue ?score ;
+     psi:priority ?priority .
+  OPTIONAL { ?r psi:hasExplanation/psi:text ?expl . }
+  OPTIONAL { ?r psi:hasMitigation/psi:text  ?hint . }
+}
+ORDER BY ?priority

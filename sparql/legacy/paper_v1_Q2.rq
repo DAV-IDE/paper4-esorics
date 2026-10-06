@@ -1,0 +1,11 @@
+# VERBATIM from submitted manuscript (bundle 12/09/2026), Sec. 4.4 listing 2
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+SELECT ?w ?neu ?nesy WHERE {
+  ?w  a psi:Window .
+  ?rn psi:onWindow ?w ;
+      psi:configuration "neural" ;
+      psi:scoreValue ?neu .
+  ?rs psi:onWindow ?w ;
+      psi:configuration "nesy" ;
+      psi:scoreValue ?nesy .
+}

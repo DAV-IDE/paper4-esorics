@@ -1,0 +1,65 @@
+{
+ "source": "https://github.com/Cvartic/psi-risk-dt/tree/af7ccbc/sparql",
+ "sha256": {
+  "example_data.ttl": "2b7190b428b429324ae162ec257d43988119af1371345c2bcf0e54626ca7dd00",
+  "q1_entropy_spike.rq": "9461c916d6b8035bc6ecb30f961ada4809dc017121bdd9bf7c3878cf07ec9225",
+  "q2_rampup_compare.rq": "cb60a370189213c78e0232b27021e23fb3f137b2ab184b00555dc5fb0d051fb4",
+  "q3_gate_fired.rq": "168d2fe96a2ba7d0ace858138f11234712c14331c605ed8c8e36420d54136987"
+ },
+ "rdflib": "7.6.0",
+ "triples": 140,
+ "windows": [
+  3,
+  19,
+  27
+ ],
+ "q1_entropy_spike.rq": {
+  "n_rows": 2,
+  "rows": [
+   [
+    "27",
+    "87.556",
+    "4602",
+    "1.83"
+   ],
+   [
+    "19",
+    "47.556",
+    "151",
+    "0.74"
+   ]
+  ]
+ },
+ "q2_rampup_compare.rq": {
+  "n_rows": 0,
+  "rows": []
+ },
+ "q3_gate_fired.rq": {
+  "n_rows": 2,
+  "rows": [
+   [
+    "19",
+    "47.556",
+    "0.78",
+    "2"
+   ],
+   [
+    "27",
+    "87.556",
+    "0.95",
+    "1"
+   ]
+  ]
+ },
+ "window19_scores_direct_lookup": [
+  [
+   "neural-only",
+   "0.46"
+  ],
+  [
+   "neurosymbolic",
+   "0.78"
+  ]
+ ],
+ "phaseName_triples": 0
+}

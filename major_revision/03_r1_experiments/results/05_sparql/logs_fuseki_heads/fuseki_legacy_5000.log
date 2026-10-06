@@ -1,0 +1,20 @@
+15:54:25 INFO  Fuseki          :: Apache Jena Fuseki 6.2.0
+15:54:25 INFO  Server          :: Dataset: in-memory: load file: ../results/05_sparql/graphs/legacy_5000.ttl
+15:54:25 INFO  Config          :: Fuseki Base = /tmp/repo/major_revision/mr/run
+15:54:25 INFO  Config          :: Database: /ds
+15:54:25 INFO  Config          :: UI Base: fuseki-server.jar
+15:54:25 INFO  Shiro           :: Shiro configuration: file:/tmp/repo/major_revision/mr/run/shiro.ini
+15:54:26 INFO  Server          :: Path = /ds
+15:54:26 INFO  Server          :: System
+15:54:26 INFO  Server          ::   Memory: 3.0 GiB
+15:54:26 INFO  Server          ::   PID:    7165
+15:54:26 INFO  Server          ::   Port:   http=3399
+15:54:26 INFO  Server          :: Start Fuseki
+15:54:26 INFO  Fuseki          :: [1] POST http://localhost:3399/ds/query
+15:54:26 INFO  Fuseki          :: [1] Query = # VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9) PREFIX psi: <http://example.org/psi#> SELECT ?w ?h WHERE {   ?w a psi:Window ;      psi:hasEntropySignal ?es .   ?es psi:entropyValue ?h .   FILTER (?h > 3.5) } 
+15:54:26 INFO  Fuseki          :: [1] 200 OK (178 ms)
+15:54:26 INFO  Fuseki          :: [2] POST http://localhost:3399/ds/query
+15:54:26 INFO  Fuseki          :: [2] Query = # VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9) PREFIX psi: <http://example.org/psi#> SELECT ?w ?h WHERE {   ?w a psi:Window ;      psi:hasEntropySignal ?es .   ?es psi:entropyValue ?h .   FILTER (?h > 3.5) } 
+15:54:26 INFO  Fuseki          :: [2] 200 OK (46 ms)
+15:54:26 INFO  Fuseki          :: [3] POST http://localhost:3399/ds/query
+15:54:26 INFO  Fuseki          :: [3] Query = # VERBATIM from scripts/sparql_scaling.py @ c1b04d7 (benchmark used for Table 9) PREFIX psi: <http://example.org/psi#> SELECT ?w ?h WHERE {   ?w a psi:Window ;      psi:hasEntropySignal ?es .   ?es psi:entropyValue ?h .   FILTER (?h > 3.5) } 

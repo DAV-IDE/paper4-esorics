@@ -1,0 +1,20 @@
+15:51:47 INFO  Fuseki          :: Apache Jena Fuseki 6.2.0
+15:51:47 INFO  Server          :: Dataset: in-memory: load file: ../results/05_sparql/graphs/canonical_5000.ttl
+15:51:48 INFO  Config          :: Fuseki Base = /tmp/repo/major_revision/mr/run
+15:51:48 INFO  Config          :: Database: /ds
+15:51:48 INFO  Config          :: UI Base: fuseki-server.jar
+15:51:48 INFO  Shiro           :: Shiro configuration: file:/tmp/repo/major_revision/mr/run/shiro.ini
+15:51:48 INFO  Server          :: Path = /ds
+15:51:48 INFO  Server          :: System
+15:51:48 INFO  Server          ::   Memory: 3.0 GiB
+15:51:48 INFO  Server          ::   PID:    7111
+15:51:48 INFO  Server          ::   Port:   http=3399
+15:51:48 INFO  Server          :: Start Fuseki
+15:51:48 INFO  Fuseki          :: [1] POST http://localhost:3399/ds/query
+15:51:48 INFO  Fuseki          :: [1] Query = # Q1 -- Entropy-spike triage (canonical v1.0, Paper 4 Major Revision R1) # Single source of truth: used verbatim by major_revision/mr/sparql_bench_fuseki.py # and to be reproduced verbatim in the manuscript (Sec. 4.4). # Returns every Window whose entropy deviation exceeds its parameter-aware # threshold, two-sided (|DeltaH_t| > tau_s), most extreme first. PREFIX psi: <https://insubria.it/psi-risk-dt#> SELECT ?w ?config ?dh ?tau WHERE {   ?w  a psi:Window ;       psi:configuration ?config ;       psi:hasEntropySignal ?es .   ?es a psi:EntropySignal ;       psi:deltaH ?dh ;       psi:tauS ?tau .   FILTER (ABS(?dh) > ?tau) } ORDER BY DESC(ABS(?dh)) ?w 
+15:51:48 INFO  Fuseki          :: [1] 200 OK (138 ms)
+15:51:48 INFO  Fuseki          :: [2] POST http://localhost:3399/ds/query
+15:51:48 INFO  Fuseki          :: [2] Query = # Q1 -- Entropy-spike triage (canonical v1.0, Paper 4 Major Revision R1) # Single source of truth: used verbatim by major_revision/mr/sparql_bench_fuseki.py # and to be reproduced verbatim in the manuscript (Sec. 4.4). # Returns every Window whose entropy deviation exceeds its parameter-aware # threshold, two-sided (|DeltaH_t| > tau_s), most extreme first. PREFIX psi: <https://insubria.it/psi-risk-dt#> SELECT ?w ?config ?dh ?tau WHERE {   ?w  a psi:Window ;       psi:configuration ?config ;       psi:hasEntropySignal ?es .   ?es a psi:EntropySignal ;       psi:deltaH ?dh ;       psi:tauS ?tau .   FILTER (ABS(?dh) > ?tau) } ORDER BY DESC(ABS(?dh)) ?w 
+15:51:48 INFO  Fuseki          :: [2] 200 OK (20 ms)
+15:51:48 INFO  Fuseki          :: [3] POST http://localhost:3399/ds/query
+15:51:48 INFO  Fuseki          :: [3] Query = # Q1 -- Entropy-spike triage (canonical v1.0, Paper 4 Major Revision R1) # Single source of truth: used verbatim by major_revision/mr/sparql_bench_fuseki.py # and to be reproduced verbatim in the manuscript (Sec. 4.4). # Returns every Window whose entropy deviation exceeds its parameter-aware # threshold, two-sided (|DeltaH_t| > tau_s), most extreme first. PREFIX psi: <https://insubria.it/psi-risk-dt#> SELECT ?w ?config ?dh ?tau WHERE {   ?w  a psi:Window ;       psi:configuration ?config ;       psi:hasEntropySignal ?es .   ?es a psi:EntropySignal ;       psi:deltaH ?dh ;       psi:tauS ?tau .   FILTER (ABS(?dh) > ?tau) } ORDER BY DESC(ABS(?dh)) ?w 

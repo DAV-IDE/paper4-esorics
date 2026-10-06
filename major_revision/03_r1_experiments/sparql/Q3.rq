@@ -1,0 +1,18 @@
+# Q3 -- Gate-fired explainability lookup (canonical v1.0, Paper 4 Major Revision R1)
+# For every gate-fired Window (or a chosen one, bound at run time via
+# initBindings ?w), return the RiskScore, its Explanation and any
+# MitigationHint (with optional CVE reference), ordered by priority.
+PREFIX psi: <https://insubria.it/psi-risk-dt#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?w ?r ?score ?priority ?expl ?hint ?cve WHERE {
+  ?w  a psi:Window ;
+      psi:gateFired "true"^^xsd:boolean .
+  ?r  a psi:RiskScore ;
+      psi:onWindow ?w ;
+      psi:scoreValue ?score ;
+      psi:priority ?priority .
+  OPTIONAL { ?r psi:hasExplanation/psi:text ?expl . }
+  OPTIONAL { ?r psi:hasMitigation/psi:text ?hint . }
+  OPTIONAL { ?r psi:hasMitigation/psi:referencedCVE ?cve . }
+}
+ORDER BY ?priority ?w
